@@ -391,7 +391,7 @@ void ClearScene()
 #define COIN_X 100.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
-#define NUM_BRICKS 70
+#define NUM_BRICKS 200
 
 /*
 * Reload all objects of current scene 
@@ -416,7 +416,26 @@ void Reload()
 	
 		}
 	}
-
+	for (int i = 75; i < 95; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
+		objects.push_back(b);
+	}
+	for (int i = 97; i < 102; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
+		objects.push_back(b);
+	}
+	for (int i = 105; i < 140; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
+		objects.push_back(b);
+	}
+	for (int i = 141; i < 200; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
+		objects.push_back(b);
+	}
 
 
 	// Short, low platform
