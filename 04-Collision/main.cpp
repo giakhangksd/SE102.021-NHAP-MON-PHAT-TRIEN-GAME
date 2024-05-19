@@ -386,11 +386,11 @@ void ClearScene()
 #define MARIO_START_X 20.0f
 #define MARIO_START_Y 10.0f
 
-#define BRICK_X 0.0f
+#define BRICK_X 1.0f
 #define GOOMBA_X 200.0f
 #define COIN_X 100.0f
 
-#define BRICK_Y GROUND_Y + 20.0f
+#define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 70
 
 /*
@@ -402,67 +402,78 @@ void Reload()
 	ClearScene();
 
 	// Main ground
-	for (int i = 0; i < NUM_BRICKS; i++)
+	for (int i = 0; i < 40; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
+	for (int i = 40; i < 70; i++)
+	{
+		for (int j = 1; j < 3; j++)
+		{
+			CBrick* b = new CBrick(BRICK_X + i * BRICK_WIDTH - 1.0f, BRICK_Y - j * BRICK_WIDTH + 12.0f);
+			objects.push_back(b);
+	
+		}
+	}
+
+
 
 	// Short, low platform
-	for (int i = 1; i < 3; i++)
-	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
-		objects.push_back(b);
-	}
+	//for (int i = 1; i < 3; i++)
+	//{
+	//	CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
+	//	objects.push_back(b);
+	//}
 
 	// Vertical column 1
-	for (int i = 0; i < 10; i++)
-	{
-		CBrick* b = new CBrick(0, BRICK_Y - i * BRICK_WIDTH);
-		objects.push_back(b);
-	}
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	CBrick* b = new CBrick(0, BRICK_Y - i * BRICK_WIDTH);
+	//	objects.push_back(b);
+	//}
 
 	// Vertical column 2
-	for (int i = 1; i < 3; i++)
-	{
-		CBrick* b = new CBrick(BRICK_X + 300.0f, BRICK_Y - i * BRICK_WIDTH);
-		objects.push_back(b);
-	}
+	//for (int i = 1; i < 3; i++)
+	//{
+	//	CBrick* b = new CBrick(BRICK_X + 300.0f, BRICK_Y - i * BRICK_WIDTH);
+	//	objects.push_back(b);
+	//}
 
 	// Vertical column 3
-	for (int i = 1; i < 4; i++)
-	{
-		CBrick* b = new CBrick(BRICK_X + 400.0f, BRICK_Y - i * BRICK_WIDTH);
-		objects.push_back(b);
-	}
+	//for (int i = 1; i < 4; i++)
+	//{
+	//	CBrick* b = new CBrick(BRICK_X + 400.0f, BRICK_Y - i * BRICK_WIDTH);
+	//	objects.push_back(b);
+	//}
 
 	// Vertical column 4
-	for (int i = 1; i < 5; i++)
-	{
-		CBrick* b = new CBrick(BRICK_X + 500.0f, BRICK_Y - i * BRICK_WIDTH);
-		objects.push_back(b);
-	}
+	//for (int i = 1; i < 5; i++)
+	//{
+	//	cbrick* b = new cbrick(brick_x + 500.0f, brick_y - i * brick_width);
+	//	objects.push_back(b);
+	//}
 
 	// Second cloud platform 
-	CPlatform* p = new CPlatform(90.0f, GROUND_Y - 34.0f,
-		16, 15, 16, ID_SPRITE_CLOUD_BEGIN, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_END);
-	objects.push_back(p);
+	//CPlatform* p = new CPlatform(90.0f, GROUND_Y - 34.0f,
+	//	16, 15, 16, ID_SPRITE_CLOUD_BEGIN, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_END);
+	//objects.push_back(p);
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
-	for (int j = 0; j < 4; j++)
-	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
-		objects.push_back(goomba);
-	}
+	//for (int j = 0; j < 6; j++)
+	//{
+	//	CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
+	//	objects.push_back(goomba);
+	//}
 
 	// COINS 
-	for (int i = 0; i < 10; i++)
-	{
-		CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
-		objects.push_back(c);
-	}
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
+	//	objects.push_back(c);
+	//}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }

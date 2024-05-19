@@ -84,13 +84,13 @@ void LoadResources()
 
 	// readline => id, left, top, right 
 
-	sprites->Add(10001, 246, 154, 259, 181, texMario);//154,...181
-	sprites->Add(10002, 275, 154, 290, 181, texMario);
-	sprites->Add(10003, 304, 154, 321, 181, texMario);
+	sprites->Add(10001, 246, 114, 259, 141, texMario);//154,...181
+	sprites->Add(10002, 275, 114, 290, 141, texMario);
+	sprites->Add(10003, 304, 114, 321, 141, texMario);
 
-	sprites->Add(10011, 186, 154, 200, 181, texMario);
-	sprites->Add(10012, 155, 154, 171, 181, texMario);
-	sprites->Add(10013, 125, 154, 141, 181, texMario);
+	sprites->Add(10011, 186, 114, 200, 141, texMario);
+	sprites->Add(10012, 155, 114, 171, 141, texMario);
+	sprites->Add(10013, 125, 114, 141, 141, texMario);
 
 	CAnimations * animations = CAnimations::GetInstance();
 	LPANIMATION ani;
@@ -112,10 +112,10 @@ void LoadResources()
 
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 300, 117, 317, 133, texMisc);
-	sprites->Add(20002, 318, 117, 335, 133, texMisc);
-	sprites->Add(20003, 336, 117, 353, 133, texMisc);
-	sprites->Add(20004, 354, 117, 371, 133, texMisc);
+	sprites->Add(20001, 300, 135, 317, 152, texMisc);
+	sprites->Add(20002, 318, 135, 335, 151, texMisc);
+	sprites->Add(20003, 336, 135, 353, 150, texMisc);
+	sprites->Add(20004, 354, 135, 371, 150, texMisc);
 
 	ani = new CAnimation(100);
 	ani->Add(20001,1000);
