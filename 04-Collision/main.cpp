@@ -36,6 +36,7 @@
 #include "Goomba.h"
 #include "Coin.h"
 #include "Platform.h"
+#include "pipe.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -292,7 +293,7 @@ void LoadAssetsGoomba()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);  
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //44, 83, 84, 140 pipe
 	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy); 
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
@@ -339,6 +340,10 @@ void LoadAssetsCoin()
 	animations->Add(ID_ANI_COIN, ani);
 }
 
+void LoadAssetsPipe() {
+
+}
+
 void LoadAssetsOther()
 {
 	CTextures* textures = CTextures::GetInstance();
@@ -370,6 +375,7 @@ void LoadResources()
 	LoadAssetsGoomba();
 	LoadAssetsBrick();
 	LoadAssetsCoin();
+	LoadAssetsPipe();
 	LoadAssetsOther();
 }
 
@@ -389,6 +395,7 @@ void ClearScene()
 #define BRICK_X 1.0f
 #define GOOMBA_X 200.0f
 #define COIN_X 100.0f
+#define PIPE_X 1.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
@@ -491,6 +498,12 @@ void Reload()
 		CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
 		objects.push_back(goomba);
 	}
+	
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	Cpipe* pipe = new Cpipe(PIPE_X + j * 60, GROUND_Y - 120.0f);
+	//	objects.push_back(pipe);
+	//}
 
 	// COINS 
 	//for (int i = 0; i < 10; i++)
