@@ -341,7 +341,22 @@ void LoadAssetsCoin()
 }
 
 void LoadAssetsPipe() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
 
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+
+	sprites->Add(ID_SPRITE_PIPE + 1, 48, 87, 88, 120, texEnemy);   //48, 87, 88, 120 pipe 48,102,88,125 pipe under
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_PIPE + 1);
+	ani->Add(ID_SPRITE_PIPE + 2);
+	animations->Add(ID_ANY_PIPE, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_PIPE + 1);
+	animations->Add(ID_ANY_PIPE, ani);
 }
 
 void LoadAssetsOther()
@@ -395,7 +410,7 @@ void ClearScene()
 #define BRICK_X 1.0f
 #define GOOMBA_X 200.0f
 #define COIN_X 100.0f
-#define PIPE_X 1.0f
+#define PIPE_X 400.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
@@ -501,9 +516,14 @@ void Reload()
 	
 	//for (int j = 0; j < 1; j++)
 	//{
-	//	Cpipe* pipe = new Cpipe(PIPE_X + j * 60, GROUND_Y - 120.0f);
+	//	Cpipe* pipe = new Cpipe(PIPE_X + j * 10000 , GROUND_Y + 14.0f );
 	//	objects.push_back(pipe);
 	//}
+		for (int j = 0; j < 1; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X + j , GROUND_Y + 14.0f );
+		objects.push_back(pipe);
+	}
 
 	// COINS 
 	//for (int i = 0; i < 10; i++)

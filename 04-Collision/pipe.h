@@ -5,8 +5,8 @@
 
 #define ID_ANY_PIPE 20000
 #define PIPE_WIDTH 16
-#define PIPE_BBOX_WIDTH 16
-#define PIPE_BBOX_HEIGHT 16
+#define PIPE_BBOX_WIDTH 32
+#define PIPE_BBOX_HEIGHT 32
 
 class Cpipe : public CGameObject {
 public:
