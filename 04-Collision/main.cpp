@@ -410,7 +410,7 @@ void ClearScene()
 #define BRICK_X 1.0f
 #define GOOMBA_X 200.0f
 #define COIN_X 100.0f
-#define PIPE_X 400.0f
+#define PIPE_X 200.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
