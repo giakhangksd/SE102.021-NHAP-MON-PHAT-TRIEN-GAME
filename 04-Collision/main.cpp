@@ -416,6 +416,7 @@ void Reload()
 	
 		}
 	}
+
 	for (int i = 75; i < 95; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
@@ -485,11 +486,11 @@ void Reload()
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
-	//for (int j = 0; j < 6; j++)
-	//{
-	//	CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
-	//	objects.push_back(goomba);
-	//}
+	for (int j = 0; j < 1; j++)
+	{
+		CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
+		objects.push_back(goomba);
+	}
 
 	// COINS 
 	//for (int i = 0; i < 10; i++)
