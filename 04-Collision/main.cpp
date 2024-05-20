@@ -446,11 +446,11 @@ void Reload()
 	//}
 
 	// Vertical column 1
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	CBrick* b = new CBrick(0, BRICK_Y - i * BRICK_WIDTH);
-	//	objects.push_back(b);
-	//}
+	for (int i = 0; i < 10; i++)
+	{
+		CBrick* b = new CBrick(-8.0f, BRICK_Y - i * BRICK_WIDTH);
+		objects.push_back(b);
+	}
 
 	// Vertical column 2
 	//for (int i = 1; i < 3; i++)
@@ -473,10 +473,14 @@ void Reload()
 	//	objects.push_back(b);
 	//}
 
-	// Second cloud platform 
-	//CPlatform* p = new CPlatform(90.0f, GROUND_Y - 34.0f,
-	//	16, 15, 16, ID_SPRITE_CLOUD_BEGIN, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_END);
-	//objects.push_back(p);
+	// Second cloud platform
+	for (int i = 0; i < 2; i++) {
+		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 20.0f - 40.0f * i,
+			16, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+
+
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
