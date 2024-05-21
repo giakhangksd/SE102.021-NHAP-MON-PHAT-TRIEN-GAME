@@ -66,8 +66,8 @@ int BackBufferHeight = 0;
 
 #define BRICK_START_VX 0.2f
 
-#define BRICK_WIDTH 16.0f
-#define BRICK_HEIGHT 16.0f
+#define BRICK_WIDTH 32.0f
+#define BRICK_HEIGHT 32.0f
 
 
 ID3D10Texture2D* texBrick = NULL;				// Texture object to store brick image

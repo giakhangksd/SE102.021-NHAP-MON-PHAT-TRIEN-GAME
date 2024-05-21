@@ -72,6 +72,9 @@
     <ClInclude Include="pipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="underpipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="underpipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

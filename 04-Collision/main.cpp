@@ -37,6 +37,7 @@
 #include "Coin.h"
 #include "Platform.h"
 #include "pipe.h"
+#include "underpipe.h"
 
 #include "SampleKeyEventHandler.h"
 
