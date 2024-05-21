@@ -541,12 +541,41 @@ void Reload()
 		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j  , GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
-		for (int j = 0; j < 1; j++)
+	for (int j = 0; j < 1; j++)
 	{
 		Cpipe* pipe = new Cpipe(PIPE_X + j , GROUND_Y );
 		objects.push_back(pipe);
 	}
-
+	for (int j = 0; j < 2; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X * 4.55 + j* 520.0f, GROUND_Y + 14.0f);
+		objects.push_back(pipe);
+	}
+	for (int j = 0; j < 2; j++)
+	{
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X *4.72 + j * 376.0f, GROUND_Y + 24.0f);
+		objects.push_back(underpipe);
+	}
+	for (int j = 0; j < 2; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y );
+		objects.push_back(pipe);	
+	}
+	for (int j = 1; j < 2; j++)
+	{
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4.72 + j * 376.0f, GROUND_Y - 75.0f);
+		objects.push_back(underpipe);
+	}
+	for (int j = 1; j < 2; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y - 99.0f);
+		objects.push_back(pipe);
+	}
+	for (int i = 1; i < 3; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
+		objects.push_back(b);
+	}
 	// COINS 
 	//for (int i = 0; i < 10; i++)
 	//{
