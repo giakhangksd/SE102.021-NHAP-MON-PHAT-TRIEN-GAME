@@ -563,17 +563,22 @@ void Reload()
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4.72 + j * 376.0f, GROUND_Y - 75.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4.72 + j * 376.0f, GROUND_Y - 85.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y - 99.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y - 109.0f);
 		objects.push_back(pipe);
 	}
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240, BRICK_Y - 50.0f);
+		objects.push_back(b);
+	}
+	for (int i = 1; i < 3; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240, BRICK_Y - 115.0f);
 		objects.push_back(b);
 	}
 	// COINS 
