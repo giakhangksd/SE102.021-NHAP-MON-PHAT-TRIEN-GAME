@@ -360,6 +360,25 @@ void LoadAssetsPipe() {
 	animations->Add(ID_ANY_PIPE, ani);
 }
 
+void LoadAssetsUnderPipe() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+
+	sprites->Add(ID_SPRITE_UNDERPIPE + 1, 48, 102, 88, 125, texEnemy);   //48, 87, 88, 120 pipe 48,102,88,125 pipe under
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_UNDERPIPE + 1);
+	ani->Add(ID_SPRITE_UNDERPIPE + 2);
+	animations->Add(ID_ANY_UNDERPIPE, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_UNDERPIPE + 1);
+	animations->Add(ID_ANY_UNDERPIPE, ani);
+}
+
 void LoadAssetsOther()
 {
 	CTextures* textures = CTextures::GetInstance();
@@ -392,6 +411,7 @@ void LoadResources()
 	LoadAssetsBrick();
 	LoadAssetsCoin();
 	LoadAssetsPipe();
+	LoadAssetsUnderPipe();
 	LoadAssetsOther();
 }
 
@@ -411,7 +431,8 @@ void ClearScene()
 #define BRICK_X 1.0f
 #define GOOMBA_X 200.0f
 #define COIN_X 100.0f
-#define PIPE_X 200.0f
+#define PIPE_X 400.0f
+#define UNDERPIPE_X 400.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
@@ -515,14 +536,14 @@ void Reload()
 		objects.push_back(goomba);
 	}
 	
-	//for (int j = 0; j < 1; j++)
-	//{
-	//	Cpipe* pipe = new Cpipe(PIPE_X + j * 10000 , GROUND_Y + 14.0f );
-	//	objects.push_back(pipe);
-	//}
+	for (int j = 0; j < 1; j++)
+	{
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j  , GROUND_Y + 24.0f);
+		objects.push_back(underpipe);
+	}
 		for (int j = 0; j < 1; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X + j , GROUND_Y + 14.0f );
+		Cpipe* pipe = new Cpipe(PIPE_X + j , GROUND_Y );
 		objects.push_back(pipe);
 	}
 
