@@ -584,7 +584,7 @@ void Reload()
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y - 109.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 144.0f+ j * 520.0f, GROUND_Y - 109.0f);
 		objects.push_back(pipe);
 	}
 	for (int i = 1; i < 3; i++)
