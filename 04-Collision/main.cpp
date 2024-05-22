@@ -534,6 +534,11 @@ void Reload()
 			16, 15, 6, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
+	for (int i = 1; i < 4; i++) {
+		CPlatform* p = new CPlatform(1280.0f + i * 30, GROUND_Y + 40.0f - 40.0f * i,
+			16, 15, 7, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
 
 	
 
@@ -559,22 +564,22 @@ void Reload()
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4.55 + j* 520.0f, GROUND_Y + 14.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 220.0f + j * 520.0f, GROUND_Y + 14.0f);
 		objects.push_back(pipe);
 	}
-	for (int j = 0; j < 2; j++)
+	for (int j = 1; j < 3; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X *4.72 + j * 376.0f, GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 - 88.0f + j * 376.0f, GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4.72 + j * 376.0f, GROUND_Y );
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 +288.0f + j * 376.0f, GROUND_Y );
 		objects.push_back(pipe);	
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4.72 + j * 376.0f, GROUND_Y - 85.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 288.0f + j * 376.0f, GROUND_Y - 85.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 1; j < 2; j++)
