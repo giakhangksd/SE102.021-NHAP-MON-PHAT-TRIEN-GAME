@@ -446,12 +446,12 @@ void Reload()
 	ClearScene();
 
 	// Main ground
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 43; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
-	for (int i = 40; i < 70; i++)
+	for (int i = 43; i < 70; i++)
 	{
 		for (int j = 1; j < 3; j++)
 		{
@@ -520,11 +520,22 @@ void Reload()
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
-		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 20.0f - 40.0f * i,
+		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 10.0f - 50.0f * i,
 			16, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
+	for (int i = 1; i < 3; i++) {
+		CPlatform* p = new CPlatform(480.0f + i * 50, GROUND_Y  - 20.0f - 40.0f * i,
+			16, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+	for (int i = 1; i < 3; i++) {
+		CPlatform* p = new CPlatform(320.0f + i * 130, GROUND_Y  - 20.0f + 10.0f * i,
+			16, 15, 6, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
 
+	
 
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
