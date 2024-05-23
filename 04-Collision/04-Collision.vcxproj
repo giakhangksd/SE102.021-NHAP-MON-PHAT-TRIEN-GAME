@@ -141,6 +141,7 @@
     <ClInclude Include="Mario.h" />
     <ClInclude Include="pipe.h" />
     <ClInclude Include="Platform.h" />
+    <ClInclude Include="quesbox.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
+    <ClCompile Include="quesbox.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />

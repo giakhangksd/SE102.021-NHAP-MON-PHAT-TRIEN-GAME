@@ -38,6 +38,7 @@
 #include "Platform.h"
 #include "pipe.h"
 #include "underpipe.h"
+#include "quesbox.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -378,6 +379,25 @@ void LoadAssetsUnderPipe() {
 	ani->Add(ID_SPRITE_UNDERPIPE + 1);
 	animations->Add(ID_ANY_UNDERPIPE, ani);
 }
+void LoadAssetsQuesBox() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+
+	sprites->Add(ID_SPRITE_QUESBOX + 1, 300 , 116, 300 + 15 , 99 + 34, texMisc);
+	sprites->Add(ID_SPRITE_QUESBOX + 2, 318, 116, 318 + 15, 99 + 34, texMisc);
+	sprites->Add(ID_SPRITE_QUESBOX + 3, 336, 116, 336 + 15, 99 + 34, texMisc);
+	sprites->Add(ID_SPRITE_QUESBOX + 4, 354, 116, 354 + 15, 99 + 34, texMisc);
+
+	LPANIMATION ani = new CAnimation(300);
+	ani->Add(ID_SPRITE_QUESBOX + 1);
+	ani->Add(ID_SPRITE_QUESBOX + 2);
+	ani->Add(ID_SPRITE_QUESBOX + 3);
+	ani->Add(ID_SPRITE_QUESBOX + 4);
+	animations->Add(ID_ANI_QUESBOX, ani);
+}
 
 void LoadAssetsOther()
 {
@@ -412,7 +432,9 @@ void LoadResources()
 	LoadAssetsCoin();
 	LoadAssetsPipe();
 	LoadAssetsUnderPipe();
+	LoadAssetsQuesBox();
 	LoadAssetsOther();
+
 }
 
 void ClearScene()
@@ -433,6 +455,7 @@ void ClearScene()
 #define COIN_X 100.0f
 #define PIPE_X 400.0f
 #define UNDERPIPE_X 400.0f
+#define QUESBOX_X 100.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
@@ -597,12 +620,17 @@ void Reload()
 		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 115.0f);
 		objects.push_back(b);
 	}
-	// COINS 
-	for (int i = 0; i < 10; i++)
+	for (int i = 1; i < 2; i++)
 	{
-		CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
+		CQuesbox* c = new CQuesbox(QUESBOX_X + i * (QUESBOX_WIDTH * 2), GROUND_Y - 36.0f);
 		objects.push_back(c);
 	}
+	// COINS 
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
+	//	objects.push_back(c);
+	//}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }

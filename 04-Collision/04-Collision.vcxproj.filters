@@ -75,6 +75,9 @@
     <ClInclude Include="underpipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="quesbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -129,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="underpipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="quesbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
