@@ -589,20 +589,20 @@ void Reload()
 	}
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240, BRICK_Y - 50.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 50.0f);
 		objects.push_back(b);
 	}
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240, BRICK_Y - 115.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 115.0f);
 		objects.push_back(b);
 	}
 	// COINS 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
-	//	objects.push_back(c);
-	//}
+	for (int i = 0; i < 10; i++)
+	{
+		CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
+		objects.push_back(c);
+	}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
