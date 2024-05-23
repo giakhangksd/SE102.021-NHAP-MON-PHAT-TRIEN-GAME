@@ -1,10 +1,19 @@
 #include "quesbox.h"
 
+CQuesbox::CQuesbox(float x, float y) :CGameObject(x, y)
+{
+	SetState(QUESBOX_STATE);
+}
+
 void CQuesbox::Render()
 {
-	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(ID_ANI_QUESBOX)->Render(x, y);
-	
+	int aniId = ID_ANI_QUESBOX;
+	if (state == QUESBOX_STATE_NOT)
+	{
+		aniId = ID_ANI_QUESBOX_NOT;
+	}
+
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
 

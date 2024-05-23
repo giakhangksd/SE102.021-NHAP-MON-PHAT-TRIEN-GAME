@@ -96,8 +96,16 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 }
 
 void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
+	CQuesbox* quesbox = dynamic_cast<CQuesbox*>(e->obj);
+
 	if (e->ny > 0) {
-		coin++;
+		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
+			quesbox->SetState(QUESBOX_STATE_NOT);
+			coin++;
+		}
+	}
+	else {
+		coin = 1;
 	}
 }
 //

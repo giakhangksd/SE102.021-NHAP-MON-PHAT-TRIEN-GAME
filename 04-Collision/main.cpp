@@ -390,15 +390,18 @@ void LoadAssetsQuesBox() {
 	sprites->Add(ID_SPRITE_QUESBOX + 2, 318, 116, 318 + 15, 99 + 34, texMisc);
 	sprites->Add(ID_SPRITE_QUESBOX + 3, 336, 116, 336 + 15, 99 + 34, texMisc);
 	sprites->Add(ID_SPRITE_QUESBOX + 4, 354, 116, 354 + 15, 99 + 34, texMisc);
-	//sprites->Add(ID_SPRITE_QUESBOX + 5, 372, 116, 372 + 15, 99 + 34, texMisc);
+	sprites->Add(ID_SPRITE_QUESBOX + 5, 372, 116, 372 + 15, 99 + 34, texMisc);
 
-	LPANIMATION ani = new CAnimation(300);
+	LPANIMATION ani = new CAnimation(400);
 	ani->Add(ID_SPRITE_QUESBOX + 1);
 	ani->Add(ID_SPRITE_QUESBOX + 2);
 	ani->Add(ID_SPRITE_QUESBOX + 3);
 	ani->Add(ID_SPRITE_QUESBOX + 4);
-	//ani->Add(ID_SPRITE_QUESBOX + 5);
+	
 	animations->Add(ID_ANI_QUESBOX, ani);
+	ani = new CAnimation(400);
+	ani->Add(ID_SPRITE_QUESBOX + 5);
+	animations->Add(ID_ANI_QUESBOX_NOT, ani);
 }
 
 void LoadAssetsOther()
