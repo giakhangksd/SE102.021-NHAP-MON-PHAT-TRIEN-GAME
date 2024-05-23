@@ -6,6 +6,7 @@
 
 #include "Goomba.h"
 #include "Coin.h"
+#include "quesbox.h"
 
 #include "Collision.h"
 
@@ -51,6 +52,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithGoomba(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
+	else if (dynamic_cast<CQuesbox*>(e->obj))
+		OnCollisionWithQuesbox(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -92,6 +95,11 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 	coin++;
 }
 
+void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
+	if (e->ny > 0) {
+		coin++;
+	}
+}
 //
 // Get animation ID for small Mario
 //

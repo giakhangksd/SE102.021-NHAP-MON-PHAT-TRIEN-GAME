@@ -390,12 +390,14 @@ void LoadAssetsQuesBox() {
 	sprites->Add(ID_SPRITE_QUESBOX + 2, 318, 116, 318 + 15, 99 + 34, texMisc);
 	sprites->Add(ID_SPRITE_QUESBOX + 3, 336, 116, 336 + 15, 99 + 34, texMisc);
 	sprites->Add(ID_SPRITE_QUESBOX + 4, 354, 116, 354 + 15, 99 + 34, texMisc);
+	//sprites->Add(ID_SPRITE_QUESBOX + 5, 372, 116, 372 + 15, 99 + 34, texMisc);
 
 	LPANIMATION ani = new CAnimation(300);
 	ani->Add(ID_SPRITE_QUESBOX + 1);
 	ani->Add(ID_SPRITE_QUESBOX + 2);
 	ani->Add(ID_SPRITE_QUESBOX + 3);
 	ani->Add(ID_SPRITE_QUESBOX + 4);
+	//ani->Add(ID_SPRITE_QUESBOX + 5);
 	animations->Add(ID_ANI_QUESBOX, ani);
 }
 
@@ -622,7 +624,7 @@ void Reload()
 	}
 	for (int i = 1; i < 2; i++)
 	{
-		CQuesbox* c = new CQuesbox(QUESBOX_X + i * (QUESBOX_WIDTH * 2), GROUND_Y - 36.0f);
+		CQuesbox* c = new CQuesbox(QUESBOX_X + i * (QUESBOX_WIDTH * 2), GROUND_Y - 16.0f);
 		objects.push_back(c);
 	}
 	// COINS 
