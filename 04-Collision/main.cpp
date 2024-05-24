@@ -576,7 +576,7 @@ void Reload()
 
 	for (int j = 0; j < 1; j++)
 	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X + j * 60, GROUND_Y - 120.0f);
+		CGoomba* goomba = new CGoomba(GOOMBA_X , GROUND_Y - 120.0f);
 		objects.push_back(goomba);
 	}
 	
@@ -625,9 +625,14 @@ void Reload()
 		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 115.0f);
 		objects.push_back(b);
 	}
-	for (int i = 1; i < 2; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		CQuesbox* c = new CQuesbox(QUESBOX_X + i * (QUESBOX_WIDTH * 2), GROUND_Y - 16.0f);
+		CQuesbox* c = new CQuesbox(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 26.0f);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		CQuesbox* c = new CQuesbox(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 86.0f);
 		objects.push_back(c);
 	}
 	// COINS 

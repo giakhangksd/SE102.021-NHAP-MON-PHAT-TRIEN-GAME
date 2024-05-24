@@ -10,6 +10,7 @@
 
 #include "Collision.h"
 
+
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	vy += ay * dt;
@@ -101,11 +102,12 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 	if (e->ny > 0) {
 		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
 			quesbox->SetState(QUESBOX_STATE_NOT);
+	
 			coin++;
 		}
 	}
 	else {
-		coin = 1;
+	
 	}
 }
 //
