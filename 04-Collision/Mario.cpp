@@ -105,9 +105,7 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 	
 			coin++;
 		}
-	}
-	else {
-	
+
 	}
 }
 //
