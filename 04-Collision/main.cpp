@@ -601,7 +601,7 @@ void Reload()
 	
 	for (int j = 0; j < 1; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j + 1  , GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j   , GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 1; j++)
@@ -661,11 +661,11 @@ void Reload()
 	//	objects.push_back(c);
 	//}
 	 
-	for (int j = 0; j < 1; j++)
-	{
-		CMushroom* mushroom = new CMushroom(MUSHROOM_X, GROUND_Y - 120.0f);
-		objects.push_back(mushroom);
-	}
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	CMushroom* mushroom = new CMushroom(MUSHROOM_X, GROUND_Y - 120.0f);
+	//	objects.push_back(mushroom);
+	//}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }

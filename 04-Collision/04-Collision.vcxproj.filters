@@ -81,6 +81,9 @@
     <ClInclude Include="Mushroom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="leaf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -141,6 +144,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="leaf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
