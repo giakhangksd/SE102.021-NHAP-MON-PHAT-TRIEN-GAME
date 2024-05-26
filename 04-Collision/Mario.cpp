@@ -8,6 +8,7 @@
 #include "Coin.h"
 #include "quesbox.h"
 #include "Mushroom.h"
+#include "leaf.h"
 
 #include "Collision.h"
 
@@ -58,6 +59,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithQuesbox(e);
 	else if (dynamic_cast<CMushroom*>(e->obj))
 		OnCollosionWithMushroom(e);
+	else if (dynamic_cast<CLeaf*>(e->obj))
+		OnCollosionWithLeaf(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -124,6 +127,17 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 	e->obj->Delete();
 }
 
+void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
+{
+	CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
+	if (level < MARIO_LEVEL_BIG) {
+		vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+		level = MARIO_LEVEL_BIG;
+	}
+
+
+	e->obj->Delete();
+}
 //
 // Get animation ID for small Mario
 //

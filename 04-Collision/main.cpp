@@ -429,7 +429,7 @@ void LoadAssetsLeaf() {
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 
-	sprites->Add(ID_SPRITE_LEAF + 100, 300, 187, 300 + 15, 170 + 34, texMisc);
+	sprites->Add(ID_SPRITE_LEAF + 100, 300, 187 + 19, 300 + 15, 170 + 34 + 19 , texMisc);
 
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_LEAF + 100);
