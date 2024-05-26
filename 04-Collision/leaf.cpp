@@ -61,7 +61,7 @@ void CLeaf::SetState(int state)
 	switch (state)
 	{
 	case LEAF_STATE_FALLING:
-		vy = LEAF_FALLING_SPEED;
+		vy = LEAF_FALLING_SPEED / 2;
 		break;
 	}
 }

@@ -40,6 +40,7 @@
 #include "underpipe.h"
 #include "quesbox.h"
 #include "Mushroom.h"
+#include "leaf.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -421,6 +422,22 @@ void LoadAssetsMushroom() {
 
 }
 
+void LoadAssetsLeaf() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+
+	sprites->Add(ID_SPRITE_LEAF + 100, 300, 187, 300 + 15, 170 + 34, texMisc);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_LEAF + 100);
+
+	animations->Add(ID_ANI_LEAF_FALLING, ani);
+
+}
+
 void LoadAssetsOther()
 {
 	CTextures* textures = CTextures::GetInstance();
@@ -456,6 +473,7 @@ void LoadResources()
 	LoadAssetsUnderPipe();
 	LoadAssetsQuesBox();
 	LoadAssetsMushroom();
+	LoadAssetsLeaf();
 	LoadAssetsOther();
 
 }
@@ -480,6 +498,7 @@ void ClearScene()
 #define UNDERPIPE_X 400.0f
 #define QUESBOX_X 100.0f
 #define MUSHROOM_X 100.0f
+#define LEAF_X 100.0f
 
 #define BRICK_Y GROUND_Y + 40.0f
 #define NUM_BRICKS 200
@@ -666,6 +685,12 @@ void Reload()
 	//	CMushroom* mushroom = new CMushroom(MUSHROOM_X, GROUND_Y - 120.0f);
 	//	objects.push_back(mushroom);
 	//}
+
+	for (int j = 0; j < 1; j++)
+	{
+		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 120.0f);
+		objects.push_back(leaf);
+	}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
