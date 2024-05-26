@@ -115,9 +115,13 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 {
 	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
-	
+	if (level < MARIO_LEVEL_BIG) {
+		vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+		level = MARIO_LEVEL_BIG;
+	}
+
+
 	e->obj->Delete();
-	StartUntouchable();
 }
 
 //

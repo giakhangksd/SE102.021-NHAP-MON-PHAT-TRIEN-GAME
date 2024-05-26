@@ -9,7 +9,7 @@
 #define MUSHROOM_BBOX_HEIGHT 16
 
 #define MUSHROOM_STATE_WALKING 350
-#define ID_ANI_MUSHROOM_WALKING 5000
+#define ID_ANI_MUSHROOM_WALKING 5600
 
 class CMushroom : public CGameObject
 {
@@ -29,6 +29,6 @@ protected:
 
 public:
 	CMushroom(float x, float y);
-	//virtual void SetState(int state);
+	virtual void SetState(int state);
 };
 

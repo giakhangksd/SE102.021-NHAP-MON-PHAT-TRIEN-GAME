@@ -54,3 +54,14 @@ void CMushroom::Render()
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
+
+void CMushroom::SetState(int state)
+{
+	CGameObject::SetState(state);
+	switch (state)
+	{
+	case MUSHROOM_STATE_WALKING:
+		vx = -MUSHROOM_WALKING_SPEED;
+		break;
+	}
+}
