@@ -413,7 +413,7 @@ void LoadAssetsMushroom() {
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 
-	sprites->Add(ID_SPRITE_MUSHROOM + 100, 300, 187, 300 + 15, 170 + 34, texMisc);
+	sprites->Add(ID_SPRITE_MUSHROOM + 100, 300, 187 + 1, 300 + 15, 170 + 34 + 1, texMisc);
 
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_MUSHROOM + 100);
@@ -586,7 +586,7 @@ void Reload()
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
-		CPlatform* p = new CPlatform(260.0f + i * 50, GROUND_Y - 10.0f - 50.0f * i,
+		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 15.0f - 50.0f * i,
 			16, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
@@ -679,9 +679,15 @@ void Reload()
 	}
 	for (int j = 0; j < 1; j++)
 	{
-		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 120.0f);
+		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 20.0f );
 		objects.push_back(leaf);
 	}
+	for (int j = 0; j < 1; j++)
+	{
+		CMushroom* mushroom= new CMushroom(LEAF_X+20.0f, GROUND_Y - 20.0f);
+		objects.push_back(mushroom);
+	}
+
 
 	for (int i = 0; i < 2; i++)
 	{

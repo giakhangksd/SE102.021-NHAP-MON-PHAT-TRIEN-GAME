@@ -126,7 +126,7 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 		}
 	}
 	else {
-		if (level < MARIO_LEVEL_BIG) {
+		if (level == MARIO_LEVEL_SMALL) {
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 			level = MARIO_LEVEL_BIG;
 			
@@ -139,12 +139,23 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 {
 	CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
-	if (level > MARIO_LEVEL_SMALL) {
-		vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-		
+	if(leaf->GetState()==LEAF_STATE_WAITING)
+		if (e->ny > 0 && level == MARIO_LEVEL_BIG) {
+			leaf->SetState(LEAF_STATE_FALLING);
+			
+		}
+		else {
+			
+			e->obj->Delete();
+		}
+	else {
+		if (level == MARIO_LEVEL_BIG) {
+			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+			
+		}
+		e->obj->Delete();
 	}
 
-	e->obj->Delete();
 }
 //
 // Get animation ID for small Mario
@@ -283,7 +294,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 }

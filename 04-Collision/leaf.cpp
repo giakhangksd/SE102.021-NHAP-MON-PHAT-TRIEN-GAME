@@ -10,10 +10,10 @@ CLeaf::CLeaf(float x, float y) :CGameObject(x, y)
 
 void CLeaf::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = x - LEAF_BBOX_WIDTH ;
-	t = y - LEAF_BBOX_HEIGHT ;
-	r = l +	LEAF_BBOX_WIDTH*2;
-	b = t + LEAF_BBOX_HEIGHT*2;
+	l = x - LEAF_BBOX_WIDTH / 2;
+	t = y - LEAF_BBOX_HEIGHT / 2 ; 
+	r = l +	LEAF_BBOX_WIDTH;
+	b = t + LEAF_BBOX_HEIGHT; 
 }
 
 void CLeaf::OnNoCollision(DWORD dt)
@@ -43,7 +43,7 @@ void CLeaf::Render()
 	int aniId = ID_ANI_LEAF_FALLING;
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void CLeaf::SetState(int state)
@@ -54,7 +54,8 @@ void CLeaf::SetState(int state)
 	case LEAF_STATE_WAITING:
 		break;
 	case LEAF_STATE_FALLING:
-		vy = LEAF_GRAVITY / 2 ;
+		vy = -0.1f;
+		ay = LEAF_GRAVITY  ;
 		break;
 	}
 }

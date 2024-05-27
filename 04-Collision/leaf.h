@@ -2,7 +2,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define LEAF_GRAVITY 0.00002f
+#define LEAF_GRAVITY 0.0001f
 #define LEAF_FALLING_L -0.005f
 #define LEAF_FALLING_R 0.005f
 
