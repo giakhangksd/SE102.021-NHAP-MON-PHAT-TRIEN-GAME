@@ -667,14 +667,14 @@ void Reload()
 	for (int j = 1; j < 2; j++)
 	{
 
-		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.5f);
+		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.0f);
 		objects.push_back(mushroom);
 	}
 
 	for (int j = 1; j < 2; j++)
 	{
 
-		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.5f);
+		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.0f);
 		objects.push_back(leaf);
 	}
 	for (int j = 0; j < 1; j++)
@@ -684,8 +684,13 @@ void Reload()
 	}
 	for (int j = 0; j < 1; j++)
 	{
-		CMushroom* mushroom= new CMushroom(LEAF_X+20.0f, GROUND_Y - 20.0f);
+		CMushroom* mushroom= new CMushroom(LEAF_X, GROUND_Y - 20.0f);
 		objects.push_back(mushroom);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		CQuesbox* quesbox = new CQuesbox(LEAF_X, GROUND_Y - 20.0f - 1.0f);
+		objects.push_back(quesbox);
 	}
 
 

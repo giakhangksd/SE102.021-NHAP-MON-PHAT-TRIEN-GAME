@@ -31,5 +31,6 @@ protected:
 public:
 	CMushroom(float x, float y);
 	virtual void SetState(int state);
+
 };
 

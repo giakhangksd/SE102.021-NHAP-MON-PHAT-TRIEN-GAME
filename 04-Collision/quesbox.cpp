@@ -25,3 +25,5 @@ void CQuesbox::GetBoundingBox(float& l, float& t, float& r, float& b)
 	b = t + QUESBOX_BBOX_HEIGHT;
 }
 
+
+
