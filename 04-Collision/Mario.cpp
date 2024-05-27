@@ -108,7 +108,7 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 	if (e->ny > 0) {
 		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
 			quesbox->SetState(QUESBOX_STATE_NOT);
-	
+		
 		}
 
 	}
@@ -120,6 +120,7 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 	if (mushroom->GetState() == MUSHROOM_STATE_WAITING) {
 		if (e->ny > 0 && level == MARIO_LEVEL_SMALL) {
 			mushroom->SetState(MUSHROOM_STATE_WALKING);
+			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 		}
 		else {
 			e->obj->Delete();
@@ -142,7 +143,7 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 	if(leaf->GetState()==LEAF_STATE_WAITING)
 		if (e->ny > 0 && level == MARIO_LEVEL_BIG) {
 			leaf->SetState(LEAF_STATE_FALLING);
-			
+			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 		}
 		else {
 			
@@ -294,7 +295,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 }
@@ -335,9 +336,9 @@ void CMario::SetState(int state)
 		if (isOnPlatform)
 		{
 			if (abs(this->vx) == MARIO_RUNNING_SPEED)
-				vy = -MARIO_JUMP_RUN_SPEED_Y;
+				vy = -MARIO_JUMP_RUN_SPEED_Y * 1.1f;
 			else
-				vy = -MARIO_JUMP_SPEED_Y;
+				vy = -MARIO_JUMP_SPEED_Y * 1.1f;
 		}
 		break;
 
