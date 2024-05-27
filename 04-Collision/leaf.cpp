@@ -25,6 +25,8 @@ void CLeaf::OnNoCollision(DWORD dt)
 void CLeaf::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (dynamic_cast<CLeaf*>(e->obj)) return;
+
+
 }
 
 void CLeaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -51,7 +53,6 @@ void CLeaf::SetState(int state)
 	{
 	case LEAF_STATE_FALLING:
 		vy = LEAF_GRAVITY / 2 ;
-		
 		break;
 	}
 }

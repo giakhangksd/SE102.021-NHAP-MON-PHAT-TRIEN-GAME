@@ -663,6 +663,20 @@ void Reload()
 		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 115.0f);
 		objects.push_back(b);
 	}
+
+	for (int j = 0; j < 1; j++)
+	{
+
+		CMushroom* mushroom = new CMushroom(MUSHROOM_X + 80.0f, GROUND_Y - 27.0f);
+		objects.push_back(mushroom);
+	}
+
+	for (int j = 0; j < 1; j++)
+	{
+		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 120.0f);
+		objects.push_back(leaf);
+	}
+
 	for (int i = 0; i < 2; i++)
 	{
 		CQuesbox* c = new CQuesbox(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 26.0f);
@@ -680,17 +694,7 @@ void Reload()
 	//	objects.push_back(c);
 	//}
 	 
-	//for (int j = 0; j < 1; j++)
-	//{
-	//	CMushroom* mushroom = new CMushroom(MUSHROOM_X, GROUND_Y - 120.0f);
-	//	objects.push_back(mushroom);
-	//}
 
-	for (int j = 0; j < 1; j++)
-	{
-		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 120.0f);
-		objects.push_back(leaf);
-	}
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }

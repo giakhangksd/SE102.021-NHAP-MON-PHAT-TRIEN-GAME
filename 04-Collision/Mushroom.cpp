@@ -3,17 +3,19 @@
 CMushroom::CMushroom(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
-	this->ay = MUSHROOM_GRAVITY;
-
-	SetState(MUSHROOM_STATE_WALKING);
+	this->ay = 0;
+	this->enable = true;
+	SetState(MUSHROOM_STATE_WAITING);
 }
 
 void CMushroom::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = x - MUSHROOM_BBOX_WIDTH / 2;
-	t = y - MUSHROOM_BBOX_HEIGHT / 2;
-	r = l + MUSHROOM_BBOX_WIDTH;
-	b = t + MUSHROOM_BBOX_HEIGHT;
+	if (enable == true) {
+		l = x - MUSHROOM_BBOX_WIDTH / 2;
+		t = y - MUSHROOM_BBOX_HEIGHT / 2;
+		r = l + MUSHROOM_BBOX_WIDTH;
+		b = t + MUSHROOM_BBOX_HEIGHT;
+	}
 }
 
 void CMushroom::OnNoCollision(DWORD dt)
@@ -60,8 +62,11 @@ void CMushroom::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
+	case MUSHROOM_STATE_WAITING:
+		break;
 	case MUSHROOM_STATE_WALKING:
 		vx = -MUSHROOM_WALKING_SPEED;
+		ay =  MUSHROOM_GRAVITY;
 		break;
 	}
 }

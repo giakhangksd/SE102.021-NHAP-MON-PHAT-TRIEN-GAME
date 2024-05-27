@@ -109,7 +109,6 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
 			quesbox->SetState(QUESBOX_STATE_NOT);
 	
-			coin++;
 		}
 
 	}
@@ -118,23 +117,28 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 {
 	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
-	if (level < MARIO_LEVEL_BIG) {
-		vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-		level = MARIO_LEVEL_BIG;
+	if (mushroom->GetState() == MUSHROOM_STATE_WAITING) {
+		mushroom->SetState(MUSHROOM_STATE_WALKING);
+		StartUntouchable();
+	}
+	else {
+		if (level < MARIO_LEVEL_BIG) {
+			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+			level = MARIO_LEVEL_BIG;
+		}
 	}
 
 
-	e->obj->Delete();
+	//e->obj->Delete();
 }
 
 void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 {
 	CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
-	if (level < MARIO_LEVEL_BIG) {
+	if (level > MARIO_LEVEL_SMALL) {
 		vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-		level = MARIO_LEVEL_BIG;
+		
 	}
-
 
 	e->obj->Delete();
 }
