@@ -3,9 +3,9 @@
 CLeaf::CLeaf(float x, float y) :CGameObject(x, y) 
 {
 	this->ax = 0;
-	this->ay = LEAF_GRAVITY;
+	this->ay = 0;
 
-	SetState(LEAF_STATE_FALLING);
+	SetState(LEAF_STATE_WAITING);
 }
 
 void CLeaf::GetBoundingBox(float& l, float& t, float& r, float& b)
@@ -51,6 +51,8 @@ void CLeaf::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
+	case LEAF_STATE_WAITING:
+		break;
 	case LEAF_STATE_FALLING:
 		vy = LEAF_GRAVITY / 2 ;
 		break;

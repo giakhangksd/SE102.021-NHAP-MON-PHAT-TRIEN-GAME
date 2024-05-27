@@ -11,6 +11,7 @@
 #define LEAF_BBOX_HEIGHT 16
 
 #define LEAF_STATE_FALLING 450
+#define LEAF_STATE_WAITING 460
 #define ID_ANI_LEAF_FALLING 5800
 
 class CLeaf : public CGameObject

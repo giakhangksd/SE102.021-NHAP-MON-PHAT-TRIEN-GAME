@@ -586,7 +586,7 @@ void Reload()
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
-		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 10.0f - 50.0f * i,
+		CPlatform* p = new CPlatform(260.0f + i * 50, GROUND_Y - 10.0f - 50.0f * i,
 			16, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
@@ -667,10 +667,16 @@ void Reload()
 	for (int j = 1; j < 2; j++)
 	{
 
-		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 87.0f);
+		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.5f);
 		objects.push_back(mushroom);
 	}
 
+	for (int j = 1; j < 2; j++)
+	{
+
+		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.5f);
+		objects.push_back(leaf);
+	}
 	for (int j = 0; j < 1; j++)
 	{
 		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 120.0f);
