@@ -17,7 +17,8 @@ class CMushroom : public CGameObject
 protected:
 	float ax;
 	float ay;
-	bool enable;
+	int untouchable;
+	ULONGLONG untouchable_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom );
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -32,5 +33,6 @@ protected:
 public:
 	CMushroom(float x, float y);
 	virtual void SetState(int state);
+	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 };
 

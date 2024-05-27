@@ -119,7 +119,7 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
 	if (mushroom->GetState() == MUSHROOM_STATE_WAITING) {
 		mushroom->SetState(MUSHROOM_STATE_WALKING);
-		StartUntouchable();
+		
 	}
 	else {
 		if (level < MARIO_LEVEL_BIG) {

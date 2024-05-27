@@ -4,18 +4,18 @@ CMushroom::CMushroom(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = 0;
-	this->enable = true;
+	untouchable = 0;
+	untouchable_start = -1;
 	SetState(MUSHROOM_STATE_WAITING);
 }
 
 void CMushroom::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	if (enable == true) {
 		l = x - MUSHROOM_BBOX_WIDTH / 2;
 		t = y - MUSHROOM_BBOX_HEIGHT / 2;
 		r = l + MUSHROOM_BBOX_WIDTH;
 		b = t + MUSHROOM_BBOX_HEIGHT;
-	}
+
 }
 
 void CMushroom::OnNoCollision(DWORD dt)
@@ -45,6 +45,12 @@ void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
+	if (GetTickCount64() - untouchable_start > 2500)
+	{
+		untouchable_start = 0;
+		untouchable = 0;
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -54,7 +60,7 @@ void CMushroom::Render()
 	int aniId = ID_ANI_MUSHROOM_WALKING;
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CMushroom::SetState(int state)
@@ -65,6 +71,8 @@ void CMushroom::SetState(int state)
 	case MUSHROOM_STATE_WAITING:
 		break;
 	case MUSHROOM_STATE_WALKING:
+		StartUntouchable();
+		vy = -0.2f;
 		vx = -MUSHROOM_WALKING_SPEED;
 		ay =  MUSHROOM_GRAVITY;
 		break;

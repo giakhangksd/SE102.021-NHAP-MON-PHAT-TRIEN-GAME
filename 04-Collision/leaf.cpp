@@ -43,7 +43,7 @@ void CLeaf::Render()
 	int aniId = ID_ANI_LEAF_FALLING;
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CLeaf::SetState(int state)
