@@ -4,8 +4,7 @@ CMushroom::CMushroom(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = 0;
-	untouchable = 0;
-	untouchable_start = -1;
+
 	SetState(MUSHROOM_STATE_WAITING);
 }
 
@@ -29,11 +28,11 @@ void CMushroom::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CMushroom*>(e->obj)) return;
 
-	if (e->ny != 0)
+	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
 	}
-	else if (e->nx != 0)
+	else if (e->nx != 0 && e->obj->IsBlocking())
 	{
 		vx = -vx;
 	}
@@ -45,11 +44,6 @@ void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (GetTickCount64() - untouchable_start > 2500)
-	{
-		untouchable_start = 0;
-		untouchable = 0;
-	}
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -71,7 +65,7 @@ void CMushroom::SetState(int state)
 	case MUSHROOM_STATE_WAITING:
 		break;
 	case MUSHROOM_STATE_WALKING:
-		StartUntouchable();
+
 		vy = -0.2f;
 		vx = -MUSHROOM_WALKING_SPEED;
 		ay =  MUSHROOM_GRAVITY;

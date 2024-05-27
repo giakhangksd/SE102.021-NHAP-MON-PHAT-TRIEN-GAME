@@ -667,7 +667,7 @@ void Reload()
 	for (int j = 0; j < 1; j++)
 	{
 
-		CMushroom* mushroom = new CMushroom(MUSHROOM_X + 80.0f, GROUND_Y - 27.0f);
+		CMushroom* mushroom = new CMushroom(MUSHROOM_X + 00.0f, GROUND_Y - 27.0f);
 		objects.push_back(mushroom);
 	}
 
