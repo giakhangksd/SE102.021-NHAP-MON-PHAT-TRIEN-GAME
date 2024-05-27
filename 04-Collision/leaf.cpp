@@ -10,8 +10,8 @@ CLeaf::CLeaf(float x, float y) :CGameObject(x, y)
 
 void CLeaf::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = x - LEAF_BBOX_WIDTH / 2;
-	t = y - LEAF_BBOX_HEIGHT / 2;
+	l = x - LEAF_BBOX_WIDTH ;
+	t = y - LEAF_BBOX_HEIGHT ;
 	r = l +	LEAF_BBOX_WIDTH;
 	b = t + LEAF_BBOX_HEIGHT;
 }
