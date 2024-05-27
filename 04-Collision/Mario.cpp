@@ -118,18 +118,22 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 {
 	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
 	if (mushroom->GetState() == MUSHROOM_STATE_WAITING) {
-		mushroom->SetState(MUSHROOM_STATE_WALKING);
-		
+		if (e->ny > 0 && level == MARIO_LEVEL_SMALL) {
+			mushroom->SetState(MUSHROOM_STATE_WALKING);
+		}
+		else {
+			e->obj->Delete();
+		}
 	}
 	else {
 		if (level < MARIO_LEVEL_BIG) {
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 			level = MARIO_LEVEL_BIG;
+			
 		}
+		e->obj->Delete();
 	}
-
-
-	//e->obj->Delete();
+	
 }
 
 void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)

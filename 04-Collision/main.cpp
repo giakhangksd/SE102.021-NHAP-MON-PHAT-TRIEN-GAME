@@ -664,10 +664,10 @@ void Reload()
 		objects.push_back(b);
 	}
 
-	for (int j = 0; j < 1; j++)
+	for (int j = 1; j < 2; j++)
 	{
 
-		CMushroom* mushroom = new CMushroom(MUSHROOM_X + 00.0f, GROUND_Y - 27.0f);
+		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 87.0f);
 		objects.push_back(mushroom);
 	}
 

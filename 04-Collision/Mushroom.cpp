@@ -45,6 +45,7 @@ void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vx += ax * dt;
 
 
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -65,7 +66,6 @@ void CMushroom::SetState(int state)
 	case MUSHROOM_STATE_WAITING:
 		break;
 	case MUSHROOM_STATE_WALKING:
-
 		vy = -0.2f;
 		vx = -MUSHROOM_WALKING_SPEED;
 		ay =  MUSHROOM_GRAVITY;
