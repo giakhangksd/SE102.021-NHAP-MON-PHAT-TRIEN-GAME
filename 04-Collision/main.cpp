@@ -715,7 +715,11 @@ void Reload()
 		CCoinjump* c = new CCoinjump(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
 		objects.push_back(c);
 	}
-	 
+	for (int i = 0; i < 1; i++)
+	{
+		CQuesbox* q = new CQuesbox(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
+		objects.push_back(q);
+	}
 
 }
 

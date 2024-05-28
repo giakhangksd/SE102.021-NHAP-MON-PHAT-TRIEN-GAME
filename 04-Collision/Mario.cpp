@@ -9,6 +9,8 @@
 #include "quesbox.h"
 #include "Mushroom.h"
 #include "leaf.h"
+#include "Coineffect.h"
+
 
 #include "Collision.h"
 
@@ -61,6 +63,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollosionWithMushroom(e);
 	else if (dynamic_cast<CLeaf*>(e->obj))
 		OnCollosionWithLeaf(e);
+	else if (dynamic_cast<CCoinjump*>(e->obj))
+		OnCollosionWithCoineffect(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -122,6 +126,9 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 			mushroom->SetState(MUSHROOM_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED /2;
 		}
+		else if (e->ny < 0) {
+
+		}
 		else {
 			e->obj->Delete();
 		}
@@ -145,6 +152,9 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 			leaf->SetState(LEAF_STATE_FALLING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 		}
+		else if (e->ny < 0) {
+
+		}
 		else {
 			
 			e->obj->Delete();
@@ -158,6 +168,17 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 	}
 
 }
+
+void CMario::OnCollosionWithCoineffect(LPCOLLISIONEVENT e)
+{
+	CCoinjump* coinj = dynamic_cast<CCoinjump*>(e->obj);
+	if (coinj->GetState() == COIN_STATE_WAITING)
+		if (e->ny > 0 ) {
+			coinj->SetState(COIN_STATE_ACTIVE);
+			coin++;
+		}
+}
+
 //
 // Get animation ID for small Mario
 //
