@@ -120,7 +120,7 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 	if (mushroom->GetState() == MUSHROOM_STATE_WAITING) {
 		if (e->ny > 0 && level == MARIO_LEVEL_SMALL) {
 			mushroom->SetState(MUSHROOM_STATE_WALKING);
-			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+			vy = -MARIO_JUMP_DEFLECT_SPEED /2;
 		}
 		else {
 			e->obj->Delete();
@@ -128,7 +128,7 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 	}
 	else {
 		if (level == MARIO_LEVEL_SMALL) {
-			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+			vy = -MARIO_JUMP_DEFLECT_SPEED /2;
 			level = MARIO_LEVEL_BIG;
 			
 		}

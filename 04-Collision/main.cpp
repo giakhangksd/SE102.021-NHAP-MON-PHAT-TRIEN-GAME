@@ -677,21 +677,6 @@ void Reload()
 		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.0f);
 		objects.push_back(leaf);
 	}
-	for (int j = 0; j < 1; j++)
-	{
-		CLeaf* leaf = new CLeaf(LEAF_X, GROUND_Y - 20.0f );
-		objects.push_back(leaf);
-	}
-	for (int j = 0; j < 1; j++)
-	{
-		CMushroom* mushroom= new CMushroom(LEAF_X, GROUND_Y - 20.0f);
-		objects.push_back(mushroom);
-	}
-	for (int j = 0; j < 1; j++)
-	{
-		CQuesbox* quesbox = new CQuesbox(LEAF_X, GROUND_Y - 20.0f - 1.0f);
-		objects.push_back(quesbox);
-	}
 
 
 	for (int i = 0; i < 2; i++)

@@ -84,6 +84,9 @@
     <ClInclude Include="leaf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="coineffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -147,6 +150,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="leaf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coineffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
