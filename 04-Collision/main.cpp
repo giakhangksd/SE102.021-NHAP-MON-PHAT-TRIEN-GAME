@@ -41,6 +41,7 @@
 #include "quesbox.h"
 #include "Mushroom.h"
 #include "leaf.h"
+#include "coineffect.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -438,6 +439,24 @@ void LoadAssetsLeaf() {
 
 }
 
+void LoadAssesCoineffect() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+
+	sprites->Add(ID_SPRITE_COIN + 4, 303, 99, 303 + 9, 99 + 15, texMisc);
+	sprites->Add(ID_SPRITE_COIN + 5, 321, 99, 321 + 9, 99 + 15, texMisc);
+	sprites->Add(ID_SPRITE_COIN + 6, 338, 99, 338 + 9, 99 + 15, texMisc);
+
+	LPANIMATION ani = new CAnimation(300);
+	ani->Add(ID_SPRITE_COIN + 4);
+	ani->Add(ID_SPRITE_COIN + 5);
+	ani->Add(ID_SPRITE_COIN + 6);
+	animations->Add(ID_ANI_COINJUMP, ani);
+}
+
 void LoadAssetsOther()
 {
 	CTextures* textures = CTextures::GetInstance();
@@ -475,6 +494,7 @@ void LoadResources()
 	LoadAssetsMushroom();
 	LoadAssetsLeaf();
 	LoadAssetsOther();
+	LoadAssesCoineffect();
 
 }
 
@@ -690,11 +710,11 @@ void Reload()
 		objects.push_back(c);
 	}
 	// COINS 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	CCoin* c = new CCoin(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 96.0f);
-	//	objects.push_back(c);
-	//}
+	for (int i = 0; i < 1; i++)
+	{
+		CCoinjump* c = new CCoinjump(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
+		objects.push_back(c);
+	}
 	 
 
 }

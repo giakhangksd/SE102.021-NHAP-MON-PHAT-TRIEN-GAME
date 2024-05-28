@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_COINJUMP 12000
+#define ID_ANI_COINJUMP 13000
 
 #define	COINJUMP_WIDTH 16
 #define COINJUMP_BBOX_WIDTH 16
