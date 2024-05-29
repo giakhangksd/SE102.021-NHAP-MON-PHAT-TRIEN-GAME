@@ -91,6 +91,9 @@
 #define ID_ANI_MARIO_FOX_BRACE_RIGHT 2400
 #define ID_ANI_MARIO_FOX_BRACE_LEFT 2401
 
+#define ID_ANI_MARIO_FOX_SIT_RIGHT 2900
+#define ID_ANI_MARIO_FOX_SIT_LEFT 2901
+
 #define ID_ANI_MARIO_FOX_JUMP_WALK_RIGHT 2500
 #define ID_ANI_MARIO_FOX_JUMP_WALK_LEFT 2501
 
@@ -148,6 +151,7 @@ class CMario : public CGameObject
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
+	int GetAniIdFox();
 
 public:
 	CMario(float x, float y) : CGameObject(x, y)
