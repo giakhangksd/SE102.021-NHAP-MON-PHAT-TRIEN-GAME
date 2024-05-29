@@ -129,6 +129,46 @@ void LoadAssetsMario()
 	sprites->Add(ID_SPRITE_MARIO_BIG_BRACE_RIGHT + 1, 425,154,442,181, texMario);
 	sprites->Add(ID_SPRITE_MARIO_BIG_BRACE_LEFT + 1, 5,154,22,181, texMario);
 
+	////////////////// FOX_MARIO //////////////
+		// IDLE
+	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_RIGHT + 1, 246-5, 154+480, 259+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_LEFT + 1, 186-5, 154+480, 199+5, 181+480, texMario);
+
+	// WALKING LEFT
+	sprites->Add(ID_SPRITE_MARIO_FOX_WALKING_RIGHT + 2, 275-5, 154+480, 290+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_WALKING_RIGHT + 3, 304-5, 154+480, 321+5, 181+480, texMario);
+
+	// WALKING RIGHT
+	sprites->Add(ID_SPRITE_MARIO_FOX_WALKING_LEFT + 2, 155-5, 154+480, 170+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_WALKING_LEFT + 3, 125-5, 154+480, 140+5, 181+480, texMario);
+
+	// RUNNING RIGHT 
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 1, 334-5, 154+480, 355+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 2, 334-5, 154+480, 355+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 3, 392-5, 154+480, 413+5, 181+480, texMario);
+
+	// RUNNING LEFT
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 1, 91-5, 154+480, 112+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 2, 65-5, 154+480, 86+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 3, 34-5, 154+480, 55+5, 181+480, texMario);
+
+	// JUMP WALK RIGHT & LEFT 
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_RIGHT + 1, 395-5, 275+480, 412+5, 302+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_LEFT + 1, 35-5, 275+480, 52+5, 302+480, texMario);
+
+	// JUMP RUN RIGHT & LEFT 
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_RIGHT + 1, 394-5, 195+480, 413+5, 222, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_LEFT + 1, 35-5, 195+480, 52+5, 222+480, texMario);
+
+	// SIT RIGHT/LEFT
+	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_RIGHT + 1, 426-5, 239+480, 441+5, 256+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_LEFT + 1, 5-5, 239+480, 20+5, 256+480, texMario);
+
+	// BRACING RIGHT/LEFT
+	sprites->Add(ID_SPRITE_MARIO_FOX_BRACE_RIGHT + 1, 425-5, 154+480, 442+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_BRACE_LEFT + 1, 5-5, 154+480, 22+5, 181+480, texMario);
+
+
 	// MARIO DIE
 	sprites->Add(ID_SPRITE_MARIO_DIE + 1, 215, 120, 231, 135, texMario);
 
@@ -229,6 +269,75 @@ void LoadAssetsMario()
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_MARIO_DIE + 1);
 	animations->Add(ID_ANI_MARIO_DIE, ani);
+
+	//
+	///////////FOX MARIO
+	//
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_IDLE_RIGHT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_IDLE_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_IDLE_LEFT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_IDLE_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_IDLE_RIGHT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_WALKING_RIGHT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_WALKING_RIGHT + 3);
+	animations->Add(ID_ANI_MARIO_FOX_WALKING_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_IDLE_LEFT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_WALKING_LEFT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_WALKING_LEFT + 3);
+	animations->Add(ID_ANI_MARIO_FOX_WALKING_LEFT, ani);
+
+	ani = new CAnimation(50);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 3);
+	animations->Add(ID_ANI_MARIO_RUNNING_RIGHT, ani);
+
+	// Mario runs faster hence animation speed should be faster
+	ani = new CAnimation(50);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 3);
+	animations->Add(ID_ANI_MARIO_FOX_RUNNING_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_RIGHT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_JUMP_WALK_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_LEFT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_JUMP_WALK_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_RIGHT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_JUMP_RUN_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_LEFT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_JUMP_RUN_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_SIT_RIGHT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_SIT_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_SIT_LEFT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_SIT_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_BRACE_RIGHT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_BRACE_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_BRACE_LEFT + 1);
+	animations->Add(ID_ANI_MARIO_FOX_BRACE_LEFT, ani);
+
 
 	//
 	// SMALL MARIO 

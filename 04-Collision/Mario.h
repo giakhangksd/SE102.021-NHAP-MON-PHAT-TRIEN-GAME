@@ -86,7 +86,7 @@
 #define ID_ANI_MARIO_FOX_WALKING_LEFT 2201
 
 #define ID_ANI_MARIO_FOX_RUNNING_RIGHT 2300
-#define ID_ANI_MARIO_FOX_RUNNING_LEFT 2301
+#define ID_ANI_MARIO_FOX_RUNNING_LEFT 2302
 
 #define ID_ANI_MARIO_FOX_BRACE_RIGHT 2400
 #define ID_ANI_MARIO_FOX_BRACE_LEFT 2401
@@ -161,7 +161,7 @@ public:
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 
 
-		level = MARIO_LEVEL_BIG;
+		level = MARIO_LEVEL_FOX;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;

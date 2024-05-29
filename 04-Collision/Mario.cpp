@@ -150,6 +150,7 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 		if (e->ny > 0 && level == MARIO_LEVEL_BIG) {
 			leaf->SetState(LEAF_STATE_FALLING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
+			//level = MARIO_LEVEL_FOX;
 		}
 		else if (e->ny < 0) {
 
