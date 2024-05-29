@@ -1,6 +1,8 @@
 #include <Windows.h>
+#include <iostream>
 #include "debug.h"
 
+using namespace std;
 HWND _hwnd = NULL;
 
 void DebugOut(const wchar_t* fmt, ...)
@@ -16,7 +18,8 @@ void DebugOut(const wchar_t* fmt, ...)
 void DebugOutTitle(const wchar_t* fmt, ...)
 {
 	wchar_t s[1024];
-	VA_PRINTS(s);
+	VA_PRINTS(s); 
+	cout << "\n";
 	SetWindowText(_hwnd, s);
 }
 

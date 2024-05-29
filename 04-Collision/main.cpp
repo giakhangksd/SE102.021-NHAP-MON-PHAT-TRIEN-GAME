@@ -161,8 +161,8 @@ void LoadAssetsMario()
 	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_LEFT + 1, 35+26, 195+478+80, 52+32, 222+478+80, texMario);
 
 	// SIT RIGHT/LEFT
-	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_RIGHT + 1, 426-5, 239+480, 441+5, 256+480, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_LEFT + 1, 5-5, 239+480, 20+5, 256+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_RIGHT + 1, 425 - 5, 154 + 480+80, 442 + 5, 181 + 480+80, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_LEFT + 1, 5 - 5, 154 + 480+80, 22 + 5, 181 + 480+80, texMario);
 
 	// BRACING RIGHT/LEFT
 	sprites->Add(ID_SPRITE_MARIO_FOX_BRACE_RIGHT + 1, 425-5, 154+480, 442+5, 181+480, texMario);
@@ -831,11 +831,7 @@ void Reload()
 
 
 	// COINS 
-	for (int i = 0; i < 1; i++)
-	{
-		CCoinjump* c = new CCoinjump(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
-		objects.push_back(c);
-	}
+
 
 }
 

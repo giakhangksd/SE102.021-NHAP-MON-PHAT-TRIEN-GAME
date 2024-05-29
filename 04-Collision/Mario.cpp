@@ -147,10 +147,9 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 {
 	CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
 	if(leaf->GetState()==LEAF_STATE_WAITING)
-		if (e->ny > 0 && level == MARIO_LEVEL_BIG) {
+		if (e->ny > 0 && level >= MARIO_LEVEL_BIG) {
 			leaf->SetState(LEAF_STATE_FALLING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-			level = MARIO_LEVEL_FOX;
 		}
 		else if (e->ny < 0) {
 
@@ -160,9 +159,9 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 			e->obj->Delete();
 		}
 	else {
-		if (level == MARIO_LEVEL_BIG) {
+		if (level >= MARIO_LEVEL_BIG) {
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-			
+			level = MARIO_LEVEL_FOX;
 		}
 		e->obj->Delete();
 	}
@@ -384,6 +383,7 @@ void CMario::Render()
 	//RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
+	//DebugOutTitle(L"Score: %d", score);
 }
 
 void CMario::SetState(int state)
