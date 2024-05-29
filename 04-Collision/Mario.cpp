@@ -150,7 +150,7 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 		if (e->ny > 0 && level == MARIO_LEVEL_BIG) {
 			leaf->SetState(LEAF_STATE_FALLING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
-			//level = MARIO_LEVEL_FOX;
+			level = MARIO_LEVEL_FOX;
 		}
 		else if (e->ny < 0) {
 
@@ -485,19 +485,30 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 			bottom = top + MARIO_BIG_BBOX_HEIGHT;
 		}
 	}
-	else if(level==MARIO_LEVEL_SMALL)
+	else if (level == MARIO_LEVEL_FOX) {
+		if (isSitting)
+		{
+			left = x - MARIO_FOX_SITTING_BBOX_WIDTH / 2;
+			top = y - MARIO_FOX_SITTING_BBOX_HEIGHT / 2;
+			right = left + MARIO_FOX_SITTING_BBOX_WIDTH;
+			bottom = top + MARIO_FOX_SITTING_BBOX_HEIGHT;
+		}
+		else
+		{
+			left = x - MARIO_FOX_BBOX_WIDTH / 2;
+			top = y - MARIO_FOX_BBOX_HEIGHT / 2;
+			right = left + MARIO_FOX_BBOX_WIDTH;
+			bottom = top + MARIO_FOX_BBOX_HEIGHT;
+		}
+	}
+	else 
 	{
 		left = x - MARIO_SMALL_BBOX_WIDTH/2;
 		top = y - MARIO_SMALL_BBOX_HEIGHT/2;
 		right = left + MARIO_SMALL_BBOX_WIDTH;
 		bottom = top + MARIO_SMALL_BBOX_HEIGHT;
 	}
-	else {
-		left = x - MARIO_FOX_BBOX_WIDTH / 2;
-		top = y - MARIO_FOX_BBOX_HEIGHT / 2;
-		right = left + MARIO_FOX_BBOX_WIDTH;
-		bottom = top + MARIO_FOX_BBOX_HEIGHT;
-	}
+
 }
 
 void CMario::SetLevel(int l)

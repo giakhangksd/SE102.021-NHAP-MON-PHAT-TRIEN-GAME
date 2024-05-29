@@ -148,17 +148,17 @@ void LoadAssetsMario()
 	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 3, 392-5, 154+480, 413+5, 181+480, texMario);
 
 	// RUNNING LEFT
-	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 1, 91-5, 154+480, 112+5, 181+480, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 2, 65-5, 154+480, 86+5, 181+480, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 3, 34-5, 154+480, 55+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 1, 91-7, 154+480, 112+3, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 2, 65-7, 154+480, 86+3, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_RUNNING_LEFT + 3, 34-7, 154+480, 55+3, 181+480, texMario);
 
 	// JUMP WALK RIGHT & LEFT 
-	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_RIGHT + 1, 395-5, 275+480, 412+5, 302+480, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_LEFT + 1, 35-5, 275+480, 52+5, 302+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_RIGHT + 1, 395-5, 275+478, 412+5, 302+478, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_WALK_LEFT + 1, 35-5, 275+478, 52+5, 302+478, texMario);
 
 	// JUMP RUN RIGHT & LEFT 
-	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_RIGHT + 1, 394-5, 195+480, 413+5, 222, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_LEFT + 1, 35-5, 195+480, 52+5, 222+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_RIGHT + 1, 394-33, 195+478+80, 413-29, 222+478+80, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_JUMP_RUN_LEFT + 1, 35+26, 195+478+80, 52+32, 222+478+80, texMario);
 
 	// SIT RIGHT/LEFT
 	sprites->Add(ID_SPRITE_MARIO_FOX_SIT_RIGHT + 1, 426-5, 239+480, 441+5, 256+480, texMario);
@@ -297,7 +297,7 @@ void LoadAssetsMario()
 	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 1);
 	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 2);
 	ani->Add(ID_SPRITE_MARIO_FOX_RUNNING_RIGHT + 3);
-	animations->Add(ID_ANI_MARIO_RUNNING_RIGHT, ani);
+	animations->Add(ID_ANI_MARIO_FOX_RUNNING_RIGHT, ani);
 
 	// Mario runs faster hence animation speed should be faster
 	ani = new CAnimation(50);
