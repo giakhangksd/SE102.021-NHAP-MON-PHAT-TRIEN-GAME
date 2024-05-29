@@ -174,8 +174,10 @@ void CMario::OnCollosionWithCoineffect(LPCOLLISIONEVENT e)
 	CCoinjump* coinj = dynamic_cast<CCoinjump*>(e->obj);
 	if (coinj->GetState() == COIN_STATE_WAITING)
 		if (e->ny > 0 ) {
+			
 			coinj->SetState(COIN_STATE_ACTIVE);
 			coin++;
+			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 		}
 }
 

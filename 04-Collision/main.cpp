@@ -606,8 +606,8 @@ void Reload()
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
-		CPlatform* p = new CPlatform(250.0f + i * 50, GROUND_Y - 15.0f - 50.0f * i,
-			16, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		CPlatform* p = new CPlatform(240.0f + i * 50, GROUND_Y - 15.0f - 50.0f * i,
+			16, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
 	for (int i = 1; i < 3; i++) {
@@ -698,6 +698,16 @@ void Reload()
 		objects.push_back(leaf);
 	}
 
+	for (int i = 0; i < 2; i++)
+	{
+		CCoinjump* c = new CCoinjump(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 26.0f);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		CCoinjump* c = new CCoinjump(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 86.0f);
+		objects.push_back(c);
+	}
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -709,16 +719,13 @@ void Reload()
 		CQuesbox* c = new CQuesbox(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 86.0f);
 		objects.push_back(c);
 	}
+
+
 	// COINS 
 	for (int i = 0; i < 1; i++)
 	{
 		CCoinjump* c = new CCoinjump(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
 		objects.push_back(c);
-	}
-	for (int i = 0; i < 1; i++)
-	{
-		CQuesbox* q = new CQuesbox(COIN_X + i * (COIN_WIDTH * 2), GROUND_Y - 26.0f);
-		objects.push_back(q);
 	}
 
 }
