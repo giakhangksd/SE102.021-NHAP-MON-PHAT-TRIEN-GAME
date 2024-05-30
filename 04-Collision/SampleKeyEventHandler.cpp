@@ -19,6 +19,13 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_S:
 		mario->SetState(MARIO_STATE_JUMP);
 		break;
+	//fox mario lying///
+	case DIK_X:
+		if (mario->GetState() == MARIO_LEVEL_FOX) {
+			mario->SetState(MARIO_STATE_FOX_FLY);
+		}
+		break;
+
 	case DIK_1:
 		mario->SetLevel(MARIO_LEVEL_SMALL);
 		break;
@@ -66,6 +73,11 @@ void CSampleKeyHandler::KeyState(BYTE *states)
 			mario->SetState(MARIO_STATE_RUNNING_LEFT);
 		else
 			mario->SetState(MARIO_STATE_WALKING_LEFT);
+	}
+	else if (game->IsKeyDown(DIK_Z)) {
+		if (mario->GetState() == MARIO_LEVEL_FOX) {
+			mario->SetState(MARIO_STATE_FOX_HIT);
+		}
 	}
 	else
 		mario->SetState(MARIO_STATE_IDLE);
