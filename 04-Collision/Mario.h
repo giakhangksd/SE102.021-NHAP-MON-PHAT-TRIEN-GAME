@@ -15,7 +15,7 @@
 #define MARIO_JUMP_SPEED_Y		0.5f
 #define MARIO_JUMP_RUN_SPEED_Y	0.6f
 
-#define MARIO_GRAVITY			0.002f
+#define MARIO_GRAVITY			0.0018f
 
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
 
@@ -37,6 +37,7 @@
 
 #define MARIO_STATE_FOX_FLY			700
 #define MARIO_STATE_FOX_HIT			701
+#define MARIO_STATE_FOX_HIT_RELEASE			702
 
 #pragma region ANIMATION_ID
 
@@ -142,7 +143,7 @@
 
 class CMario : public CGameObject
 {
-	BOOLEAN isSitting;
+	BOOLEAN isSitting,isHitting;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
@@ -170,6 +171,7 @@ public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
+		isHitting = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 

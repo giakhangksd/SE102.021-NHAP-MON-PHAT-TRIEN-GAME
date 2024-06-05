@@ -131,8 +131,8 @@ void LoadAssetsMario()
 
 	////////////////// FOX_MARIO //////////////
 		// IDLE
-	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_RIGHT + 1, 246-5, 154+480, 259+5, 181+480, texMario);
-	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_LEFT + 1, 186-5, 154+480, 199+5, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_RIGHT + 1, 246-5, 154+480, 259+9, 181+480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_IDLE_LEFT + 1, 186-9, 154+480, 199+5, 181+480, texMario);
 
 	// WALKING LEFT
 	sprites->Add(ID_SPRITE_MARIO_FOX_WALKING_RIGHT + 2, 275-5, 154+480, 290+5, 181+480, texMario);
@@ -881,10 +881,11 @@ void Update(DWORD dt)
 	mario->GetPosition(cx, cy);
 
 	cx -= SCREEN_WIDTH / 2;
-	cy = 0;
-	//cy -= SCREEN_HEIGHT / 2;
+	//cy = 0;
+	cy -= SCREEN_HEIGHT / 8;
 
 	if (cx < 0) cx = 0;
+	if (cy > 0) cy = 0;
 
 	CGame::GetInstance()->SetCamPos(cx, cy);
 }

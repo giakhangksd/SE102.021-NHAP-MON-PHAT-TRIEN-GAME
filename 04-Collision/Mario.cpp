@@ -69,9 +69,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-
 	// jump on top >> kill Goomba and deflect a bit 
-	if (e->ny < 0)
+	if (e->ny < 0 || isHitting == 1)
 	{
 		if (goomba->GetState() != GOOMBA_STATE_DIE)
 		{
@@ -313,10 +312,13 @@ int CMario::GetAniIdFox()
 	{
 		if (abs(ax) == MARIO_ACCEL_RUN_X)
 		{
-			if (nx >= 0)
+			if (nx >= 0) {
+				
 				aniId = ID_ANI_MARIO_FOX_JUMP_RUN_RIGHT;
-			else
+			}
+			else {
 				aniId = ID_ANI_MARIO_FOX_JUMP_RUN_LEFT;
+			}
 		}
 		else
 		{
@@ -380,7 +382,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);
@@ -395,36 +397,56 @@ void CMario::SetState(int state)
 	{
 	case MARIO_STATE_RUNNING_RIGHT:
 		if (isSitting) break;
+		if (isHitting) break;
 		maxVx = MARIO_RUNNING_SPEED;
 		ax = MARIO_ACCEL_RUN_X;
 		nx = 1;
 		break;
 	case MARIO_STATE_RUNNING_LEFT:
 		if (isSitting) break;
+		if (isHitting) break;
 		maxVx = -MARIO_RUNNING_SPEED;
 		ax = -MARIO_ACCEL_RUN_X;
 		nx = -1;
 		break;
 	case MARIO_STATE_WALKING_RIGHT:
 		if (isSitting) break;
+		if (isHitting) break;
 		maxVx = MARIO_WALKING_SPEED;
 		ax = MARIO_ACCEL_WALK_X;
 		nx = 1;
 		break;
 	case MARIO_STATE_WALKING_LEFT:
 		if (isSitting) break;
+		if (isHitting) break;
 		maxVx = -MARIO_WALKING_SPEED;
 		ax = -MARIO_ACCEL_WALK_X;
 		nx = -1;
 		break;
 	case MARIO_STATE_JUMP:
 		if (isSitting) break;
-		if (isOnPlatform)
-		{
-			if (abs(this->vx) == MARIO_RUNNING_SPEED)
-				vy = -MARIO_JUMP_RUN_SPEED_Y * 1.1f;
+		if (isHitting) break;
+		if (level == MARIO_LEVEL_FOX) {
+			if (isOnPlatform)
+			{
+				if (abs(this->vx) == MARIO_RUNNING_SPEED)
+					vy = -MARIO_JUMP_RUN_SPEED_Y * 1.1f;
+				else
+					vy = -MARIO_JUMP_SPEED_Y * 1.1f;
+			}
+			else if (abs(this->vx) == MARIO_RUNNING_SPEED)
+				vy = -MARIO_JUMP_RUN_SPEED_Y * 0.7f;
 			else
-				vy = -MARIO_JUMP_SPEED_Y * 1.1f;
+				vy = -MARIO_JUMP_SPEED_Y * 0.7f;
+		}
+		else {
+			if (isOnPlatform)
+			{
+				if (abs(this->vx) == MARIO_RUNNING_SPEED)
+					vy = -MARIO_JUMP_RUN_SPEED_Y * 1.1f;
+				else
+					vy = -MARIO_JUMP_SPEED_Y * 1.1f;
+			}
 		}
 		break;
 
@@ -438,7 +460,7 @@ void CMario::SetState(int state)
 			state = MARIO_STATE_IDLE;
 			isSitting = true;
 			vx = 0; vy = 0.0f;
-			y +=MARIO_SIT_HEIGHT_ADJUST;
+			y += MARIO_SIT_HEIGHT_ADJUST;
 		}
 		break;
 
@@ -461,8 +483,23 @@ void CMario::SetState(int state)
 		vx = 0;
 		ax = 0;
 		break;
-	}
+	case MARIO_STATE_FOX_HIT:
+		if (isOnPlatform && level == MARIO_LEVEL_FOX)
+		{
+			isHitting = true;
+		//	y -= MARIO_SIT_HEIGHT_ADJUST;
 
+		}
+		break;
+
+	case MARIO_STATE_FOX_HIT_RELEASE:
+		if (isHitting)
+		{
+			isHitting = false;
+		//	y -= MARIO_SIT_HEIGHT_ADJUST;
+		}
+		break;
+	}
 	CGameObject::SetState(state);
 }
 
@@ -493,6 +530,12 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 			right = left + MARIO_FOX_SITTING_BBOX_WIDTH;
 			bottom = top + MARIO_FOX_SITTING_BBOX_HEIGHT;
 		}
+		else if (isHitting) {
+			left = x - MARIO_FOX_BBOX_WIDTH ;
+			top = y - MARIO_FOX_BBOX_HEIGHT / 2;
+			right = left + MARIO_FOX_BBOX_WIDTH*2;
+			bottom = top + MARIO_FOX_BBOX_HEIGHT;
+		}
 		else
 		{
 			left = x - MARIO_FOX_BBOX_WIDTH / 2;
@@ -515,6 +558,10 @@ void CMario::SetLevel(int l)
 {
 	// Adjust position to avoid falling off platform
 	if (this->level == MARIO_LEVEL_SMALL)
+	{
+		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT) / 2;
+	}
+	if (this->level == MARIO_LEVEL_FOX)
 	{
 		y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT) / 2;
 	}
