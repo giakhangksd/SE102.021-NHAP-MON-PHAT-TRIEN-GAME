@@ -13,6 +13,7 @@
 
 #include "Collision.h"
 
+int a = 0;
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -27,7 +28,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		untouchable_start = 0;
 		untouchable = 0;
 	}
-
+	if (a == 1 && GetTickCount64() - untouchable_start > MARIO_UNTOUCHABLE_TIME / 5)
+	{
+		SetState(MARIO_STATE_FOX_HIT_RELEASE);
+	}
+	
+	
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -70,7 +76,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 	// jump on top >> kill Goomba and deflect a bit 
-	if (e->ny < 0 )
+	if (e->ny < 0)
 	{
 		if (goomba->GetState() != GOOMBA_STATE_DIE)
 		{
@@ -83,6 +89,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 		if (goomba->GetState() != GOOMBA_STATE_DIE)
 		{
 			goomba->SetState(GOOMBA_STATE_DIE);
+			
 		}
 	}
 	else // hit by Goomba
@@ -500,8 +507,8 @@ void CMario::SetState(int state)
 		if (isOnPlatform && level == MARIO_LEVEL_FOX)
 		{
 			isHitting = true;
-		//	y -= MARIO_SIT_HEIGHT_ADJUST;
-
+			StartUntouchable();
+			a = 1;
 		}
 		break;
 
@@ -509,7 +516,6 @@ void CMario::SetState(int state)
 		if (isHitting)
 		{
 			isHitting = false;
-		//	y -= MARIO_SIT_HEIGHT_ADJUST;
 		}
 		break;
 	}
