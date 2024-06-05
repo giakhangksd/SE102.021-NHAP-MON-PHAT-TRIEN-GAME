@@ -70,12 +70,19 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 	// jump on top >> kill Goomba and deflect a bit 
-	if (e->ny < 0 || isHitting == 1)
+	if (e->ny < 0 )
 	{
 		if (goomba->GetState() != GOOMBA_STATE_DIE)
 		{
 			goomba->SetState(GOOMBA_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else if ( isHitting == 1)
+	{
+		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		{
+			goomba->SetState(GOOMBA_STATE_DIE);
 		}
 	}
 	else // hit by Goomba
@@ -336,6 +343,12 @@ int CMario::GetAniIdFox()
 			else
 				aniId = ID_ANI_MARIO_FOX_SIT_LEFT;
 		}
+		else if (isHitting) {
+			if (nx > 0) 
+				aniId = ID_ANI_MARIO_FOX_HIT_RIGHT;
+			else
+				aniId = ID_ANI_MARIO_FOX_HIT_LEFT;
+		}
 		else
 			if (vx == 0)
 			{
@@ -382,7 +395,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);

@@ -168,6 +168,15 @@ void LoadAssetsMario()
 	sprites->Add(ID_SPRITE_MARIO_FOX_BRACE_RIGHT + 1, 425-5, 154+480, 442+5, 181+480, texMario);
 	sprites->Add(ID_SPRITE_MARIO_FOX_BRACE_LEFT + 1, 5-5, 154+480, 22+5, 181+480, texMario);
 
+	// FOX TAIL HIT RIGHT
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 1, 246 - 5 - 2, 154 + 480, 259 + 9 - 2, 181 + 480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 2, 216 - 9 - 2, 154 + 480, 239 + 5 - 2, 181 + 480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 3, 186 - 9 - 2, 154 + 480, 199 + 5 - 2, 181 + 480, texMario);
+
+	// FOX TAIL HIT LEFT
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 1, 186 - 9 - 2, 154 + 480, 199 + 5 - 2, 181 + 480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 2, 216 - 9 - 2, 154 + 480, 239 + 5 - 2, 181 + 480, texMario);
+	sprites->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 3, 246 - 5 - 2, 154 + 480, 259 + 9 - 2, 181 + 480, texMario);
 
 	// MARIO DIE
 	sprites->Add(ID_SPRITE_MARIO_DIE + 1, 215, 120, 231, 135, texMario);
@@ -338,6 +347,18 @@ void LoadAssetsMario()
 	ani->Add(ID_SPRITE_MARIO_FOX_BRACE_LEFT + 1);
 	animations->Add(ID_ANI_MARIO_FOX_BRACE_LEFT, ani);
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_RIGHT + 3);
+	animations->Add(ID_ANI_MARIO_FOX_HIT_RIGHT, ani);
+
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 1);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 2);
+	ani->Add(ID_SPRITE_MARIO_FOX_HIT_LEFT + 3);
+	animations->Add(ID_ANI_MARIO_FOX_HIT_LEFT, ani);
 
 	//
 	// SMALL MARIO 

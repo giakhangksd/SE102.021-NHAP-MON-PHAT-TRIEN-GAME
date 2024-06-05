@@ -6,13 +6,13 @@
 #include "Mario.h"
 extern CMario* mario;
 extern void Reload();
-
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 	switch (KeyCode)
 	{
 	case DIK_DOWN:
+		
 		mario->SetState(MARIO_STATE_SIT);
 		break;
 	case DIK_S:
