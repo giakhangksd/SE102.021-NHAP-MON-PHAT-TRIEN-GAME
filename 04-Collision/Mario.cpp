@@ -32,8 +32,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		SetState(MARIO_STATE_FOX_HIT_RELEASE);
 	}
-	
-	
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -454,10 +452,12 @@ void CMario::SetState(int state)
 				else
 					vy = -MARIO_JUMP_SPEED_Y * 1.1f;
 			}
-			else if (abs(this->vx) == MARIO_RUNNING_SPEED)
+			else if (abs(this->vx) == MARIO_RUNNING_SPEED) {
 				vy = -MARIO_JUMP_RUN_SPEED_Y * 0.7f;
+			}
 			else
-				vy = -MARIO_JUMP_SPEED_Y * 0.7f;
+				vy += -MARIO_JUMP_SPEED_Y * 0.7f;
+
 		}
 		else {
 			if (isOnPlatform)

@@ -42,6 +42,7 @@
 #include "Mushroom.h"
 #include "leaf.h"
 #include "coineffect.h"
+#include "worldmap.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -56,12 +57,12 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
-
 #define TEXTURES_DIR L"textures"
 #define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario_transparent.png"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
+#define TEXTURE_PATH_MAP TEXTURES_DIR "\\map.png"
 
 CGame *game;
 CMario *mario;
@@ -592,10 +593,29 @@ void LoadAssetsOther()
 	CTextures* textures = CTextures::GetInstance();
 	CSprites* sprites = CSprites::GetInstance();
 
+
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_CLOUD_BEGIN, 390, 117, 390 + 15, 117 + 15, texMisc);
 	sprites->Add(ID_SPRITE_CLOUD_MIDDLE, 408, 117, 408 + 15, 117 + 15, texMisc);
 	sprites->Add(ID_SPRITE_CLOUD_END, 426, 117, 426 + 15, 117 + 15, texMisc);
+
+}
+
+
+void LoadAssetsworldmap() {
+
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texMap = textures->Get(ID_TEX_MAP);
+	sprites->Add(ID_SPRITE_WORLDMAP, 15 -2600, 300 -52 -400 , 220 + 2600 , 450 + 400, texMap);
+
+
+	LPANIMATION ani = new CAnimation(300);
+	ani->Add(ID_SPRITE_WORLDMAP);
+
+	animations->Add(ID_ANI_WORLDMAP, ani);
 
 }
 
@@ -613,6 +633,7 @@ void LoadResources()
 	textures->Add(ID_TEX_ENEMY, TEXTURE_PATH_ENEMY);
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
+	textures->Add(ID_TEX_MAP, TEXTURE_PATH_MAP);
 
 	LoadAssetsMario();
 	LoadAssetsGoomba();
@@ -625,6 +646,7 @@ void LoadResources()
 	LoadAssetsLeaf();
 	LoadAssetsOther();
 	LoadAssesCoineffect();
+	LoadAssetsworldmap();
 
 }
 
@@ -662,6 +684,7 @@ void Reload()
 	ClearScene();
 
 	// Main ground
+
 	for (int i = 0; i < 43; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
@@ -699,13 +722,6 @@ void Reload()
 	}
 
 
-	// Short, low platform
-	//for (int i = 1; i < 3; i++)
-	//{
-	//	CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
-	//	objects.push_back(b);
-	//}
-
 	// Vertical column 1
 	for (int i = 0; i < 10; i++)
 	{
@@ -713,36 +729,22 @@ void Reload()
 		objects.push_back(b);
 	}
 
-	// Vertical column 2
-	//for (int i = 1; i < 3; i++)
-	//{
-	//	CBrick* b = new CBrick(BRICK_X + 300.0f, BRICK_Y - i * BRICK_WIDTH);
-	//	objects.push_back(b);
-	//}
-
-	// Vertical column 3
-	//for (int i = 1; i < 4; i++)
-	//{
-	//	CBrick* b = new CBrick(BRICK_X + 400.0f, BRICK_Y - i * BRICK_WIDTH);
-	//	objects.push_back(b);
-	//}
-
-	// Vertical column 4
-	//for (int i = 1; i < 5; i++)
-	//{
-	//	cbrick* b = new cbrick(brick_x + 500.0f, brick_y - i * brick_width);
-	//	objects.push_back(b);
-	//}
+		//WORLDMAP
+	for (int i = 1; i < 2; i++)
+	{
+		Cworldmap* w = new Cworldmap(i + 100.0f, GROUND_Y - 55.0f);
+		objects.push_back(w);
+	}
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
-		CPlatform* p = new CPlatform(240.0f + i * 50, GROUND_Y - 15.0f - 50.0f * i,
-			16, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		CPlatform* p = new CPlatform(248.0f + i * 32, GROUND_Y - 13.0f - 32.0f * i,
+			15, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
-	for (int i = 1; i < 3; i++) {
-		CPlatform* p = new CPlatform(480.0f + i * 50, GROUND_Y  - 20.0f - 40.0f * i,
-			16, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+	for (int i = 0; i < 2; i++) {
+		CPlatform* p = new CPlatform(472.0f + i * 48, GROUND_Y  - 45.0f - 32.0f * i,
+			15, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
 	for (int i = 1; i < 3; i++) {
@@ -756,7 +758,6 @@ void Reload()
 		objects.push_back(p);
 	}
 
-	
 
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
@@ -770,12 +771,12 @@ void Reload()
 	
 	for (int j = 0; j < 1; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j   , GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f , GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 1; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X + j , GROUND_Y );
+		Cpipe* pipe = new Cpipe(PIPE_X + j - 32.0f , GROUND_Y - 2.0f );
 		objects.push_back(pipe);
 	}
 	for (int j = 0; j < 2; j++)
@@ -817,38 +818,50 @@ void Reload()
 	for (int j = 1; j < 2; j++)
 	{
 
-		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.0f);
+		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
 		objects.push_back(mushroom);
 	}
 
 	for (int j = 1; j < 2; j++)
 	{
 
-		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 86.0f);
+		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
 		objects.push_back(leaf);
 	}
 
 	for (int i = 0; i < 2; i++)
 	{
-		CCoinjump* c = new CCoinjump(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 26.0f);
+		CCoinjump* c = new CCoinjump(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH) + 2.0f , GROUND_Y - 28.0f);
 		objects.push_back(c);
 	}
 	for (int i = 0; i < 1; i++)
 	{
-		CCoinjump* c = new CCoinjump(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 86.0f);
+		CCoinjump* c = new CCoinjump(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 76.0f);
+		objects.push_back(c);
+	}
+	for (int i = 1; i < 2; i++)
+	{
+		CCoinjump* c = new CCoinjump(307.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 61.0f);
 		objects.push_back(c);
 	}
 
 	for (int i = 0; i < 2; i++)
 	{
-		CQuesbox* c = new CQuesbox(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 26.0f);
+		CQuesbox* c = new CQuesbox(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH) + 2.0f , GROUND_Y - 28.0f);
 		objects.push_back(c);
 	}
 	for (int i = 0; i < 2; i++)
 	{
-		CQuesbox* c = new CQuesbox(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 86.0f);
+		CQuesbox* c = new CQuesbox(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 76.0f);
 		objects.push_back(c);
 	}
+
+	for (int i = 1; i < 2; i++)
+	{
+		CQuesbox* c = new CQuesbox(307.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 61.0f);
+		objects.push_back(c);
+	}
+
 
 
 	// COINS 

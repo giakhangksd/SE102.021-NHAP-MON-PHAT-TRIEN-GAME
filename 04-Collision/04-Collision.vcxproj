@@ -138,6 +138,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="leaf.h" />
     <ClInclude Include="Mario.h" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="coineffect.cpp" />

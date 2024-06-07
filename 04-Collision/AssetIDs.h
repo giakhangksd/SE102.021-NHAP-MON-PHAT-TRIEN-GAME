@@ -7,6 +7,9 @@
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
+#define ID_TEX_MAP 30
+
+
 
 #pragma region MARIO 
 
@@ -132,5 +135,10 @@
 
 #define ID_SPRITE_LEAF 70000
 #define ID_SPRITE_LEAF_FALLING (ID_SPRITE_LEAF + 1000)
+
+#define ID_SPRITE_WORLDMAP 24000
+
+
+
 
 
