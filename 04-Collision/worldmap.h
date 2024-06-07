@@ -2,7 +2,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_WORLDMAP 11000
+#define ID_ANI_WORLDMAP 11020
 
 #define	COIN_WIDTH 10
 #define COIN_BBOX_WIDTH 10

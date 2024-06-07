@@ -682,15 +682,19 @@ void ClearScene()
 void Reload()
 {
 	ClearScene();
-
+	for (int i = 1; i < 2; i++)
+	{
+		Cworldmap* w = new Cworldmap(i + 100.0f, GROUND_Y - 55.0f);
+		objects.push_back(w);
+	}
 	// Main ground
 
-	for (int i = 0; i < 43; i++)
+	for (int i = 0; i < 40; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
-	for (int i = 43; i < 70; i++)
+	for (int i = 40; i < 68; i++)
 	{
 		for (int j = 1; j < 3; j++)
 		{
@@ -700,12 +704,12 @@ void Reload()
 		}
 	}
 
-	for (int i = 75; i < 95; i++)
+	for (int i = 73; i < 94; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
-	for (int i = 97; i < 102; i++)
+	for (int i = 97; i < 101; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
@@ -715,12 +719,26 @@ void Reload()
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
-	for (int i = 141; i < 200; i++)
+	for (int i = 142; i < 200; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 4.0f);
 		objects.push_back(b);
 	}
-
+	for (int i = 0; i < 2; i++)
+	{
+		CBrick* b = new CBrick(1511.0f + BRICK_WIDTH * i, GROUND_Y - 44.0f);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		CBrick* b = new CBrick(1576.0f + BRICK_WIDTH * i, GROUND_Y + 20.0f - i * 16.0f );
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		CBrick* b = new CBrick(1671.0f + BRICK_WIDTH * i, GROUND_Y - 12.0f + i* 16.0f );
+		objects.push_back(b);
+	}
 
 	// Vertical column 1
 	for (int i = 0; i < 10; i++)
@@ -730,11 +748,7 @@ void Reload()
 	}
 
 		//WORLDMAP
-	for (int i = 1; i < 2; i++)
-	{
-		Cworldmap* w = new Cworldmap(i + 100.0f, GROUND_Y - 55.0f);
-		objects.push_back(w);
-	}
+
 
 	// Second cloud platform
 	for (int i = 0; i < 2; i++) {
@@ -747,21 +761,46 @@ void Reload()
 			15, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
-	for (int i = 1; i < 3; i++) {
-		CPlatform* p = new CPlatform(320.0f + i * 130, GROUND_Y  - 20.0f + 10.0f * i,
-			16, 15, 6, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+	for (int i = 1; i < 2; i++) {
+		CPlatform* p = new CPlatform(407.0f + i , GROUND_Y  - 13.0f ,
+			15, 15, 5, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
-	for (int i = 1; i < 4; i++) {
-		CPlatform* p = new CPlatform(1280.0f + i * 30, GROUND_Y + 40.0f - 40.0f * i,
+	for (int i = 1; i < 2; i++) {
+		CPlatform* p = new CPlatform(520.0f + i, GROUND_Y + 3.0f  ,
+			15, 15, 6, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+	for (int i = 0; i < 3; i++) {
+		CPlatform* p = new CPlatform(1272.0f + i * 32, GROUND_Y + 4.0f - 32.0f * i,
 			16, 15, 7, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
 		objects.push_back(p);
 	}
-
-
+	for (int i = 0; i < 2; i++) {
+		CPlatform* p = new CPlatform(2152.0f + i * 32.0f , GROUND_Y - 13.0f - 96.0f * i,
+			15, 15, 3, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+	for (int i = 2; i < 3; i++) {
+		CPlatform* p = new CPlatform(1256.0f + i * 32, GROUND_Y - 120.0f * i + 3.0f,
+			15, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+	for (int i = 2; i < 3; i++) {
+		CPlatform* p = new CPlatform(1352.0f + i * 32, GROUND_Y - 94.0f * i - 1.0f,
+			15, 15, 4, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
+	for (int i = 2; i < 3; i++) {
+		CPlatform* p = new CPlatform(1432.0f + i * 32, GROUND_Y - 100.0f * i - 5.0f,
+			15, 15, 14, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE, ID_SPRITE_CLOUD_MIDDLE);
+		objects.push_back(p);
+	}
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
+
+	//enemies
 
 	for (int j = 0; j < 1; j++)
 	{
@@ -769,6 +808,8 @@ void Reload()
 		objects.push_back(goomba);
 	}
 	
+	//pipe
+
 	for (int j = 0; j < 1; j++)
 	{
 		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f , GROUND_Y + 24.0f);
@@ -781,39 +822,41 @@ void Reload()
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 220.0f + j * 520.0f, GROUND_Y + 14.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 208.0f + j * 527.0f, GROUND_Y + 14.0f);
 		objects.push_back(pipe);
 	}
-	for (int j = 1; j < 3; j++)
+	for (int j = 0; j < 2; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 - 88.0f + j * 376.0f, GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 +272.0f + j * 400.0f, GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 +288.0f + j * 376.0f, GROUND_Y );
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 2.0f );
 		objects.push_back(pipe);	
 	}
-	for (int j = 1; j < 2; j++)
+	for (int j = 0; j < 11; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 288.0f + j * 376.0f, GROUND_Y - 85.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 295.0f +  376.0f, GROUND_Y - 85.0f - 16.0f * j);
 		objects.push_back(underpipe);
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 144.0f+ j * 520.0f, GROUND_Y - 109.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 295.0f + j * 376.0f, GROUND_Y - 260.0f);
 		objects.push_back(pipe);
 	}
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 50.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2247.0f, BRICK_Y - 52.0f);
 		objects.push_back(b);
 	}
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH + 2240.0f, BRICK_Y - 115.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH + 2247.0f, BRICK_Y - 117.0f);
 		objects.push_back(b);
 	}
+
+	//quesbox
 
 	for (int j = 1; j < 2; j++)
 	{
@@ -821,12 +864,22 @@ void Reload()
 		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
 		objects.push_back(mushroom);
 	}
+	for (int i = 0; i < 1; i++)
+	{
+		CMushroom* m = new CMushroom(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f);
+		objects.push_back(m);
+	}
 
 	for (int j = 1; j < 2; j++)
 	{
 
 		CLeaf* leaf = new CLeaf(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
 		objects.push_back(leaf);
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		CLeaf* l = new CLeaf(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f);
+		objects.push_back(l);
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -844,7 +897,11 @@ void Reload()
 		CCoinjump* c = new CCoinjump(307.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 61.0f);
 		objects.push_back(c);
 	}
-
+	for (int i = 1; i < 2; i++)
+	{
+		CCoinjump* c = new CCoinjump(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 4.0f - 32.0f * i);
+		objects.push_back(c);
+	}
 	for (int i = 0; i < 2; i++)
 	{
 		CQuesbox* c = new CQuesbox(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH) + 2.0f , GROUND_Y - 28.0f);
@@ -855,17 +912,52 @@ void Reload()
 		CQuesbox* c = new CQuesbox(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 76.0f);
 		objects.push_back(c);
 	}
-
 	for (int i = 1; i < 2; i++)
 	{
 		CQuesbox* c = new CQuesbox(307.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 61.0f);
 		objects.push_back(c);
 	}
-
-
-
+	for (int i = 0; i < 2; i++)
+	{
+		CQuesbox* c = new CQuesbox(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f , GROUND_Y + 4.0f - 32.0f * i );
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		CQuesbox* c = new CQuesbox(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f );
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		CQuesbox* b = new CQuesbox(1447.0f + i * 16.0f, GROUND_Y - 252.0f);
+		objects.push_back(b);
+	}
 	// COINS 
-
+	for (int i = 0; i < 5 ; i++)
+	{
+		CCoin* c = new CCoin(1080.0f + i * 30.0f , GROUND_Y - 60.0f - 32.0f * i);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		CCoin* c = new CCoin(1333.0f + i * 16.0f, GROUND_Y - 300.0f);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		CCoin* c = new CCoin(1477.0f + i * 16.0f, GROUND_Y - 270.0f);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		CCoin* c = new CCoin(1542.0f + i * 16.0f, GROUND_Y - 252.0f);
+		objects.push_back(c);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		CCoin* c = new CCoin(1620.0f + i * 16.0f, GROUND_Y - 270.0f);
+		objects.push_back(c);
+	}
 
 }
 
