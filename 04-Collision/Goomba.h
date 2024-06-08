@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define GOOMBA_GRAVITY 0.002f
+#define GOOMBA_GRAVITY 0.0005f
 #define GOOMBA_WALKING_SPEED 0.05f
 
 
@@ -13,13 +13,16 @@
 
 #define GOOMBA_STATE_WALKING 100
 #define GOOMBA_STATE_DIE 200
-#define GOOMBA_STATE_WING_WALK 300
+#define GOOMBA_STATE_WING_WALK_LEFT 300
 #define GOOMBA_STATE_WING_FLY 400
+#define GOOMBA_STATE_WING_WALK_RIGHT 500
+#define GOOMBA_STATE_WING_WALK 600
 
 #define ID_ANI_GOOMBA_WALKING 5000
 #define ID_ANI_GOOMBA_DIE 5001
 #define ID_ANI_GOOMBA_WING_WALK 5002
-#define ID_ANI_GOOMBA_WING_FLY 5002
+#define ID_ANI_GOOMBA_WING_FLY 5003
+
 
 class CGoomba : public CGameObject
 {
@@ -27,7 +30,7 @@ protected:
 	float ax;				
 	float ay; 
 
-	ULONGLONG die_start;
+	ULONGLONG die_start,wait_2_fly,wait_2_walk;
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

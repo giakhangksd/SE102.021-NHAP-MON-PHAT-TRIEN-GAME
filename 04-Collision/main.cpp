@@ -429,8 +429,11 @@ void LoadAssetsGoomba()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 1, 4 + 61, 13-2, 22 + 62, 30+2, texEnemy);   //4 13 22 30
-	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 2, 24 + 61, 13-2, 42 + 64, 30+2, texEnemy);  //24 13 42 30
+	sprites->Add(ID_SPRITE_GOOMBA_WING_FLY + 1, 4 + 61 + 45, 13-7, 22 + 62 + 45, 30 + 3, texEnemy);   //4+61 13-2 22+62 30+2
+	sprites->Add(ID_SPRITE_GOOMBA_WING_FLY + 2, 24 + 61 + 49, 13-7, 42 + 64 + 49, 30 + 3, texEnemy);  //24+61 13-2 42+64 30+2
+
+	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 1, 4 + 61, 13 - 2, 22 + 62, 30 + 2, texEnemy);  
+	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 2, 24 + 61, 13 - 2, 42 + 64, 30 + 2, texEnemy);
 
 	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //4 13 22 30
 	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);  //24 13 42 30
@@ -446,6 +449,11 @@ void LoadAssetsGoomba()
 	ani->Add(ID_SPRITE_GOOMBA_WING_WALK + 1);
 	ani->Add(ID_SPRITE_GOOMBA_WING_WALK + 2);
 	animations->Add(ID_ANI_GOOMBA_WING_WALK, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GOOMBA_WING_FLY + 1);
+	ani->Add(ID_SPRITE_GOOMBA_WING_FLY + 2);
+	animations->Add(ID_ANI_GOOMBA_WING_FLY, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GOOMBA_DIE + 1);
@@ -867,7 +875,7 @@ void Reload()
 
 	for (int j = 0; j < 1; j++)
 	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X + 40.0f, GROUND_Y - 20.0f, 1);
+		CGoomba* goomba = new CGoomba(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 1);
 		objects.push_back(goomba);
 	}
 

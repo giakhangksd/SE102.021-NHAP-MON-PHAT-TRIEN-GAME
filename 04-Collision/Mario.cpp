@@ -85,6 +85,10 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			goomba->SetState(GOOMBA_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		else if (goomba->GetState() == GOOMBA_STATE_WING_FLY) {
+			goomba->SetState(GOOMBA_STATE_WALKING);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
 	}
 	else if ( isHitting == 1)
 	{
@@ -93,6 +97,9 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			goomba->SetState(GOOMBA_STATE_DIE);
 		}
 		else if (goomba->GetState() == GOOMBA_STATE_WING_WALK) {
+			goomba->SetState(GOOMBA_STATE_WALKING);
+		}
+		else if (goomba->GetState() == GOOMBA_STATE_WING_FLY) {
 			goomba->SetState(GOOMBA_STATE_WALKING);
 		}
 	}

@@ -5,6 +5,8 @@ CGoomba::CGoomba(float x, float y,int type):CGameObject(x, y)
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
 	die_start = -1;
+	wait_2_fly = -1;
+	wait_2_walk = -1;
 	if (type == 0) {
 		SetState(GOOMBA_STATE_WALKING);
 	}
@@ -64,6 +66,24 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		return;
 	}
 
+	if ((state == GOOMBA_STATE_WING_WALK) && (GetTickCount64() - wait_2_fly > GOOMBA_DIE_TIMEOUT * 2))
+	{
+		SetState(GOOMBA_STATE_WING_FLY);
+	}
+	if ((state == GOOMBA_STATE_WING_WALK_RIGHT) && (GetTickCount64() - wait_2_fly > GOOMBA_DIE_TIMEOUT * 2))
+	{
+		SetState(GOOMBA_STATE_WING_FLY);
+	}
+	if ((state == GOOMBA_STATE_WING_FLY) && (GetTickCount64() - wait_2_walk > GOOMBA_DIE_TIMEOUT * 2) && vx < 0)
+	{
+		SetState(GOOMBA_STATE_WING_WALK);
+	}
+	if ((state == GOOMBA_STATE_WING_FLY) && (GetTickCount64() - wait_2_walk > GOOMBA_DIE_TIMEOUT * 2) && vx > 0)
+	{
+		SetState(GOOMBA_STATE_WING_WALK_RIGHT);
+	}
+
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -76,9 +96,13 @@ void CGoomba::Render()
 	{
 		aniId = ID_ANI_GOOMBA_DIE;
 	}
-	else if (state == GOOMBA_STATE_WING_WALK) {
+	if (state == GOOMBA_STATE_WING_WALK || state == GOOMBA_STATE_WING_WALK_RIGHT || state == GOOMBA_STATE_WING_WALK_LEFT) {
 		aniId = ID_ANI_GOOMBA_WING_WALK;
 	}
+	if (state == GOOMBA_STATE_WING_FLY) {
+		aniId = ID_ANI_GOOMBA_WING_FLY;
+	}
+
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x,y);
 	//RenderBoundingBox();
@@ -101,7 +125,17 @@ void CGoomba::SetState(int state)
 			y -= 1;
 			break;
 		case GOOMBA_STATE_WING_WALK:
-			vx = -GOOMBA_WALKING_SPEED;
+			vx = -GOOMBA_WALKING_SPEED ;
+			vy = 0;
+			wait_2_fly = GetTickCount64();
+			break;
+		case GOOMBA_STATE_WING_WALK_RIGHT:
+			vx = GOOMBA_WALKING_SPEED;
+			wait_2_fly = GetTickCount64();
+			break;
+		case GOOMBA_STATE_WING_FLY:
+			vy -= 0.25f;
+			wait_2_walk = GetTickCount64();
 			break;
 	}
 }
