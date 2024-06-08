@@ -13,9 +13,13 @@
 
 #define GOOMBA_STATE_WALKING 100
 #define GOOMBA_STATE_DIE 200
+#define GOOMBA_STATE_WING_WALK 300
+#define GOOMBA_STATE_WING_FLY 400
 
 #define ID_ANI_GOOMBA_WALKING 5000
 #define ID_ANI_GOOMBA_DIE 5001
+#define ID_ANI_GOOMBA_WING_WALK 5002
+#define ID_ANI_GOOMBA_WING_FLY 5002
 
 class CGoomba : public CGameObject
 {
@@ -36,6 +40,6 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public: 	
-	CGoomba(float x, float y);
+	CGoomba(float x, float y,int type);
 	virtual void SetState(int state);
 };

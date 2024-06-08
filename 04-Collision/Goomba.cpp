@@ -1,11 +1,16 @@
 #include "Goomba.h"
 
-CGoomba::CGoomba(float x, float y):CGameObject(x, y)
+CGoomba::CGoomba(float x, float y,int type):CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
 	die_start = -1;
-	SetState(GOOMBA_STATE_WALKING);
+	if (type == 0) {
+		SetState(GOOMBA_STATE_WALKING);
+	}
+	if (type == 1) {
+		SetState(GOOMBA_STATE_WING_WALK);
+	}
 }
 
 void CGoomba::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -71,6 +76,9 @@ void CGoomba::Render()
 	{
 		aniId = ID_ANI_GOOMBA_DIE;
 	}
+	else if (state == GOOMBA_STATE_WING_WALK) {
+		aniId = ID_ANI_GOOMBA_WING_WALK;
+	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x,y);
 	//RenderBoundingBox();
@@ -89,6 +97,10 @@ void CGoomba::SetState(int state)
 			ay = 0;
 			break;
 		case GOOMBA_STATE_WALKING: 
+			vx = -GOOMBA_WALKING_SPEED;
+			y -= 1;
+			break;
+		case GOOMBA_STATE_WING_WALK:
 			vx = -GOOMBA_WALKING_SPEED;
 			break;
 	}

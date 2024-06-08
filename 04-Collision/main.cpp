@@ -429,8 +429,11 @@ void LoadAssetsGoomba()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //44, 83, 84, 140 pipe
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy); 
+	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 1, 4 + 61, 13-2, 22 + 62, 30+2, texEnemy);   //4 13 22 30
+	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 2, 24 + 61, 13-2, 42 + 64, 30+2, texEnemy);  //24 13 42 30
+
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //4 13 22 30
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);  //24 13 42 30
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
 
@@ -438,6 +441,11 @@ void LoadAssetsGoomba()
 	ani->Add(ID_SPRITE_GOOMBA_WALK + 1);
 	ani->Add(ID_SPRITE_GOOMBA_WALK + 2);
 	animations->Add(ID_ANI_GOOMBA_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GOOMBA_WING_WALK + 1);
+	ani->Add(ID_SPRITE_GOOMBA_WING_WALK + 2);
+	animations->Add(ID_ANI_GOOMBA_WING_WALK, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GOOMBA_DIE + 1);
@@ -682,11 +690,6 @@ void ClearScene()
 void Reload()
 {
 	ClearScene();
-	for (int i = 1; i < 2; i++)
-	{
-		Cworldmap* w = new Cworldmap(i + 100.0f, GROUND_Y - 55.0f);
-		objects.push_back(w);
-	}
 	// Main ground
 
 	for (int i = 0; i < 40; i++)
@@ -747,7 +750,6 @@ void Reload()
 		objects.push_back(b);
 	}
 
-		//WORLDMAP
 
 
 	// Second cloud platform
@@ -797,54 +799,44 @@ void Reload()
 		objects.push_back(p);
 	}
 
-	mario = new CMario(MARIO_START_X, MARIO_START_Y);
-	objects.push_back(mario);
-
-	//enemies
-
-	for (int j = 0; j < 1; j++)
-	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X , GROUND_Y - 120.0f);
-		objects.push_back(goomba);
-	}
-	
 	//pipe
 
 	for (int j = 0; j < 1; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f , GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f, GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 1; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X + j - 32.0f , GROUND_Y - 2.0f );
+		Cpipe* pipe = new Cpipe(PIPE_X + j - 32.0f, GROUND_Y - 4.0f);
 		objects.push_back(pipe);
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 208.0f + j * 527.0f, GROUND_Y + 14.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 208.0f + j * 527.0f, GROUND_Y + 12.0f);
 		objects.push_back(pipe);
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 +272.0f + j * 400.0f, GROUND_Y + 24.0f);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
 	for (int j = 0; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 2.0f );
-		objects.push_back(pipe);	
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 4.0f);
+		objects.push_back(pipe);
 	}
 	for (int j = 0; j < 11; j++)
 	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 295.0f +  376.0f, GROUND_Y - 85.0f - 16.0f * j);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 295.0f + 376.0f, GROUND_Y - 85.0f - 16.0f * j);
 		objects.push_back(underpipe);
 	}
 	for (int j = 1; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 295.0f + j * 376.0f, GROUND_Y - 260.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 295.0f + j * 376.0f, GROUND_Y - 262.0f);
 		objects.push_back(pipe);
 	}
+	//ogrange brick
 	for (int i = 1; i < 3; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH + 2247.0f, BRICK_Y - 52.0f);
@@ -854,6 +846,29 @@ void Reload()
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH + 2247.0f, BRICK_Y - 117.0f);
 		objects.push_back(b);
+	}
+
+	//world map
+
+	for (int i = 1; i < 2; i++)
+	{
+		Cworldmap* w = new Cworldmap(i + 100.0f, GROUND_Y - 55.0f);
+		objects.push_back(w);
+	}
+
+
+	//enemies
+
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 0);
+	//	objects.push_back(goomba);
+	//}
+
+	for (int j = 0; j < 1; j++)
+	{
+		CGoomba* goomba = new CGoomba(GOOMBA_X + 40.0f, GROUND_Y - 20.0f, 1);
+		objects.push_back(goomba);
 	}
 
 	//quesbox
@@ -959,6 +974,10 @@ void Reload()
 		objects.push_back(c);
 	}
 
+
+	//mario
+	mario = new CMario(MARIO_START_X, MARIO_START_Y);
+	objects.push_back(mario);
 }
 
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
