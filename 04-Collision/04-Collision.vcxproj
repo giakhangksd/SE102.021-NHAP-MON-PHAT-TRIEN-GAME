@@ -138,6 +138,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Koopa.h" />
     <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="leaf.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="Koopa.cpp" />
     <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />

@@ -435,8 +435,8 @@ void LoadAssetsGoomba()
 	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 1, 4 + 61, 13 - 2, 22 + 62, 30 + 2, texEnemy);  
 	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 2, 24 + 61, 13 - 2, 42 + 64, 30 + 2, texEnemy);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //4 13 22 30
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);  //24 13 42 30
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13+110, 22+5, 30+140, texEnemy);   //4 13 22 30
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13+110, 42+5, 30+140, texEnemy);  //24 13 42 30
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
 
@@ -875,7 +875,7 @@ void Reload()
 
 	for (int j = 0; j < 1; j++)
 	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 1);
+		CGoomba* goomba = new CGoomba(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 0);
 		objects.push_back(goomba);
 	}
 
