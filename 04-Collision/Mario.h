@@ -162,6 +162,7 @@ class CMario : public CGameObject
 	void OnCollosionWithMushroom(LPCOLLISIONEVENT e);
 	void OnCollosionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollosionWithCoineffect(LPCOLLISIONEVENT e);
+	void OnCollisionWithKoopa(LPCOLLISIONEVENT e);
 
 	int GetAniIdBig();
 	int GetAniIdSmall();

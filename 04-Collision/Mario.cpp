@@ -10,6 +10,7 @@
 #include "Mushroom.h"
 #include "leaf.h"
 #include "Coineffect.h"
+#include "Koopa.h"
 
 #include "Collision.h"
 
@@ -68,6 +69,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollosionWithLeaf(e);
 	else if (dynamic_cast<CCoinjump*>(e->obj))
 		OnCollosionWithCoineffect(e);
+	else if (dynamic_cast<CKoopa*>(e->obj))
+		OnCollisionWithKoopa(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -207,6 +210,63 @@ void CMario::OnCollosionWithCoineffect(LPCOLLISIONEVENT e)
 			coin++;
 			vy = -MARIO_JUMP_DEFLECT_SPEED / 2;
 		}
+}
+
+void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
+{
+	CKoopa* koopa = dynamic_cast<CKoopa*>(e->obj);
+
+	if (e->ny < 0)
+	{
+		if (koopa->GetState() == KOOPA_STATE_WALKING)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		else if (koopa->GetState() == KOOPA_STATE_SHELL)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL_MOV);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else if (isHitting == 1)
+	{
+		if (koopa->GetState() == KOOPA_STATE_WALKING)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL);
+		}
+		else if (koopa->GetState() == KOOPA_STATE_SHELL)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL_MOV);
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (koopa->GetState() != KOOPA_STATE_SHELL)
+			{
+				if (level == MARIO_LEVEL_FOX)
+				{
+					level = MARIO_LEVEL_BIG;
+					StartUntouchable();
+				}
+				else if (level == MARIO_LEVEL_BIG)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+			else if (koopa->GetState() == KOOPA_STATE_SHELL)
+			{
+				koopa->SetState(KOOPA_STATE_SHELL_MOV);
+			}
+		}
+	}
 }
 
 //

@@ -43,6 +43,7 @@
 #include "leaf.h"
 #include "coineffect.h"
 #include "worldmap.h"
+#include "Koopa.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -435,8 +436,8 @@ void LoadAssetsGoomba()
 	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 1, 4 + 61, 13 - 2, 22 + 62, 30 + 2, texEnemy);  
 	sprites->Add(ID_SPRITE_GOOMBA_WING_WALK + 2, 24 + 61, 13 - 2, 42 + 64, 30 + 2, texEnemy);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13+110, 22+5, 30+140, texEnemy);   //4 13 22 30
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13+110, 42+5, 30+140, texEnemy);  //24 13 42 30
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);   //4 13 22 30
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);  //24 13 42 30
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
 
@@ -617,6 +618,39 @@ void LoadAssetsOther()
 
 }
 
+void LoadAssetskoopa() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+	//walikng left
+	sprites->Add(ID_SPRITE_KOOPA_WALKING + 1, 4, 13 + 110, 22 + 5, 30 + 140, texEnemy);   
+	sprites->Add(ID_SPRITE_KOOPA_WALKING + 2, 24, 13 + 110, 42 + 5, 30 + 140, texEnemy);  
+	
+	//walking right
+	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 1, 4 + 304, 13 + 110, 22 + 5 + 304, 30 + 140, texEnemy);
+	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 2, 24 + 304, 13 + 110, 42 + 5 + 304, 30 + 140, texEnemy);
+
+	//shell
+	sprites->Add(ID_SPRITE_KOOPA_SHELL + 1, 4 + 40, 13 + 110, 22 + 5 + 40, 30 + 140, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_KOOPA_WALKING + 1);
+	ani->Add(ID_SPRITE_KOOPA_WALKING + 2);
+	animations->Add(ID_ANI_KOOPA_WALKING, ani);
+
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 1);
+	ani->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 2);
+	animations->Add(ID_ANI_KOOPA_WALKING_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_KOOPA_SHELL + 1);
+	animations->Add(ID_ANI_KOOPA_SHELL, ani);
+
+}
 
 void LoadAssetsworldmap() {
 
@@ -663,6 +697,7 @@ void LoadResources()
 	LoadAssetsOther();
 	LoadAssesCoineffect();
 	LoadAssetsworldmap();
+	LoadAssetskoopa();
 
 }
 
@@ -869,14 +904,14 @@ void Reload()
 
 	//for (int j = 0; j < 1; j++)
 	//{
-	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 0);
+	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 1);
 	//	objects.push_back(goomba);
 	//}
 
 	for (int j = 0; j < 1; j++)
 	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 0);
-		objects.push_back(goomba);
+		CKoopa* koopa = new CKoopa(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 0);
+		objects.push_back(koopa);
 	}
 
 	//quesbox

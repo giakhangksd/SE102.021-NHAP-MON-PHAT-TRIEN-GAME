@@ -12,21 +12,24 @@
 #define KOOPA_DIE_TIMEOUT 500
 
 #define KOOPA_STATE_WALKING 1000
-#define KOOPA_STATE_WAITING 2000
-#define KOOPA_STATE_WING_FLY 3000
+#define KOOPA_STATE_SHELL 2000
+#define KOOPA_STATE_SHELL_MOV 3000
+#define KOOPA_STATE_WING_FLY 4000
+#define KOOPA_STATE_SHELL_MOV_RIGHT 5000
 
-#define ID_ANI_KOOBA_WALKING 6000
-#define ID_ANI_KOOBA_WAITING 6001
-#define ID_ANI_GOOMBA_WING_FLY 6002
+#define ID_ANI_KOOPA_WALKING 6000
+#define ID_ANI_KOOPA_SHELL 6001
+#define ID_ANI_KOOPA_WING_FLY 6002
+#define ID_ANI_KOOPA_WALKING_RIGHT 6003
 
 
-class CKooba : public CGameObject
+class CKoopa : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
 
-	ULONGLONG die_start, wait_2_fly;
+	ULONGLONG die_start, wait;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
