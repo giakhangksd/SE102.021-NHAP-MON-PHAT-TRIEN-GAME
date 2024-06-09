@@ -635,6 +635,9 @@ void LoadAssetskoopa() {
 	//shell
 	sprites->Add(ID_SPRITE_KOOPA_SHELL + 1, 4 + 40, 13 + 110, 22 + 5 + 40, 30 + 140, texEnemy);
 
+	//shell->walking
+	sprites->Add(ID_SPRITE_KOOPA_SHELL_CHANGE + 1, 4 + 62, 13 + 110, 22 + 5 + 62, 30 + 140, texEnemy);
+
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_KOOPA_WALKING + 1);
 	ani->Add(ID_SPRITE_KOOPA_WALKING + 2);
@@ -650,6 +653,9 @@ void LoadAssetskoopa() {
 	ani->Add(ID_SPRITE_KOOPA_SHELL + 1);
 	animations->Add(ID_ANI_KOOPA_SHELL, ani);
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_KOOPA_SHELL_CHANGE + 1);
+	animations->Add(ID_ANI_KOOPA_SHELL_CHANGE, ani);
 }
 
 void LoadAssetsworldmap() {

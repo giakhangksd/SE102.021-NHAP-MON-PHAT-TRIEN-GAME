@@ -223,10 +223,26 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		else if (koopa->GetState() == KOOPA_STATE_WALKING_RIGHT)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL_RIGHT);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
 		else if (koopa->GetState() == KOOPA_STATE_SHELL)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL_MOV);
-			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else if (e->nx > 0) {
+		if (koopa->GetState() == KOOPA_STATE_SHELL)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL_MOV);
+		}
+	}
+	else if (e->nx < 0) {
+		if (koopa->GetState() == KOOPA_STATE_SHELL)
+		{
+			koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
 		}
 	}
 	else if (isHitting == 1)
@@ -240,7 +256,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL_MOV);
 		}
 	}
-	else // hit by Goomba
+	else 
 	{
 		if (untouchable == 0)
 		{
