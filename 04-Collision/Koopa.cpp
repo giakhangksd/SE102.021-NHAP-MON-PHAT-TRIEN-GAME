@@ -5,7 +5,7 @@ CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
 	die_start = -1;
-	wait1 = wait2 = -1;
+	wait1 = wait2 = wait3 = -1;
 	if (type == 0) {
 		SetState(KOOPA_STATE_WALKING);
 	}
@@ -49,25 +49,13 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	if (vx > 0) {
-		SetState(KOOPA_STATE_WALKING_RIGHT);
-	}
-	if (vx < 0) {
-		SetState(KOOPA_STATE_WALKING);
-	}
+
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
-	}
-	if (state == KOOPA_STATE_SHELL_RIGHT && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
-		SetState(KOOPA_STATE_SHELL_CHANGE_RIGHT);
 	}
 	if (state == KOOPA_STATE_SHELL_CHANGE && (GetTickCount64() - wait2 > KOOPA_WAIT_TIMEOUT)) {
 		SetState(KOOPA_STATE_WALKING);
 	}
-	if (state == KOOPA_STATE_SHELL_CHANGE_RIGHT && (GetTickCount64() - wait2 > KOOPA_WAIT_TIMEOUT)) {
-		SetState(KOOPA_STATE_WALKING_RIGHT);
-	}
-
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -81,7 +69,7 @@ void CKoopa::Render()
 	if (vx >= 0) {
 		aniId = ID_ANI_KOOPA_WALKING_RIGHT;
 	}
-	if (state == KOOPA_STATE_SHELL||state == KOOPA_STATE_SHELL_RIGHT)
+	if (state == KOOPA_STATE_SHELL)
 	{
 		aniId = ID_ANI_KOOPA_SHELL;
 	}
@@ -91,7 +79,7 @@ void CKoopa::Render()
 	if (state == KOOPA_STATE_SHELL_MOV||state ==KOOPA_STATE_SHELL_MOV_RIGHT) {
 		aniId = ID_ANI_KOOPA_SHELL;
 	}
-	if (state == KOOPA_STATE_SHELL_CHANGE||state == KOOPA_STATE_SHELL_CHANGE_RIGHT) {
+	if (state == KOOPA_STATE_SHELL_CHANGE) {
 		aniId = ID_ANI_KOOPA_SHELL_CHANGE;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -108,33 +96,18 @@ void CKoopa::SetState(int state)
 		vx = 0;
 		wait1 = GetTickCount64();
 		break;
-	case KOOPA_STATE_SHELL_RIGHT:
-		y -= 1.0f;
-		vx = 0;
-		wait1 = GetTickCount64();
-		break;
 	case KOOPA_STATE_SHELL_MOV:
-		y -= 1.0f;
 		vx = -KOOPA_WALKING_SPEED * 3;
+		y -= 0.5f;
 		break;
 	case KOOPA_STATE_SHELL_MOV_RIGHT:
-		y -= 1.0f;
 		vx = KOOPA_WALKING_SPEED * 3;
+		y -= 0.5f;
 		break;
 	case KOOPA_STATE_WALKING:
 		vx = -KOOPA_WALKING_SPEED;
-	//	y -= 1;
-		break;
-	case KOOPA_STATE_WALKING_RIGHT:
-		vx = KOOPA_WALKING_SPEED;
-		//y -= 1;
 		break;
 	case KOOPA_STATE_SHELL_CHANGE:
-		vx = 0;
-		y -= 1;
-		wait2 = GetTickCount64();
-		break;
-	case KOOPA_STATE_SHELL_CHANGE_RIGHT:
 		vx = 0;
 		y -= 1;
 		wait2 = GetTickCount64();

@@ -35,7 +35,7 @@ protected:
 	float ax;
 	float ay;
 
-	ULONGLONG die_start, wait1, wait2;
+	ULONGLONG die_start, wait1, wait2, wait3;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
