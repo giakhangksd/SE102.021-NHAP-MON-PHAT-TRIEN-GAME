@@ -2,18 +2,21 @@
 #include "Goomba.h"
 #include "Mario.h"
 #include "Platform.h"
+#include "Brick.h"
 
 CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
-	this->isOnPlatform = false;
-	this->nx = 1;
+	this->isOnPlatform = FALSE;
+	this->isOnBrick = FALSE;
+	this->isOnBlock = FALSE;
 	l_bounded = r_bounded = 0;
+	this->nx = 1;
 	die_start = -1;
 	wait1 = wait2 = wait3 = -1;
 	if (type == 0) {
-		SetState(KOOPA_STATE_WALKING);
+		SetState(KOOPA_STATE_RED_WALKING);
 	}
 	if (type == 1) {
 		SetState(KOOPA_STATE_WING_FLY);
@@ -46,6 +49,7 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 		vy = 0;
 		if (e->ny < 0) {
 			isOnPlatform = true;
+			isOnBrick = true;
 		}
 	}
 	else if (e->nx != 0)
@@ -55,6 +59,9 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	}
 	if (dynamic_cast<CPlatform*>(e->obj))
 		OnCollisionWithPlatform(e);
+	else if (dynamic_cast<CBrick*>(e->obj)) {
+		OnCollisionWithBrick(e);
+	}
 }
 void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 	if (state == KOOPA_STATE_SHELL_MOV||state==KOOPA_STATE_SHELL_MOV_RIGHT)
@@ -66,11 +73,11 @@ void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 		}
 		else if (dynamic_cast<CGoomba*>(e->obj))
 		{
-			CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-			goomba->SetState(GOOMBA_STATE_DIE);
+		CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+		goomba->SetState(GOOMBA_STATE_DIE);
 		}
 	}
-	
+
 }
 void CKoopa::OnCollisionWithPlatform(LPCOLLISIONEVENT e)
 {
@@ -85,14 +92,34 @@ void CKoopa::OnCollisionWithPlatform(LPCOLLISIONEVENT e)
 		l_bounded = l;
 		r_bounded = r;
 	}
+}
 
+void CKoopa::OnCollisionWithBrick(LPCOLLISIONEVENT e)
+{
+	if (e->ny < 0)
+	{
+		CGameObject* brick = dynamic_cast<CGameObject*>(e->obj);
+		float l, r, t, b;
+		brick->GetBoundingBox(l, t, r, b);
+		if (!isOnBlock)
+		{
+			l_bounded = l * 1000;
+			r_bounded = r * 1000;
+			isOnBlock = TRUE;
+		}
+		else
+		{
+			l_bounded = min(l, l_bounded);
+			r_bounded = max(r, r_bounded);
+		}
+	}
 }
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	if (isOnPlatform && state == KOOPA_STATE_WALKING)
+	if (isOnPlatform && state == KOOPA_STATE_RED_WALKING)
 	{
 		if ((x <= l_bounded && vx < 0) || (x >= r_bounded && vx > 0))
 		{
@@ -100,12 +127,22 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			nx = -nx;
 		}
 	}
+	if (isOnBrick && state == KOOPA_STATE_RED_WALKING)
+	{
+		if ((x <= l_bounded && vx < 0) || (x >= r_bounded && vx > 0))
+		{
+			vx = -vx;
+			nx = -nx;
+		}
+	}
+
+	isOnBrick = false;
 	isOnPlatform = false;
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
 	}
 	if (state == KOOPA_STATE_SHELL_CHANGE && (GetTickCount64() - wait2 > KOOPA_WAIT_TIMEOUT)) {
-		SetState(KOOPA_STATE_WALKING);
+		SetState(KOOPA_STATE_RED_WALKING);
 	}
 
 	CGameObject::Update(dt, coObjects);
@@ -115,19 +152,28 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CKoopa::Render()
 {
-
-	int aniId = ID_ANI_KOOPA_WALKING;
-	if (vx >= 0) {
-		aniId = ID_ANI_KOOPA_WALKING_RIGHT;
+	int aniId = -1;
+	if (state == KOOPA_STATE_RED_WALKING) {
+		if (vx >= 0) {
+			aniId = ID_ANI_KOOPA_WALKING_RIGHT;
+		}
+		if (vx < 0) {
+			aniId = ID_ANI_KOOPA_WALKING;
+		}
+	}
+	if (state == KOOPA_STATE_WING_FLY) {
+		if (vx >= 0) {
+			aniId = ID_ANI_GREEN_KOOPA_WALKING_RIGHT;
+		}
+		if (vx < 0) {
+			aniId = ID_ANI_GREEN_KOOPA_WALKING;
+		}
 	}
 	if (state == KOOPA_STATE_SHELL)
 	{
 		aniId = ID_ANI_KOOPA_SHELL;
 	}
-	if (state == KOOPA_STATE_WING_FLY) {
-		aniId = ID_ANI_KOOPA_WING_FLY;
-	}
-	if (state == KOOPA_STATE_SHELL_MOV||state ==KOOPA_STATE_SHELL_MOV_RIGHT) {
+	if (state == KOOPA_STATE_SHELL_MOV || state == KOOPA_STATE_SHELL_MOV_RIGHT) {
 		aniId = ID_ANI_KOOPA_SHELL;
 	}
 	if (state == KOOPA_STATE_SHELL_CHANGE) {
@@ -155,7 +201,7 @@ void CKoopa::SetState(int state)
 		vx = KOOPA_WALKING_SPEED * 3;
 		y -= 0.5f;
 		break;
-	case KOOPA_STATE_WALKING:
+	case KOOPA_STATE_RED_WALKING:
 		vx = -KOOPA_WALKING_SPEED;
 		break;
 	case KOOPA_STATE_SHELL_CHANGE:
@@ -164,7 +210,7 @@ void CKoopa::SetState(int state)
 		wait2 = GetTickCount64();
 		break;
 	case KOOPA_STATE_WING_FLY:
-
+		vx = KOOPA_WALKING_SPEED;
 		break;
 	}
 }

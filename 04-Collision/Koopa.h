@@ -11,7 +11,7 @@
 
 #define KOOPA_WAIT_TIMEOUT 500
 
-#define KOOPA_STATE_WALKING 1000
+#define KOOPA_STATE_RED_WALKING 1000
 #define KOOPA_STATE_SHELL 2000
 #define KOOPA_STATE_SHELL_RIGHT 2200
 #define KOOPA_STATE_SHELL_MOV 3000
@@ -22,9 +22,10 @@
 #define KOOPA_STATE_SHELL_CHANGE_RIGHT 8000
 
 #define ID_ANI_KOOPA_WALKING 6000
+#define ID_ANI_GREEN_KOOPA_WALKING 7000
 #define ID_ANI_KOOPA_SHELL 6001
-#define ID_ANI_KOOPA_WING_FLY 6002
 #define ID_ANI_KOOPA_WALKING_RIGHT 6003
+#define ID_ANI_GREEN_KOOPA_WALKING_RIGHT 7003
 #define ID_ANI_KOOPA_SHELL_CHANGE 6004
 #define ID_ANI_KOOPA_SHELL_CHANGE_RIGHT 6005
 
@@ -36,8 +37,8 @@ protected:
 	float ay;
 	int nx;
 
-	BOOLEAN isBlockByPlatform;
-	BOOLEAN isOnPlatform;
+	BOOLEAN isOnPlatform,isOnBrick;
+
 
 	float l_bounded, r_bounded;
 	BOOLEAN isOnBlock;
@@ -54,6 +55,7 @@ protected:
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithPlatform(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithBrick(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithOthers(LPCOLLISIONEVENT e);
 
 public:

@@ -624,13 +624,21 @@ void LoadAssetskoopa() {
 	CAnimations* animations = CAnimations::GetInstance();
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
-	//walikng left
+	//walikng left red
 	sprites->Add(ID_SPRITE_KOOPA_WALKING + 1, 4, 13 + 110, 22 + 5, 30 + 140, texEnemy);   
 	sprites->Add(ID_SPRITE_KOOPA_WALKING + 2, 24, 13 + 110, 42 + 5, 30 + 140, texEnemy);  
 	
-	//walking right
-	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 1, 4 + 304, 13 + 110, 22 + 5 + 304, 30 + 140, texEnemy);
-	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 2, 24 + 304, 13 + 110, 42 + 5 + 304, 30 + 140, texEnemy);
+	//walking right red
+	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 1, 4 + 304, 13 + 110, 22 + 5 + 304, 30 + 140, texEnemy); // 4 + 304, 13 + 110, 22 + 5 + 304, 30 + 140
+	sprites->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 2, 24 + 304, 13 + 110, 42 + 5 + 304, 30 + 140, texEnemy); //24 + 304, 13 + 110, 42 + 5 + 304, 30 + 140
+
+	//walikng left green
+	sprites->Add(ID_SPRITE_GREEN_KOOPA_WALKING + 1, 4 + 105, 13 + 110, 22 + 5 + 105, 30 + 140, texEnemy);   
+	sprites->Add(ID_SPRITE_GREEN_KOOPA_WALKING + 2, 24 + 108, 13 + 110, 42 + 5 + 108, 30 + 140, texEnemy);  
+	
+	//walking right green
+	sprites->Add(ID_SPRITE_GREEN_KOOPA_WALKING_RIGHT + 1, 4 + 105 + 66, 13 + 110, 22 + 5 + 105 + 66, 30 + 140, texEnemy);  
+	sprites->Add(ID_SPRITE_GREEN_KOOPA_WALKING_RIGHT + 2, 24 + 105 + 70+43, 13 + 110, 42 + 5 + 105 + 70+43, 30 + 140, texEnemy); 
 
 	//shell
 	sprites->Add(ID_SPRITE_KOOPA_SHELL + 1, 4 + 40, 13 + 110, 22 + 5 + 40, 30 + 140, texEnemy);
@@ -643,11 +651,20 @@ void LoadAssetskoopa() {
 	ani->Add(ID_SPRITE_KOOPA_WALKING + 2);
 	animations->Add(ID_ANI_KOOPA_WALKING, ani);
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GREEN_KOOPA_WALKING + 1);
+	ani->Add(ID_SPRITE_GREEN_KOOPA_WALKING + 2);
+	animations->Add(ID_ANI_GREEN_KOOPA_WALKING, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 1);
 	ani->Add(ID_SPRITE_KOOPA_WALKING_RIGHT + 2);
 	animations->Add(ID_ANI_KOOPA_WALKING_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GREEN_KOOPA_WALKING_RIGHT + 1);
+	ani->Add(ID_SPRITE_GREEN_KOOPA_WALKING_RIGHT + 2);
+	animations->Add(ID_ANI_GREEN_KOOPA_WALKING_RIGHT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_KOOPA_SHELL + 1);
@@ -916,7 +933,7 @@ void Reload()
 
 	for (int j = 0; j < 1; j++)
 	{
-		CKoopa* koopa = new CKoopa(250.0f, GROUND_Y - 48.0f, 0);
+		CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f,1);
 		objects.push_back(koopa);
 	}
 	for (int j = 0; j < 1; j++)

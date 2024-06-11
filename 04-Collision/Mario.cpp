@@ -216,12 +216,12 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 	
 	if (e->ny < 0)
 	{
-		if (koopa->GetState() == KOOPA_STATE_WALKING)
+		if (koopa->GetState() == KOOPA_STATE_RED_WALKING)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
-		else if (koopa->GetState() == KOOPA_STATE_WALKING )
+		else if (koopa->GetState() == KOOPA_STATE_RED_WALKING )
 		{
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
@@ -238,7 +238,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 	}
 	else if (isHitting == 1)
 	{
-		if (koopa->GetState() == KOOPA_STATE_WALKING)
+		if (koopa->GetState() == KOOPA_STATE_RED_WALKING)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL);
 		}
