@@ -46,13 +46,12 @@ void CMario::OnNoCollision(DWORD dt)
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (e->ny != 0 && e->obj->IsBlocking())
+	if (e->ny != 0 && e->obj->IsBlocking() )
 	{
 		vy = 0;
 		if (e->ny < 0) isOnPlatform = true;
 	}
-	else 
-	if (e->nx != 0 && e->obj->IsBlocking())
+	else if (e->nx != 0 && e->obj->IsBlocking())
 	{
 		vx = 0;
 	}
@@ -143,7 +142,6 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 	if (e->ny > 0) {
 		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
 			quesbox->SetState(QUESBOX_STATE_NOT);
-		
 		}
 
 	}
@@ -223,9 +221,19 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		else if (koopa->GetState() == KOOPA_STATE_WALKING )
+		{
+			koopa->SetState(KOOPA_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
 		else if (koopa->GetState() == KOOPA_STATE_SHELL)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL_MOV);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		else if (koopa->GetState() == KOOPA_STATE_SHELL_MOV || koopa->GetState() == KOOPA_STATE_SHELL_MOV_RIGHT) {
+			koopa->SetState(KOOPA_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}
 	else if (isHitting == 1)
@@ -234,7 +242,9 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL);
 		}
-
+		else if (koopa->GetState() == KOOPA_STATE_SHELL_MOV || koopa->GetState() == KOOPA_STATE_SHELL_MOV_RIGHT) {
+			koopa->SetState(KOOPA_STATE_SHELL);
+		}
 	}
 	else if (koopa->GetState() == KOOPA_STATE_SHELL)
 	{

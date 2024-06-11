@@ -34,6 +34,17 @@ class CKoopa : public CGameObject
 protected:
 	float ax;
 	float ay;
+	int nx;
+
+	float* m_x;
+	float* m_y;
+	int* m_nx;
+
+	BOOLEAN isBlockByPlatform;
+	BOOLEAN isOnPlatform;
+
+	float l_bounded, r_bounded;
+	BOOLEAN isOnBlock;
 
 	ULONGLONG die_start, wait1, wait2, wait3;
 
@@ -46,6 +57,7 @@ protected:
 	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
+	void OnCollisionWithOthers(LPCOLLISIONEVENT e);
 
 public:
 	CKoopa(float x, float y, int type);

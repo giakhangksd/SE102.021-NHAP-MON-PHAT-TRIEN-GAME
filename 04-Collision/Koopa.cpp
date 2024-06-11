@@ -1,9 +1,16 @@
 #include "Koopa.h"
-int  b = 0, c = 0;
+#include "Goomba.h"
+#include "Mario.h"
+
 CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
+	this->isOnPlatform = false;
+	this->isOnBlock = FALSE;
+	this->nx = 1;
+	this->m_x = nullptr;
+	this->m_y = nullptr;
 	die_start = -1;
 	wait1 = wait2 = wait3 = -1;
 	if (type == 0) {
@@ -31,12 +38,16 @@ void CKoopa::OnNoCollision(DWORD dt)
 
 void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->obj->IsBlocking()) return;
-	if (dynamic_cast<CKoopa*>(e->obj)) return;
-
+	if (!e->obj->IsBlocking()) {
+		OnCollisionWithOthers(e);
+	
+	}
 	if (e->ny != 0)
 	{
 		vy = 0;
+		if (e->ny < 0) {
+			isOnPlatform = true;
+		}
 	}
 	else if (e->nx != 0)
 	{
@@ -44,11 +55,31 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	}
 
 }
+void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
+	if (state == KOOPA_STATE_SHELL_MOV||state==KOOPA_STATE_SHELL_MOV_RIGHT)
+	{
+		if (dynamic_cast<CMario*>(e->obj))
+		{
+			CMario* mario = dynamic_cast<CMario*>(e->obj);
+			mario->OnCollisionWith(e);
+		}
+		else if (dynamic_cast<CGoomba*>(e->obj))
+		{
+			CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+			goomba->SetState(GOOMBA_STATE_DIE);
+		}
+	}
+	
+}
+
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+	//if (state == KOOPA_STATE_WALKING && isOnPlatform==false) {
+	//	vx = -vx;
+	//}
 
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);

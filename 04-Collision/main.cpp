@@ -905,18 +905,23 @@ void Reload()
 		objects.push_back(w);
 	}
 
-
 	//enemies
+
 
 	//for (int j = 0; j < 1; j++)
 	//{
-	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 1);
+	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 0);
 	//	objects.push_back(goomba);
 	//}
 
 	for (int j = 0; j < 1; j++)
 	{
-		CKoopa* koopa = new CKoopa(GOOMBA_X - 60.0f, GROUND_Y + 20.0f , 0);
+		CKoopa* koopa = new CKoopa(210.0f, GROUND_Y - 48.0f, 0);
+		objects.push_back(koopa);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
 		objects.push_back(koopa);
 	}
 
@@ -945,15 +950,14 @@ void Reload()
 		CLeaf* l = new CLeaf(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f);
 		objects.push_back(l);
 	}
-
 	for (int i = 0; i < 2; i++)
 	{
-		CCoinjump* c = new CCoinjump(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH) + 2.0f , GROUND_Y - 28.0f);
+		CCoinjump* c = new CCoinjump(80.0f + QUESBOX_X + i * (QUESBOX_WIDTH)+2.0f, GROUND_Y - 28.0f + 0.5f);
 		objects.push_back(c);
 	}
 	for (int i = 0; i < 1; i++)
 	{
-		CCoinjump* c = new CCoinjump(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 76.0f);
+		CCoinjump* c = new CCoinjump(130.0f + QUESBOX_X + i * (QUESBOX_WIDTH), GROUND_Y - 76.0f );
 		objects.push_back(c);
 	}
 	for (int i = 1; i < 2; i++)

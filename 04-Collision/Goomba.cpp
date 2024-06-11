@@ -1,4 +1,5 @@
 #include "Goomba.h"
+#include"Koopa.h"
 
 CGoomba::CGoomba(float x, float y,int type):CGameObject(x, y)
 {
@@ -52,7 +53,6 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 		{
 			vx = -vx;
 		}
-		
 }
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -82,7 +82,6 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		SetState(GOOMBA_STATE_WING_WALK_RIGHT);
 	}
-
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
