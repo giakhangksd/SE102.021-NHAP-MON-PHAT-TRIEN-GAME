@@ -916,7 +916,7 @@ void Reload()
 
 	for (int j = 0; j < 1; j++)
 	{
-		CKoopa* koopa = new CKoopa(210.0f, GROUND_Y - 48.0f, 0);
+		CKoopa* koopa = new CKoopa(250.0f, GROUND_Y - 48.0f, 0);
 		objects.push_back(koopa);
 	}
 	for (int j = 0; j < 1; j++)

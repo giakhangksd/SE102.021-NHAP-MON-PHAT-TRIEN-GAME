@@ -1,16 +1,15 @@
 #include "Koopa.h"
 #include "Goomba.h"
 #include "Mario.h"
+#include "Platform.h"
 
 CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = KOOPA_GRAVITY;
 	this->isOnPlatform = false;
-	this->isOnBlock = FALSE;
 	this->nx = 1;
-	this->m_x = nullptr;
-	this->m_y = nullptr;
+	l_bounded = r_bounded = 0;
 	die_start = -1;
 	wait1 = wait2 = wait3 = -1;
 	if (type == 0) {
@@ -52,8 +51,10 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	else if (e->nx != 0)
 	{
 		vx = -vx;
+		nx = -nx;
 	}
-
+	if (dynamic_cast<CPlatform*>(e->obj))
+		OnCollisionWithPlatform(e);
 }
 void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 	if (state == KOOPA_STATE_SHELL_MOV||state==KOOPA_STATE_SHELL_MOV_RIGHT)
@@ -71,16 +72,35 @@ void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 	}
 	
 }
+void CKoopa::OnCollisionWithPlatform(LPCOLLISIONEVENT e)
+{
+	if (e->ny < 0)
+	{
+		isOnBlock = FALSE;
+		CGameObject* platform = dynamic_cast<CGameObject*>(e->obj);
 
+		float l, r, t, b;
+		platform->GetBoundingBox(l, t, r, b);
+
+		l_bounded = l;
+		r_bounded = r;
+	}
+
+}
 
 void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	//if (state == KOOPA_STATE_WALKING && isOnPlatform==false) {
-	//	vx = -vx;
-	//}
-
+	if (isOnPlatform && state == KOOPA_STATE_WALKING)
+	{
+		if ((x <= l_bounded && vx < 0) || (x >= r_bounded && vx > 0))
+		{
+			vx = -vx;
+			nx = -nx;
+		}
+	}
+	isOnPlatform = false;
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
 	}

@@ -36,10 +36,6 @@ protected:
 	float ay;
 	int nx;
 
-	float* m_x;
-	float* m_y;
-	int* m_nx;
-
 	BOOLEAN isBlockByPlatform;
 	BOOLEAN isOnPlatform;
 
@@ -57,7 +53,8 @@ protected:
 	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
-	void OnCollisionWithOthers(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithPlatform(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithOthers(LPCOLLISIONEVENT e);
 
 public:
 	CKoopa(float x, float y, int type);
