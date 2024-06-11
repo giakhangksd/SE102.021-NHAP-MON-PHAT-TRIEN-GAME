@@ -927,20 +927,20 @@ void Reload()
 
 	//for (int j = 0; j < 1; j++)
 	//{
-	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 0);
+	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 1);
 	//	objects.push_back(goomba);
 	//}
 
 	for (int j = 0; j < 1; j++)
 	{
-		CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f,1);
+		CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
 		objects.push_back(koopa);
 	}
-	for (int j = 0; j < 1; j++)
-	{
-		CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
-		objects.push_back(koopa);
-	}
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
+	//	objects.push_back(koopa);
+	//}
 
 	//quesbox
 

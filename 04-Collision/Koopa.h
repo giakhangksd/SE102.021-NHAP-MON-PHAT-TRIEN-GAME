@@ -16,6 +16,8 @@
 #define KOOPA_STATE_SHELL_RIGHT 2200
 #define KOOPA_STATE_SHELL_MOV 3000
 #define KOOPA_STATE_WING_FLY 4000
+#define KOOPA_STATE_WING_WALK 4500
+#define KOOPA_STATE_WING_WALK_RIGHT 4600
 #define KOOPA_STATE_SHELL_MOV_RIGHT 5000
 #define KOOPA_STATE_SHELL_CHANGE 6000
 #define KOOPA_STATE_WALKING_RIGHT 7000
@@ -43,7 +45,7 @@ protected:
 	float l_bounded, r_bounded;
 	BOOLEAN isOnBlock;
 
-	ULONGLONG die_start, wait1, wait2, wait3;
+	ULONGLONG die_start, wait1, wait2, wait_2_walk, wait_2_fly;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

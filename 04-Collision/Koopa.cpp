@@ -14,12 +14,12 @@ CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 	l_bounded = r_bounded = 0;
 	this->nx = 1;
 	die_start = -1;
-	wait1 = wait2 = wait3 = -1;
+	wait1 = wait2 = wait_2_walk = wait_2_fly = -1;
 	if (type == 0) {
 		SetState(KOOPA_STATE_RED_WALKING);
 	}
 	if (type == 1) {
-		SetState(KOOPA_STATE_WING_FLY);
+		SetState(KOOPA_STATE_WING_WALK);
 	}
 }
 
@@ -138,6 +138,8 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	isOnBrick = false;
 	isOnPlatform = false;
+
+
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
 	}
@@ -145,24 +147,39 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(KOOPA_STATE_RED_WALKING);
 	}
 
+	if ((state == KOOPA_STATE_WING_WALK) && (GetTickCount64() - wait_2_fly > 500 * 2))
+	{
+		SetState(KOOPA_STATE_WING_FLY);
+	}
+	if ((state == KOOPA_STATE_WING_WALK_RIGHT) && (GetTickCount64() - wait_2_fly > 500 * 2))
+	{
+		SetState(KOOPA_STATE_WING_FLY);
+	}
+	if ((state == KOOPA_STATE_WING_FLY) && (GetTickCount64() - wait_2_walk > 500 * 2) && vx < 0)
+	{
+		SetState(KOOPA_STATE_WING_WALK);
+	}
+	if ((state == GOOMBA_STATE_WING_FLY) && (GetTickCount64() - wait_2_walk > 500 * 2) && vx > 0)
+	{
+		SetState(KOOPA_STATE_WING_WALK_RIGHT);
+	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
-
 
 void CKoopa::Render()
 {
 	int aniId = -1;
 	if (state == KOOPA_STATE_RED_WALKING) {
-		if (vx >= 0) {
+		if (vx > 0) {
 			aniId = ID_ANI_KOOPA_WALKING_RIGHT;
 		}
 		if (vx < 0) {
 			aniId = ID_ANI_KOOPA_WALKING;
 		}
 	}
-	if (state == KOOPA_STATE_WING_FLY) {
-		if (vx >= 0) {
+	if (state == KOOPA_STATE_WING_WALK||state==KOOPA_STATE_WING_FLY||state==KOOPA_STATE_WING_WALK_RIGHT) {
+		if (vx > 0) {
 			aniId = ID_ANI_GREEN_KOOPA_WALKING_RIGHT;
 		}
 		if (vx < 0) {
@@ -209,8 +226,22 @@ void CKoopa::SetState(int state)
 		y -= 1;
 		wait2 = GetTickCount64();
 		break;
-	case KOOPA_STATE_WING_FLY:
+	case KOOPA_STATE_WING_WALK:
+		vx = -KOOPA_WALKING_SPEED;
+		vy = 0;
+		wait_2_fly = GetTickCount64();
+		break;
+	case KOOPA_STATE_WING_WALK_RIGHT:
 		vx = KOOPA_WALKING_SPEED;
+		vy =0 ;
+		wait_2_fly = GetTickCount64();
+		break;
+	case KOOPA_STATE_WING_FLY:
+		vy -= 0.25f;
+		wait_2_walk = GetTickCount64();
 		break;
 	}
+
+
+
 }
