@@ -11,6 +11,7 @@
 #include "leaf.h"
 #include "Coineffect.h"
 #include "Koopa.h"
+#include "piranhaplant.h"
 
 #include "Collision.h"
 
@@ -70,6 +71,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollosionWithCoineffect(e);
 	else if (dynamic_cast<CKoopa*>(e->obj))
 		OnCollisionWithKoopa(e);
+	else if (dynamic_cast<CPlant*>(e->obj))
+		OnCollisionWithPlant(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -288,6 +291,34 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 	}
 }
 
+void CMario::OnCollisionWithPlant(LPCOLLISIONEVENT e) {
+	CPlant* plant = dynamic_cast<CPlant*>(e->obj);
+	if (level == MARIO_LEVEL_FOX) {
+		if (isHitting == 1) {
+			plant->Delete();
+		}
+
+	}
+	if (untouchable == 0)
+	{
+		if (level == MARIO_LEVEL_FOX)
+		{
+			level = MARIO_LEVEL_BIG;
+			StartUntouchable();
+		}
+		else if (level == MARIO_LEVEL_BIG)
+		{
+			level = MARIO_LEVEL_SMALL;
+			StartUntouchable();
+		}
+		else
+		{
+			SetState(MARIO_STATE_DIE);
+		}
+
+	}
+}
+
 //
 // Get animation ID for small Mario
 //
@@ -497,7 +528,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);

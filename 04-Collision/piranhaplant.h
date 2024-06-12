@@ -1,35 +1,37 @@
 #pragma once
-#pragma once
 #include "GameObject.h"
 
-#define LEAF_GRAVITY 0.0001f
-#define LEAF_FALLING_L -0.005f
-#define LEAF_FALLING_R 0.005f
+#define	PLANT_WIDTH 16
+#define PLANT_BBOX_WIDTH 10
+#define PLANT_BBOX_HEIGHT 26
 
-#define	LEAF_WIDTH 16
-#define LEAF_BBOX_WIDTH 14
-#define LEAF_BBOX_HEIGHT 16
+#define PLANT_STATE_UP_BITE 355
+#define PLANT_STATE_DOWN_BITE 365
 
-#define LEAF_STATE_FALLING 450
-#define LEAF_STATE_WAITING 460
-#define ID_ANI_LEAF_FALLING 5800
+#define ID_ANI_PLANT_BITE 5650
 
-class CLeaf : public CGameObject
+class CPlant : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
+
+	ULONGLONG wait1;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
 	virtual int IsCollidable() { return 0; };
+	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
+	
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public:
-	CLeaf(float x, float y);
+	CPlant(float x, float y);
 	virtual void SetState(int state);
+
 };
+

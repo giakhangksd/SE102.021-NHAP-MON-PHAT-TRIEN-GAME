@@ -26,7 +26,6 @@ void CLeaf::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (dynamic_cast<CLeaf*>(e->obj)) return;
 
-
 }
 
 void CLeaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -43,7 +42,7 @@ void CLeaf::Render()
 	int aniId = ID_ANI_LEAF_FALLING;
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void CLeaf::SetState(int state)

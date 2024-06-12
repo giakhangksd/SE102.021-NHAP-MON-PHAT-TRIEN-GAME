@@ -44,6 +44,7 @@
 #include "coineffect.h"
 #include "worldmap.h"
 #include "Koopa.h"
+#include "piranhaplant.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -687,9 +688,26 @@ void LoadAssetsworldmap() {
 
 	LPANIMATION ani = new CAnimation(300);
 	ani->Add(ID_SPRITE_WORLDMAP);
-
 	animations->Add(ID_ANI_WORLDMAP, ani);
 
+}
+
+void LoadAssetsPlant() {
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+
+	sprites->Add(ID_SPRITE_PLANT_BITE + 1, 48 + 135 + 1, 87 - 25, 88 + 135 + 1, 120 - 35, texEnemy);
+	sprites->Add(ID_SPRITE_PLANT_BITE + 2, 48 + 90 + 1, 87 - 25, 88 + 90 + 1, 120 - 35, texEnemy);
+
+
+	LPANIMATION ani = new CAnimation(300);
+	ani->Add(ID_SPRITE_PLANT_BITE + 1);
+	ani->Add(ID_SPRITE_PLANT_BITE + 2);
+
+	animations->Add(ID_ANI_PLANT_BITE, ani);
 }
 
 /*
@@ -721,6 +739,7 @@ void LoadResources()
 	LoadAssesCoineffect();
 	LoadAssetsworldmap();
 	LoadAssetskoopa();
+	LoadAssetsPlant();
 
 }
 
@@ -865,31 +884,17 @@ void Reload()
 		objects.push_back(p);
 	}
 
-	//pipe
 
-	for (int j = 0; j < 1; j++)
-	{
-		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f, GROUND_Y + 24.0f);
-		objects.push_back(underpipe);
-	}
-	for (int j = 0; j < 1; j++)
-	{
-		Cpipe* pipe = new Cpipe(PIPE_X + j - 32.0f, GROUND_Y - 4.0f);
-		objects.push_back(pipe);
-	}
-	for (int j = 0; j < 2; j++)
-	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 208.0f + j * 527.0f, GROUND_Y + 12.0f);
-		objects.push_back(pipe);
-	}
-	for (int j = 0; j < 2; j++)
+
+	//pipe
+	for (int j = 1; j < 2; j++)
 	{
 		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y + 24.0f);
 		objects.push_back(underpipe);
 	}
-	for (int j = 0; j < 2; j++)
+	for (int j = 1; j < 2; j++)
 	{
-		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 4.0f);
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 2.0f);
 		objects.push_back(pipe);
 	}
 	for (int j = 0; j < 11; j++)
@@ -922,26 +927,55 @@ void Reload()
 		objects.push_back(w);
 	}
 
-	//enemies
 
 
-	//for (int j = 0; j < 1; j++)
-	//{
-	//	CGoomba* goomba = new CGoomba(GOOMBA_X, GROUND_Y - 120.0f, 1);
-	//	objects.push_back(goomba);
-	//}
-
+	//pipe outside
 	for (int j = 0; j < 1; j++)
 	{
-		CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
-		objects.push_back(koopa);
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X + j - 32.0f, GROUND_Y + 24.0f);
+		objects.push_back(underpipe);
 	}
+	for (int j = 0; j < 1; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X + j - 32.0f, GROUND_Y - 2.0f);
+		objects.push_back(pipe);
+	}
+	for (int j = 0; j < 2; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 208.0f + j * 527.0f, GROUND_Y + 13.0f);
+		objects.push_back(pipe);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		Cunderpipe* underpipe = new Cunderpipe(UNDERPIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y + 24.0f);
+		objects.push_back(underpipe);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 2.0f);
+		objects.push_back(pipe);
+	}
+	//enemies
+	for (int j = 0; j < 1; j++)
+	{
+		CPlant* plant = new CPlant(366.0f, GROUND_Y - 12.0f);
+		objects.push_back(plant);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		CGoomba* goomba = new CGoomba(GOOMBA_X + 300.0f, GROUND_Y - 20.0f, 0);
+		objects.push_back(goomba);
+	}
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
+	//	objects.push_back(koopa);
+	//}
 	for (int j = 0; j < 1; j++)
 	{
 		CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
 		objects.push_back(koopa);
 	}
-
 	//quesbox
 
 	for (int j = 1; j < 2; j++)

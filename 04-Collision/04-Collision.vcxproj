@@ -139,6 +139,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="Koopa.h" />
+    <ClInclude Include="piranhaplant.h" />
     <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="leaf.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Koopa.cpp" />
+    <ClCompile Include="piranhaplant.cpp" />
     <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
