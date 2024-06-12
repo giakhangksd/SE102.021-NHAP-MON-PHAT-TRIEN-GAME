@@ -690,6 +690,7 @@ void LoadAssetsworldmap() {
 	ani->Add(ID_SPRITE_WORLDMAP);
 	animations->Add(ID_ANI_WORLDMAP, ani);
 
+
 }
 
 void LoadAssetsPlant() {
@@ -702,12 +703,24 @@ void LoadAssetsPlant() {
 	sprites->Add(ID_SPRITE_PLANT_BITE + 1, 48 + 135 + 1, 87 - 25, 88 + 135 + 1, 120 - 35, texEnemy);
 	sprites->Add(ID_SPRITE_PLANT_BITE + 2, 48 + 90 + 1, 87 - 25, 88 + 90 + 1, 120 - 35, texEnemy);
 
+	sprites->Add(ID_SPRITE_PLANT_LEFT, 48, 87 - 25, 88, 120 - 35, texEnemy);
+
+	sprites->Add(ID_SPRITE_PLANT_RIGHT, 48 + 332, 87 - 25, 88 +332 , 120 - 35, texEnemy);
+
 
 	LPANIMATION ani = new CAnimation(300);
 	ani->Add(ID_SPRITE_PLANT_BITE + 1);
 	ani->Add(ID_SPRITE_PLANT_BITE + 2);
-
 	animations->Add(ID_ANI_PLANT_BITE, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_PLANT_LEFT);
+	animations->Add(ID_ANI_PLANT_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_PLANT_RIGHT);
+	animations->Add(ID_ANI_PLANT_RIGHT, ani);
+
 }
 
 /*

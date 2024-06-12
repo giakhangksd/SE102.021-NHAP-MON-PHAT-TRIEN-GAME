@@ -1,11 +1,11 @@
 #include "piranhaplant.h"
+#include "Mario.h"
 
 CPlant::CPlant(float x, float y) :CGameObject(x, y)
 {
-	this->ax = 0;
-	this->ay = 0;
+
 	wait1 = -1;
-	SetState(PLANT_STATE_DOWN_BITE);
+	SetState(PLANT_STATE_UP_BITE);
 }
 
 void CPlant::GetBoundingBox(float& l, float& t, float& r, float& b)
@@ -28,11 +28,11 @@ void CPlant::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CPlant*>(e->obj)) return;
 
-	if (e->ny != 0&&e->obj->IsBlocking() )
+	if (e->ny != 0 )
 	{
 		vy = 0;
 	}
-	else if (e->nx != 0&&e->obj->IsBlocking() )
+	else if (e->nx != 0 )
 	{
 		vx = -vx;
 	}
@@ -40,8 +40,6 @@ void CPlant::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	vy += ay * dt;
-	vx += ax * dt;
 
 	if (state ==PLANT_STATE_DOWN_BITE && (GetTickCount64() - wait1 > 500 * 5)) {
 		SetState(PLANT_STATE_UP_BITE);
@@ -64,9 +62,13 @@ void CPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void CPlant::Render()
 {
 	int aniId = ID_ANI_PLANT_BITE;
+	if (state == PLANT_STATE_READY_FIRE) {
+		aniId = ID_ANI_PLANT_RIGHT;
+		//aniId = ID_ANI_PLANT_LEFT;
+	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CPlant::SetState(int state)
@@ -83,6 +85,9 @@ void CPlant::SetState(int state)
 		y = 129;
 		vy = 0.05;
 		wait1 = GetTickCount64();
+		break;
+	case PLANT_STATE_READY_FIRE:
+
 		break;
 	}
 }

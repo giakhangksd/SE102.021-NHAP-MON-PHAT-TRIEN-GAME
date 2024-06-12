@@ -143,7 +143,7 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 	CQuesbox* quesbox = dynamic_cast<CQuesbox*>(e->obj);
 
 	if (e->ny > 0) {
-		if (quesbox->GetState() != QUESBOX_STATE_NOT) {
+		if (quesbox->GetState() == QUESBOX_STATE) {
 			quesbox->SetState(QUESBOX_STATE_NOT);
 		}
 
@@ -528,7 +528,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);
