@@ -146,7 +146,7 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (state == KOOPA_STATE_SHELL_CHANGE && (GetTickCount64() - wait2 > KOOPA_WAIT_TIMEOUT)) {
 		SetState(KOOPA_STATE_RED_WALKING);
 	}
-
+	//koopa wing bay
 	if ((state == KOOPA_STATE_WING_WALK) && (GetTickCount64() - wait_2_fly > 500 * 2))
 	{
 		SetState(KOOPA_STATE_WING_FLY);

@@ -221,7 +221,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
-		else if (koopa->GetState() == KOOPA_STATE_RED_WALKING )
+		else if (koopa->GetState() == KOOPA_STATE_RED_WALKING)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
@@ -235,6 +235,10 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		else if (koopa->GetState() == KOOPA_STATE_WING_WALK || koopa->GetState() == KOOPA_STATE_WING_FLY || koopa->GetState() == KOOPA_STATE_WING_WALK_RIGHT){
+			koopa->SetState(KOOPA_STATE_RED_WALKING);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
 	}
 	else if (isHitting == 1)
 	{
@@ -245,6 +249,9 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 		else if (koopa->GetState() == KOOPA_STATE_SHELL_MOV || koopa->GetState() == KOOPA_STATE_SHELL_MOV_RIGHT) {
 			koopa->SetState(KOOPA_STATE_SHELL);
 		}
+		else if (koopa->GetState() == KOOPA_STATE_WING_WALK || koopa->GetState() == KOOPA_STATE_WING_FLY || koopa->GetState() == KOOPA_STATE_WING_WALK_RIGHT) {
+			koopa->SetState(KOOPA_STATE_RED_WALKING);
+		}
 	}
 	else if (koopa->GetState() == KOOPA_STATE_SHELL)
 	{
@@ -253,7 +260,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_SHELL_MOV);
 		}
 		else {
-			koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
+			koopa->SetState(KOOPA_STATE_SHELL);
 		}
 	}
 	else 
