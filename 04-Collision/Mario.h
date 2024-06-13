@@ -157,7 +157,7 @@ class CMario : public CGameObject
 	int a ;
 	int level; 
 	int untouchable; 
-	ULONGLONG untouchable_start;
+	ULONGLONG untouchable_start, spin_start;
 	BOOLEAN isOnPlatform;
 	int coin; 
 	int score;
@@ -191,6 +191,7 @@ public:
 		level = MARIO_LEVEL_FOX;
 		untouchable = 0;
 		untouchable_start = -1;
+		spin_start = -1;
 		isOnPlatform = false;
 		readyToHold = FALSE;
 		isHolding = FALSE;

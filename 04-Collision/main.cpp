@@ -940,7 +940,27 @@ void Reload()
 		objects.push_back(w);
 	}
 
-
+	//enemies
+	for (int j = 0; j < 1; j++)
+	{
+		CPlant* plant = new CPlant(366.0f, GROUND_Y - 12.0f);
+		objects.push_back(plant);
+	}
+	for (int j = 0; j < 1; j++)
+	{
+		CGoomba* goomba = new CGoomba(GOOMBA_X + 300.0f, GROUND_Y - 20.0f, 0);
+		objects.push_back(goomba);
+	}
+	//for (int j = 0; j < 1; j++)
+	//{
+	//	CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
+	//	objects.push_back(koopa);
+	//}
+	for (int j = 0; j < 1; j++)
+	{
+		CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
+		objects.push_back(koopa);
+	}
 
 	//pipe outside
 	for (int j = 0; j < 1; j++)
@@ -968,27 +988,7 @@ void Reload()
 		Cpipe* pipe = new Cpipe(PIPE_X * 4 + 272.0f + j * 400.0f, GROUND_Y - 2.0f);
 		objects.push_back(pipe);
 	}
-	//enemies
-	for (int j = 0; j < 1; j++)
-	{
-		CPlant* plant = new CPlant(366.0f, GROUND_Y - 12.0f);
-		objects.push_back(plant);
-	}
-	for (int j = 0; j < 1; j++)
-	{
-		CGoomba* goomba = new CGoomba(GOOMBA_X + 300.0f, GROUND_Y - 20.0f, 0);
-		objects.push_back(goomba);
-	}
-	//for (int j = 0; j < 1; j++)
-	//{
-	//	CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
-	//	objects.push_back(koopa);
-	//}
-	for (int j = 0; j < 1; j++)
-	{
-		CKoopa* koopa = new CKoopa(550.0f, GROUND_Y - 15.0f, 0);
-		objects.push_back(koopa);
-	}
+
 	//quesbox
 
 	for (int j = 1; j < 2; j++)
@@ -1002,7 +1002,16 @@ void Reload()
 		CMushroom* m = new CMushroom(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f);
 		objects.push_back(m);
 	}
-
+	for (int i = 0; i < 1; i++)
+	{
+		CMushroom* mushroom = new CMushroom(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 5.0f);
+		objects.push_back(mushroom);
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		CLeaf* leaf = new CLeaf(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 5.0f);
+		objects.push_back(leaf);
+	}
 	for (int j = 1; j < 2; j++)
 	{
 

@@ -28,7 +28,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		untouchable_start = 0;
 		untouchable = 0;
 	}
-	if (a == 1 && GetTickCount64() - untouchable_start > MARIO_UNTOUCHABLE_TIME / 5)
+	if (a == 1 && GetTickCount64() - spin_start > MARIO_UNTOUCHABLE_TIME / 5)
 	{
 		SetState(MARIO_STATE_FOX_HIT_RELEASE);
 	}
@@ -148,6 +148,13 @@ void CMario::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
 		}
 
 	}
+	if (e->nx < 0 || e->nx>0) {
+		if (isHitting) {
+			if (quesbox->GetState() == QUESBOX_STATE) {
+				quesbox->SetState(QUESBOX_STATE_NOT);
+			}
+		}
+	}
 }
 
 void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
@@ -161,6 +168,9 @@ void CMario::OnCollosionWithMushroom(LPCOLLISIONEVENT e)
 		else if (e->ny < 0) {
 
 		}
+		//else if (e->nx < 0 || e->nx > 0) {
+		//	mushroom->SetState(MUSHROOM_STATE_WALKING);
+		//}
 		else {
 			e->obj->Delete();
 		}
@@ -186,6 +196,11 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 		}
 		else if (e->ny < 0) {
 
+		}
+		else if ((e->nx < 0 || e->nx > 0)) {
+			if (isHitting) {
+				leaf->SetState(LEAF_STATE_FALLING);
+			}
 		}
 		else {
 			e->obj->Delete();
@@ -647,7 +662,7 @@ void CMario::SetState(int state)
 		if (isOnPlatform && level == MARIO_LEVEL_FOX)
 		{
 			isHitting = true;
-			StartUntouchable();
+			spin_start = GetTickCount64();
 			a = 1;
 		}
 		break;
