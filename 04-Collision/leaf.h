@@ -17,15 +17,13 @@
 class CLeaf : public CGameObject
 {
 protected:
-	float ax;
-	float ay;
+	int a;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
 	virtual int IsCollidable() { return 0; };
-	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 

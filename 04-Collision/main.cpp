@@ -994,6 +994,13 @@ void Reload()
 	for (int j = 1; j < 2; j++)
 	{
 
+		CLeaf* leaf = new CLeaf(30.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
+		objects.push_back(leaf);
+	}
+
+	for (int j = 1; j < 2; j++)
+	{
+
 		CMushroom* mushroom = new CMushroom(130.0f + MUSHROOM_X + j * QUESBOX_WIDTH, GROUND_Y - 76.0f);
 		objects.push_back(mushroom);
 	}

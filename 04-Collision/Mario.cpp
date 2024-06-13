@@ -188,7 +188,6 @@ void CMario::OnCollosionWithLeaf(LPCOLLISIONEVENT e)
 
 		}
 		else {
-			
 			e->obj->Delete();
 		}
 	else {
