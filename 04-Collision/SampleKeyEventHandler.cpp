@@ -29,6 +29,9 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_Z:
 		mario->SetState(MARIO_STATE_FOX_HIT);
 		break;
+	case DIK_X:
+		mario->SetState(MARIO_STATE_HOLDING);
+		break;
 	case DIK_R: // reset
 		Reload();
 		break;
@@ -46,6 +49,9 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 		break;
 	case DIK_DOWN:
 		mario->SetState(MARIO_STATE_SIT_RELEASE);
+		break;
+	case DIK_X:
+		mario->SetState(MARIO_STATE_NOT_HOLDING);
 		break;
 	}
 }

@@ -15,8 +15,6 @@
 
 #include "Collision.h"
 
-int a = 0;
-
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	vy += ay * dt;
@@ -34,9 +32,11 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		SetState(MARIO_STATE_FOX_HIT_RELEASE);
 	}
+
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
+
 }
 
 void CMario::OnNoCollision(DWORD dt)
@@ -216,6 +216,8 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 {
 	CKoopa* koopa = dynamic_cast<CKoopa*>(e->obj);
 	
+	if (koopa->GetState() == KOOPA_STATE_SHELL_HOLDED) return;
+
 	if (e->ny < 0)
 	{
 		if (koopa->GetState() == KOOPA_STATE_RED_WALKING)
@@ -261,6 +263,9 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 		{
 			koopa->SetState(KOOPA_STATE_SHELL_MOV);
 		}
+		else if (e->nx < 0) {
+			koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
+		}
 		else {
 			koopa->SetState(KOOPA_STATE_SHELL);
 		}
@@ -284,6 +289,14 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 				else
 				{
 					SetState(MARIO_STATE_DIE);
+				}
+			}
+			else {
+				if (readyToHold)
+				{
+					koopa->HoldByMario(&x, &y, &nx);
+					koopaShell = koopa;
+					SetState(MARIO_STATE_HOLDING);
 				}
 			}
 		}
@@ -527,7 +540,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);
@@ -638,11 +651,27 @@ void CMario::SetState(int state)
 			a = 1;
 		}
 		break;
-
 	case MARIO_STATE_FOX_HIT_RELEASE:
 		if (isHitting)
 		{
 			isHitting = false;
+		}
+		break;
+	case MARIO_STATE_READY_TO_HOLD:
+		readyToHold = TRUE;
+		break;
+	case MARIO_STATE_HOLDING:
+		readyToHold = FALSE;
+		isHolding = TRUE;
+		break;
+
+	case MARIO_STATE_NOT_HOLDING:
+		if (isHolding)
+		{
+			isHolding = FALSE;
+			CKoopa* koopa = dynamic_cast<CKoopa*>(koopaShell);
+			SetState(MARIO_STATE_IDLE);
+			koopaShell = nullptr;
 		}
 		break;
 	}
@@ -659,6 +688,12 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 			top = y - MARIO_BIG_SITTING_BBOX_HEIGHT / 2;
 			right = left + MARIO_BIG_SITTING_BBOX_WIDTH;
 			bottom = top + MARIO_BIG_SITTING_BBOX_HEIGHT;
+		}
+		else if (isHolding) {
+			left = x - MARIO_BIG_BBOX_WIDTH;
+			top = y - MARIO_BIG_BBOX_HEIGHT / 2;
+			right = left + MARIO_BIG_BBOX_WIDTH * 2;
+			bottom = top + MARIO_BIG_BBOX_HEIGHT;
 		}
 		else 
 		{
@@ -682,6 +717,12 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 			right = left + MARIO_FOX_BBOX_WIDTH*2;
 			bottom = top + MARIO_FOX_BBOX_HEIGHT;
 		}
+		else if (isHolding) {
+			left = x - MARIO_FOX_BBOX_WIDTH;
+			top = y - MARIO_FOX_BBOX_HEIGHT / 2;
+			right = left + MARIO_FOX_BBOX_WIDTH * 2;
+			bottom = top + MARIO_FOX_BBOX_HEIGHT;
+		}
 		else
 		{
 			left = x - MARIO_FOX_BBOX_WIDTH / 2;
@@ -696,6 +737,12 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 		top = y - MARIO_SMALL_BBOX_HEIGHT/2;
 		right = left + MARIO_SMALL_BBOX_WIDTH;
 		bottom = top + MARIO_SMALL_BBOX_HEIGHT;
+		if (isHolding) {
+			left = x - MARIO_SMALL_BBOX_WIDTH;
+			top = y - MARIO_SMALL_BBOX_HEIGHT / 2;
+			right = left + MARIO_SMALL_BBOX_WIDTH * 2;
+			bottom = top + MARIO_SMALL_BBOX_HEIGHT;
+		}
 	}
 
 }

@@ -22,6 +22,7 @@
 #define KOOPA_STATE_SHELL_CHANGE 6000
 #define KOOPA_STATE_WALKING_RIGHT 7000
 #define KOOPA_STATE_SHELL_CHANGE_RIGHT 8000
+#define KOOPA_STATE_SHELL_HOLDED 9000
 
 #define ID_ANI_KOOPA_WALKING 6000
 #define ID_ANI_GREEN_KOOPA_WALKING 7000
@@ -37,9 +38,14 @@ class CKoopa : public CGameObject
 protected:
 	float ax;
 	float ay;
-	int nx;
+	int nx; 
 
-	BOOLEAN isOnPlatform,isOnBrick;
+	//pointer point x,y,nx mario
+	float* m_x;
+	float* m_y;
+	int* m_nx;
+
+	BOOLEAN isOnPlatform,isOnBrick,isheld;
 
 
 	float l_bounded, r_bounded;
@@ -63,4 +69,6 @@ protected:
 public:
 	CKoopa(float x, float y, int type);
 	virtual void SetState(int state);
+	void HoldByMario(float* x, float* y, int* nx);
+	//void UpdatePositionFollowMario();
 };

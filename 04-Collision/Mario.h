@@ -39,6 +39,12 @@
 #define MARIO_STATE_FOX_HIT			701
 #define MARIO_STATE_FOX_HIT_RELEASE			702
 
+//MARIO HOLDING FEATURE
+
+#define MARIO_STATE_HOLDING 800
+#define MARIO_STATE_NOT_HOLDING 801
+#define MARIO_STATE_READY_TO_HOLD 802
+
 #pragma region ANIMATION_ID
 
 #define ID_ANI_MARIO_IDLE_RIGHT 400
@@ -143,17 +149,19 @@
 
 class CMario : public CGameObject
 {
-	BOOLEAN isSitting,isHitting;
+	BOOLEAN isSitting,isHitting,isHolding, readyToHold;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
 
+	int a ;
 	int level; 
 	int untouchable; 
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
 	int coin; 
 	int score;
+	CGameObject* koopaShell;
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
@@ -174,14 +182,19 @@ public:
 	{
 		isSitting = false;
 		isHitting = false;
+		isHolding = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 
+		a = 0;
 
 		level = MARIO_LEVEL_FOX;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;
+		readyToHold = FALSE;
+		isHolding = FALSE;
+		koopaShell = nullptr;
 		coin = 0;
 		score = 0;
 	}

@@ -11,8 +11,11 @@ CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 	this->isOnPlatform = FALSE;
 	this->isOnBrick = FALSE;
 	this->isOnBlock = FALSE;
+	this->m_x = nullptr;
+	this->m_y = nullptr;
 	l_bounded = r_bounded = 0;
 	this->nx = 1;
+	this->isheld = false;
 	die_start = -1;
 	wait1 = wait2 = wait_2_walk = wait_2_fly = -1;
 	if (type == 0) {
@@ -52,7 +55,7 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 			isOnBrick = true;
 		}
 	}
-	else if (e->nx != 0)
+	else if (e->nx != 0 && e->obj->IsBlocking())
 	{
 		vx = -vx;
 		nx = -nx;
@@ -163,6 +166,11 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		SetState(KOOPA_STATE_WING_WALK_RIGHT);
 	}
+
+	if (state == KOOPA_STATE_SHELL_HOLDED) {
+		
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -186,7 +194,7 @@ void CKoopa::Render()
 			aniId = ID_ANI_GREEN_KOOPA_WALKING;
 		}
 	}
-	if (state == KOOPA_STATE_SHELL)
+	if (state == KOOPA_STATE_SHELL||state ==KOOPA_STATE_SHELL_HOLDED)
 	{
 		aniId = ID_ANI_KOOPA_SHELL;
 	}
@@ -211,10 +219,18 @@ void CKoopa::SetState(int state)
 		wait1 = GetTickCount64();
 		break;
 	case KOOPA_STATE_SHELL_MOV:
+		isheld = FALSE;
+		m_x = nullptr;
+		m_y = nullptr;
+		m_nx = nullptr;
 		vx = -KOOPA_WALKING_SPEED * 3;
 		y -= 0.5f;
 		break;
 	case KOOPA_STATE_SHELL_MOV_RIGHT:
+		isheld = FALSE;
+		m_x = nullptr;
+		m_y = nullptr;
+		m_nx = nullptr;
 		vx = KOOPA_WALKING_SPEED * 3;
 		y -= 0.5f;
 		break;
@@ -240,8 +256,27 @@ void CKoopa::SetState(int state)
 		vy -= 0.25f;
 		wait_2_walk = GetTickCount64();
 		break;
+	case KOOPA_STATE_SHELL_HOLDED:
+		isheld = true;
+		break;
 	}
-
-
-
 }
+
+//shell movment with mario
+
+void CKoopa::HoldByMario(float* x, float* y, int* nx)
+{
+	m_x = x;
+	m_y = y;
+	m_nx = nx;
+	SetState(KOOPA_STATE_SHELL_HOLDED);
+}
+
+//void CKoopa::UpdatePositionFollowMario()
+//{
+//	if (isheld)
+//	{
+//		x = *m_x + *m_nx * (KOOPA_BBOX_WIDTH / 2 + 4);
+//		y = *m_y - 1;
+//	}
+//}
