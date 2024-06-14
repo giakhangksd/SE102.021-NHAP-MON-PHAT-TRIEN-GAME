@@ -4,6 +4,8 @@
 #include "Platform.h"
 #include "Brick.h"
 #include "quesbox.h"
+#include "leaf.h"
+#include "Mushroom.h"
 
 CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 {
@@ -14,6 +16,7 @@ CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 	this->isOnBlock = FALSE;
 	this->m_x = nullptr;
 	this->m_y = nullptr;
+	this->m_nx = nullptr;
 	l_bounded = r_bounded = 0;
 	this->nx = 1;
 	this->isheld = false;
@@ -47,6 +50,10 @@ void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (!e->obj->IsBlocking()) {
 		OnCollisionWithOthers(e);
 	
+	}
+	if (e->obj->IsBlocking()) {
+		OnCollisionWithQuesbox(e);
+
 	}
 	if (e->ny != 0)
 	{
@@ -83,13 +90,47 @@ void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 		else if (dynamic_cast<CQuesbox*>(e->obj))
 		{
 			CQuesbox* quesbox = dynamic_cast<CQuesbox*>(e->obj);
-			if (quesbox->GetState() == QUESBOX_STATE) {
-				quesbox->SetState(QUESBOX_STATE_NOT);
+			if (quesbox->GetState() == QUESBOX_STATE && (state == KOOPA_STATE_SHELL_MOV || state == KOOPA_STATE_SHELL_MOV_RIGHT)) {
+				if (e->nx < 0 || e->nx>0) {
+					quesbox->SetState(QUESBOX_STATE_NOT);
+				}
 			}
 		}
 	}
-
 }
+void CKoopa::OnCollisionWithQuesbox(LPCOLLISIONEVENT e) {
+	if (dynamic_cast<CQuesbox*>(e->obj))
+	{
+		CQuesbox* quesbox = dynamic_cast<CQuesbox*>(e->obj);
+		if (quesbox->GetState() == QUESBOX_STATE && (state == KOOPA_STATE_SHELL_MOV || state == KOOPA_STATE_SHELL_MOV_RIGHT)) {
+			quesbox->SetState(QUESBOX_STATE_NOT);
+			if (e->nx < 0) {
+				vx = -KOOPA_WALKING_SPEED*3;
+			}
+			if (e->nx > 0) {
+				vx = KOOPA_WALKING_SPEED*3;
+			}
+		}
+	}
+	if (dynamic_cast<CMushroom*>(e->obj))
+	{
+		CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
+		mushroom->SetState(MUSHROOM_STATE_WALKING);
+	}
+	if (dynamic_cast<CLeaf*>(e->obj))
+	{
+		CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
+		leaf->SetState(LEAF_STATE_FALLING);
+		if (e->nx < 0) {
+			vx = -KOOPA_WALKING_SPEED * 3;
+		}
+		if (e->nx > 0) {
+			vx = KOOPA_WALKING_SPEED * 3;
+		}
+	}
+}
+
+
 void CKoopa::OnCollisionWithPlatform(LPCOLLISIONEVENT e)
 {
 	if (e->ny < 0)
@@ -173,10 +214,6 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if ((state == GOOMBA_STATE_WING_FLY) && (GetTickCount64() - wait_2_walk > 500 * 2) && vx > 0)
 	{
 		SetState(KOOPA_STATE_WING_WALK_RIGHT);
-	}
-
-	if (state == KOOPA_STATE_SHELL_HOLDED) {
-		
 	}
 
 	CGameObject::Update(dt, coObjects);

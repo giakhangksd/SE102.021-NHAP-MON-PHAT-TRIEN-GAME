@@ -64,6 +64,7 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithPlatform(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithBrick(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithQuesbox(LPCOLLISIONEVENT e);
 	virtual void OnCollisionWithOthers(LPCOLLISIONEVENT e);
 
 public:

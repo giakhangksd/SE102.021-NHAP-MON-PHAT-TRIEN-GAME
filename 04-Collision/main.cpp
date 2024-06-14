@@ -1002,11 +1002,11 @@ void Reload()
 		CMushroom* m = new CMushroom(1380.0f + QUESBOX_X + i, GROUND_Y - 13.0f);
 		objects.push_back(m);
 	}
-	for (int i = 0; i < 1; i++)
-	{
-		CMushroom* mushroom = new CMushroom(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 5.0f);
-		objects.push_back(mushroom);
-	}
+	//for (int i = 0; i < 1; i++)
+	//{
+	//	CMushroom* mushroom = new CMushroom(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 5.0f);
+	//	objects.push_back(mushroom);
+	//}
 	for (int i = 0; i < 1; i++)
 	{
 		CLeaf* leaf = new CLeaf(564.0f + QUESBOX_X + i * (QUESBOX_WIDTH) * 3.0f, GROUND_Y + 5.0f);
