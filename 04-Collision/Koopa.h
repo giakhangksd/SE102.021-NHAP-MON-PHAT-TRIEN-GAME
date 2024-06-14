@@ -70,5 +70,5 @@ public:
 	CKoopa(float x, float y, int type);
 	virtual void SetState(int state);
 	void HoldByMario(float* x, float* y, int* nx);
-	//void UpdatePositionFollowMario();
+	void UpdatePositionFollowMario();
 };

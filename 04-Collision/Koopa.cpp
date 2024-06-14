@@ -3,6 +3,7 @@
 #include "Mario.h"
 #include "Platform.h"
 #include "Brick.h"
+#include "quesbox.h"
 
 CKoopa::CKoopa(float x, float y, int type) :CGameObject(x, y)
 {
@@ -78,6 +79,13 @@ void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 		{
 		CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 		goomba->SetState(GOOMBA_STATE_DIE);
+		}
+		else if (dynamic_cast<CQuesbox*>(e->obj))
+		{
+			CQuesbox* quesbox = dynamic_cast<CQuesbox*>(e->obj);
+			if (quesbox->GetState() == QUESBOX_STATE) {
+				quesbox->SetState(QUESBOX_STATE_NOT);
+			}
 		}
 	}
 
@@ -272,11 +280,11 @@ void CKoopa::HoldByMario(float* x, float* y, int* nx)
 	SetState(KOOPA_STATE_SHELL_HOLDED);
 }
 
-//void CKoopa::UpdatePositionFollowMario()
-//{
-//	if (isheld)
-//	{
-//		x = *m_x + *m_nx * (KOOPA_BBOX_WIDTH / 2 + 4);
-//		y = *m_y - 1;
-//	}
-//}
+void CKoopa::UpdatePositionFollowMario()
+{
+	if (isheld)
+	{
+		x = *m_x + *m_nx * (KOOPA_BBOX_WIDTH / 2 + 4);
+		y = *m_y - 1;
+	}
+}

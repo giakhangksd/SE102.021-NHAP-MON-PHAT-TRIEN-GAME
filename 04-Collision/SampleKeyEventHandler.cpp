@@ -30,7 +30,7 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		mario->SetState(MARIO_STATE_FOX_HIT);
 		break;
 	case DIK_X:
-		mario->SetState(MARIO_STATE_HOLDING);
+		mario->SetState(MARIO_STATE_READY_TO_HOLD);
 		break;
 	case DIK_R: // reset
 		Reload();

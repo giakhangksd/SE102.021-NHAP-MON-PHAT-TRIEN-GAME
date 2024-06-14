@@ -36,7 +36,10 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
-
+	if (isHolding) {
+		CKoopa* koopa = dynamic_cast<CKoopa*>(koopaShell);
+		koopa->UpdatePositionFollowMario();
+	}
 }
 
 void CMario::OnNoCollision(DWORD dt)
@@ -272,7 +275,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_RED_WALKING);
 		}
 	}
-	else if (koopa->GetState() == KOOPA_STATE_SHELL)
+	else if (koopa->GetState() == KOOPA_STATE_SHELL&& !readyToHold)
 	{
 		if (e->nx > 0)
 		{
@@ -676,7 +679,7 @@ void CMario::SetState(int state)
 		readyToHold = TRUE;
 		break;
 	case MARIO_STATE_HOLDING:
-		readyToHold = FALSE;
+		//readyToHold = FALSE;
 		isHolding = TRUE;
 		break;
 
@@ -686,6 +689,12 @@ void CMario::SetState(int state)
 			isHolding = FALSE;
 			CKoopa* koopa = dynamic_cast<CKoopa*>(koopaShell);
 			SetState(MARIO_STATE_IDLE);
+			if (nx < 0) {
+				koopa->SetState(KOOPA_STATE_SHELL_MOV);
+			}
+			else {
+				koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
+			}
 			koopaShell = nullptr;
 		}
 		break;
