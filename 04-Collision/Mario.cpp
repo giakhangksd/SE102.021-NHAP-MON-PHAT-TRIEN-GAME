@@ -275,7 +275,7 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			koopa->SetState(KOOPA_STATE_RED_WALKING);
 		}
 	}
-	else if (koopa->GetState() == KOOPA_STATE_SHELL&& !readyToHold)
+	else if (koopa->GetState() == KOOPA_STATE_SHELL && !readyToHold)
 	{
 		if (e->nx > 0)
 		{
@@ -312,9 +312,10 @@ void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 			else {
 				if (readyToHold)
 				{
-					koopa->HoldByMario(&x, &y, &nx);
-					koopaShell = koopa;
-					SetState(MARIO_STATE_HOLDING);
+						koopa->HoldByMario(&x, &y, &nx);
+						koopaShell = koopa;
+						SetState(MARIO_STATE_HOLDING);
+					
 				}
 			}
 		}
@@ -679,21 +680,27 @@ void CMario::SetState(int state)
 		readyToHold = TRUE;
 		break;
 	case MARIO_STATE_HOLDING:
-		//readyToHold = FALSE;
+		readyToHold = FALSE;
 		isHolding = TRUE;
 		break;
 
 	case MARIO_STATE_NOT_HOLDING:
+		readyToHold = FALSE;
 		if (isHolding)
 		{
 			isHolding = FALSE;
 			CKoopa* koopa = dynamic_cast<CKoopa*>(koopaShell);
 			SetState(MARIO_STATE_IDLE);
-			if (nx < 0) {
-				koopa->SetState(KOOPA_STATE_SHELL_MOV);
+			if (koopa->GetState() != KOOPA_STATE_RED_WALKING) {
+				if (nx < 0) {
+					koopa->SetState(KOOPA_STATE_SHELL_MOV);
+				}
+				else {
+					koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
+				}
 			}
 			else {
-				koopa->SetState(KOOPA_STATE_SHELL_MOV_RIGHT);
+				koopa->SetState(KOOPA_STATE_RED_WALKING);
 			}
 			koopaShell = nullptr;
 		}

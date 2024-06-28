@@ -951,10 +951,15 @@ void Reload()
 		CGoomba* goomba = new CGoomba(GOOMBA_X + 300.0f, GROUND_Y - 20.0f, 0);
 		objects.push_back(goomba);
 	}
+	for (int j = 0; j < 1; j++)
+	{
+		CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 0);
+		objects.push_back(koopa);
+	}
 	//for (int j = 0; j < 1; j++)
 	//{
-	//	CKoopa* koopa = new CKoopa(150.0f, GROUND_Y - 48.0f, 1);
-	//	objects.push_back(koopa);
+	//	CGoomba* goomba = new CGoomba(100.0f, GROUND_Y - 48.0f, 0);
+	//	objects.push_back(goomba);
 	//}
 	for (int j = 0; j < 1; j++)
 	{
