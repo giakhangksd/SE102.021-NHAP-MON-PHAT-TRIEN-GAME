@@ -1,5 +1,7 @@
 #include "Goomba.h"
 #include"Koopa.h"
+#include "AssetIDs.h"
+
 
 CGoomba::CGoomba(float x, float y,int type):CGameObject(x, y)
 {
@@ -8,6 +10,10 @@ CGoomba::CGoomba(float x, float y,int type):CGameObject(x, y)
 	die_start = -1;
 	wait_2_fly = -1;
 	wait_2_walk = -1;
+	hit_nx = 0;
+	nx = -1;
+	isFellDown = FALSE;
+	isOnPlatform = FALSE;
 	if (type == 0) {
 		SetState(GOOMBA_STATE_WALKING);
 	}
@@ -43,16 +49,19 @@ void CGoomba::OnNoCollision(DWORD dt)
 void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return; 
-	if (dynamic_cast<CGoomba*>(e->obj)) return; 
+	if (dynamic_cast<CGoomba*>(e->obj) && e->nx!=0) return; 
 
 		if (e->ny != 0)
 		{
 			vy = 0;
+			if (e->ny < 0) isOnPlatform = true;
 		}
 		else if (e->nx != 0)
 		{
 			vx = -vx;
+			nx = -nx;
 		}
+
 }
 
 void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -65,7 +74,12 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		isDeleted = true;
 		return;
 	}
-
+	if ((state == GOOMBA_STATE_DIE_SHELL) && (GetTickCount64() - die_start > GOOMBA_DIE_TIMEOUT))
+	{
+		isDeleted = true;
+		return;
+	}
+	isOnPlatform = false;
 	if ((state == GOOMBA_STATE_WING_WALK) && (GetTickCount64() - wait_2_fly > GOOMBA_DIE_TIMEOUT * 2))
 	{
 		SetState(GOOMBA_STATE_WING_FLY);
@@ -82,7 +96,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		SetState(GOOMBA_STATE_WING_WALK_RIGHT);
 	}
-
+	
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -90,8 +104,9 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CGoomba::Render()
 {
+	
 	int aniId = ID_ANI_GOOMBA_WALKING;
-	if (state == GOOMBA_STATE_DIE) 
+	if (state == GOOMBA_STATE_DIE|| state == GOOMBA_STATE_DIE_SHELL)
 	{
 		aniId = ID_ANI_GOOMBA_DIE;
 	}
@@ -118,6 +133,10 @@ void CGoomba::SetState(int state)
 			vx = 0;
 			vy = 0;
 			ay = 0;
+			break;
+		case GOOMBA_STATE_DIE_SHELL:
+			die_start = GetTickCount64();
+			vy = -0.2f;
 			break;
 		case GOOMBA_STATE_WALKING: 
 			vx = -GOOMBA_WALKING_SPEED;

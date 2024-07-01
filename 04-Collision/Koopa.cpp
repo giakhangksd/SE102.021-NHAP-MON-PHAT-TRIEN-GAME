@@ -85,7 +85,7 @@ void CKoopa::OnCollisionWithOthers(LPCOLLISIONEVENT e) {
 		else if (dynamic_cast<CGoomba*>(e->obj))
 		{
 		CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-		goomba->SetState(GOOMBA_STATE_DIE);
+		goomba->SetState(GOOMBA_STATE_DIE_SHELL);
 		}
 		else if (dynamic_cast<CQuesbox*>(e->obj))
 		{
@@ -195,7 +195,7 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (state == KOOPA_STATE_SHELL && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
 	}
-	if (state == KOOPA_STATE_SHELL_HOLDED && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 6)) {
+	if (state == KOOPA_STATE_SHELL_HOLDED && (GetTickCount64() - wait1 > KOOPA_WAIT_TIMEOUT * 10)) {
 		SetState(KOOPA_STATE_SHELL_CHANGE);
 	}
 	if (state == KOOPA_STATE_SHELL_CHANGE && (GetTickCount64() - wait2 > KOOPA_WAIT_TIMEOUT)) {
@@ -284,6 +284,10 @@ void CKoopa::SetState(int state)
 		break;
 	case KOOPA_STATE_RED_WALKING:
 		vx = -KOOPA_WALKING_SPEED;
+		isheld = FALSE;
+		break;
+	case KOOPA_STATE_WALKING_RIGHT:
+		vx = KOOPA_WALKING_SPEED;
 		isheld = FALSE;
 		break;
 	case KOOPA_STATE_SHELL_CHANGE:

@@ -14,7 +14,6 @@
 #include "piranhaplant.h"
 
 #include "Collision.h"
-
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	vy += ay * dt;
@@ -102,7 +101,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 	{
 		if (goomba->GetState() == GOOMBA_STATE_WALKING)
 		{
-			goomba->SetState(GOOMBA_STATE_DIE);
+			goomba->SetState(GOOMBA_STATE_DIE_SHELL);
 		}
 		else if (goomba->GetState() == GOOMBA_STATE_WING_WALK) {
 			goomba->SetState(GOOMBA_STATE_WALKING);
@@ -559,7 +558,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	
 	DebugOutTitle(L"Coins: %d", coin);
 	//DebugOutTitle(L"Score: %d", score);
@@ -678,6 +677,7 @@ void CMario::SetState(int state)
 		break;
 	case MARIO_STATE_READY_TO_HOLD:
 		readyToHold = TRUE;
+
 		break;
 	case MARIO_STATE_HOLDING:
 		readyToHold = FALSE;
@@ -700,9 +700,10 @@ void CMario::SetState(int state)
 				}
 			}
 			else {
-				koopa->SetState(KOOPA_STATE_RED_WALKING);
+					koopa->SetState(KOOPA_STATE_RED_WALKING);
 			}
 			koopaShell = nullptr;
+
 		}
 		break;
 	}
