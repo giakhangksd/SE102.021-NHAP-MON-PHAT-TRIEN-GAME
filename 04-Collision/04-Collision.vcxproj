@@ -162,8 +162,10 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Tail.h" />
+    <ClInclude Include="TeleportGate.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WorldmapKeyEventHandler.h" />
     <ClInclude Include="WorldmapScene.h" />
@@ -203,7 +205,9 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Tail.cpp" />
+    <ClCompile Include="TeleportGate.cpp" />
     <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WorldmapKeyEventHandler.cpp" />
     <ClCompile Include="WorldmapScene.cpp" />
