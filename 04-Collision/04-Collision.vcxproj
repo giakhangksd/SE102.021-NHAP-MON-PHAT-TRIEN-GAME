@@ -135,15 +135,17 @@
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EnemyWorldmap.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="KoopaTroopa.h" />
     <ClInclude Include="PiranhaPlant.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="Mushroom.h" />
@@ -152,18 +154,19 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
-    <ClInclude Include="underpipe.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EnemyWorldmap.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
     <ClCompile Include="PiranhaPlant.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -179,7 +182,6 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
-    <ClCompile Include="underpipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

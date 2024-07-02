@@ -1,0 +1,27 @@
+[SETTINGS]
+start	1
+width	320
+height	280
+
+#id	type	file
+# type: 0: intro, 1: world map, 2: world 1-1
+[SCENES]
+0	intro.txt
+1	intro.txt
+2	worldmap.txt
+3	world1_1.txt
+
+# id	file 
+[TEXTURES]
+-100	textures\bbox.png
+0	textures\mario.png
+10	textures\enemies.png
+20	textures\misc2.png
+30	textures\misc1.png
+40	textures\enemiess.png
+50	textures\effect.png
+60	textures\effects.png
+70	textures\hud_font.png
+80	textures\worldmap.png
+90	textures\intro.png
+100	textures\goal.png

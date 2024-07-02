@@ -69,13 +69,7 @@
     <ClInclude Include="Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="underpipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="worldmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KoopaTroopa.h">
@@ -94,6 +88,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyWorldmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -146,13 +149,7 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="underpipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="worldmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KoopaTroopa.cpp">
@@ -171,6 +168,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyWorldmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

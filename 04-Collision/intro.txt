@@ -1,0 +1,118 @@
+# list of object assets to load in this scene
+
+
+
+
+##### SIZE OF EACH OBJECTS #####
+# Mario Small	13 x 12
+# Mario Big		14 x 24
+# Mario Racoon	(14 + 5) x 25
+# Brick			15 x 16
+# Goomba		16 x 11
+# Koopa Troopa	14 x 24
+# Coin			15 x 16
+# Piranha Plant 15 x 23
+# Ground		15 x 15
+# Cloud			15 x 15
+# Tree			15 x 15
+# Rectangle		15 x 15
+# Pipe			15 x 15
+
+
+
+
+##### SYNTAX #####
+# See OBJECT_TYPE constants in AssetIDs.h
+
+# type	x	y	extra_settings per object type
+# type: 
+# 0 = Mario, 
+# 1 = Brick, 
+# 2 = Goomba, 
+# 3 = Koopa Troopa, 
+# 4 = Coin, 
+# 5 = Platform, 
+# 9 = Piranha Plant, 
+# 7 = Invisible Object,
+# 8 = Teleport Gate,
+# 9 = Platform Animate
+
+# PIRANHA PLANT	id	x	y	type(green = 1, green fire = 2, red fire = 3)
+# GOOMBA	id	x	y	type(normal = 1, red = 2)	level(normal = 1, para = 2)
+# KOOPA TROOPA	id	x	y	type(red = 1, green = 2)	level(normal = 1, para = 2)
+# PLATFORM	id	x	y	width	height	length	begin	middle	end	type(block = 1, normal = 2, no collision = 3)
+# BRICK	type	x	y	type(gold = 1, question = 2)	object_type(none = 0, super mushroom/leaf = 1, coin = 2, 1up = 3, pswitch = 4);
+# TELEPORT GATE	x	y	des_x	des_y	direction(down: 0, up: 1)
+# PORTAL	left	top	right	bottom	scene_id	type(worldmap: 1, level: 2)
+# PLATFORM ANIMATE	id	x	y	AniOrSprite	Type(block: 0, gate: 1)	IsAni(0: sprite, 1: ani)
+
+
+
+[ASSETS]
+hud.txt
+coin.txt
+misc.txt
+brick.txt
+luigi.txt
+mario.txt
+bullet.txt
+goomba.txt
+piranha.txt
+pswitch.txt
+mushroom.txt
+grassland.txt
+koopatroopa.txt
+introsprites.txt
+[OBJECTS]
+# Mario
+0	7.5	100	200
+0	290	100	100
+
+# Number 3
+9	160	116	25000	3	1
+
+# Stage
+5	50	220	255	35	3	0	0	0	1
+
+# Black Screen
+5	127	90	255	186	2	1	1	1	3
+5	127	160	255	186	2	1	1	1	3
+
+# Dynamic Curtain
+5	129	3	255	15	2	10	10	10	3
+5	129	19	255	15	2	10	10	10	3
+5	129	35	255	15	2	10	10	10	3
+5	129	51	255	15	2	10	10	10	3
+5	129	67	255	15	2	10	10	10	3
+5	129	83	255	15	2	10	10	10	3
+5	129	99	255	15	2	10	10	10	3
+5	129	115	255	15	2	10	10	10	3
+5	129	131	255	15	2	10	10	10	3
+5	129	147	255	15	2	10	10	10	3
+5	129	163	255	15	2	10	10	10	3
+
+5	129	179	255	15	2	10	10	10	3
+5	129	195	255	15	2	11	11	11	3
+
+# Static Curtain 
+5	128	17	255	15	2	12	12	12	3
+5	128	11	255	15	2	12	12	12	3
+5	128	5	255	15	2	12	12	12	3
+
+# Tree
+5	32	171	63	63	1	20	20	20	3
+5	274	155	63	95	1	21	21	21	3
+
+# Cloud
+5	250	30	31	15	1	30	30	30	3
+5	38	50	31	15	1	30	30	30	3
+5	8	85	15	7	1	31	31	31	3
+
+# Game Name
+5	155	60	178	71	1	2	2	2	1
+
+# Symbol TM
+5	250	60	7	1	1	7	7	7	1
+
+# Portal
+50	0	-100	0	0	2	2

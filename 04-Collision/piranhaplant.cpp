@@ -155,6 +155,7 @@ void CPiranhaPlant::SetState(int state)
 
 		break;
 	}
+
 	case PIRANHA_STATE_IDLE:
 		time_start = GetTickCount64();
 		vy = 0;
