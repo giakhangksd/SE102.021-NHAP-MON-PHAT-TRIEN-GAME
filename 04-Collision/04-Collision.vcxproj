@@ -140,6 +140,9 @@
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="KoopaTroopa.h" />
     <ClInclude Include="PiranhaPlant.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Portal.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Mario.h" />
@@ -157,6 +160,9 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
     <ClCompile Include="PiranhaPlant.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />

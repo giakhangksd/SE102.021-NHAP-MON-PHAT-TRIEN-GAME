@@ -1,93 +1,163 @@
-#include "piranhaplant.h"
+#include "PiranhaPlant.h"
+#include "Game.h"
+#include "debug.h"
 #include "Mario.h"
+#include "PlayScene.h"
+#include "KoopaTroopa.h"
 
-CPlant::CPlant(float x, float y) :CGameObject(x, y)
+void CPiranhaPlant::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
+	if (type == PIRANHA_TYPE_RED_FIRE) {
+		l = x - PIRANHA_RED_BBOX_WIDTH / 2;
+		t = y - PIRANHA_RED_BBOX_HEIGHT / 2;
+		r = l + PIRANHA_RED_BBOX_WIDTH;
+		b = t + PIRANHA_RED_BBOX_HEIGHT;
+	}
+	else {
+		l = x - PIRANHA_GREEN_BBOX_WIDTH / 2;
+		t = y - PIRANHA_GREEN_BBOX_HEIGHT / 2;
+		r = l + PIRANHA_GREEN_BBOX_WIDTH;
+		b = t + PIRANHA_GREEN_BBOX_HEIGHT;
+	}
+}
+void CPiranhaPlant::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (dynamic_cast<CKoopaTroopa*>(e->obj)) {
+		CKoopaTroopa* koopa = dynamic_cast<CKoopaTroopa*>(e->obj);
 
-	wait1 = -1;
-	SetState(PLANT_STATE_UP_BITE);
+		if (koopa->GetState() == KOOPA_TROOPA_STATE_SHELL && koopa->GetStateHeld()) {
+			Delete();
+			koopa->SetState(KOOPA_TROOPA_STATE_DIE);
+		}
+	}
+	else if (dynamic_cast<CPhaseChecker*>(e->obj)) Delete();
 }
 
-void CPlant::GetBoundingBox(float& l, float& t, float& r, float& b)
+void CPiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	l = x - PLANT_BBOX_WIDTH / 2;
-	t = y - PLANT_BBOX_HEIGHT / 2;
-	r = l + PLANT_BBOX_WIDTH;
-	b = t + PLANT_BBOX_HEIGHT;
-
-}
-
-void CPlant::OnNoCollision(DWORD dt)
-{
-	x += vx * dt;
+	vy += ay * dt;
 	y += vy * dt;
-};
 
-void CPlant::OnCollisionWith(LPCOLLISIONEVENT e)
-{
-	if (!e->obj->IsBlocking()) return;
-	if (dynamic_cast<CPlant*>(e->obj)) return;
+	switch (state) {
+	case PIRANHA_STATE_UP:
+		switch (type) {
+		case PIRANHA_TYPE_GREEN:
+		case PIRANHA_TYPE_GREEN_FIRE:
+			if (old_y - y > PIRANHA_GREEN_BBOX_HEIGHT) {
+				y = old_y - PIRANHA_GREEN_BBOX_HEIGHT;
+				SetState(PIRANHA_STATE_ATTACK);
+			}
+			break;
 
-	if (e->ny != 0 )
-	{
-		vy = 0;
-	}
-	else if (e->nx != 0 )
-	{
-		vx = -vx;
-	}
-}
+		case PIRANHA_TYPE_RED_FIRE:
+			if (old_y - y > PIRANHA_RED_BBOX_HEIGHT) {
+				y = old_y - PIRANHA_RED_BBOX_HEIGHT;
+				SetState(PIRANHA_STATE_ATTACK);
+			}
+			break;
+		}
+		break;
 
-void CPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
+	case PIRANHA_STATE_DOWN:
+		if (y - old_y >= 0) {
+			y = old_y;
+			SetState(PIRANHA_STATE_IDLE);
+		}
+		break;
 
-	if (state ==PLANT_STATE_DOWN_BITE && (GetTickCount64() - wait1 > 500 * 5)) {
-		SetState(PLANT_STATE_UP_BITE);
+	case PIRANHA_STATE_ATTACK:
+	case PIRANHA_STATE_IDLE:
+		if ((GetTickCount64() - time_start) > PIRANHA_ATTACK_IDLE_TIME) {
+			time_start = 0;
+			if (state == PIRANHA_STATE_IDLE && abs(mario_x - x) > DISTANCE_APPEAR) SetState(PIRANHA_STATE_UP);
+			else if (state == PIRANHA_STATE_ATTACK) SetState(PIRANHA_STATE_DOWN);
+		}
+		break;
 	}
-	if (state == PLANT_STATE_UP_BITE && (GetTickCount64() - wait1 > 500 * 5)) {
-		SetState(PLANT_STATE_DOWN_BITE);
-	}
-	if (state == PLANT_STATE_UP_BITE && y > 170) {
-		vy = 0;
-	}
-	if (state == PLANT_STATE_DOWN_BITE && y < 129) {
-		vy = 0;
-	}
+
+	//Get position of Mario
+	CPlayScene* playScene = dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene());
+	playScene->GetPlayer()->GetPosition(mario_x, mario_y);
 
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
-
-void CPlant::Render()
+int CPiranhaPlant::GetAniId()
 {
-	int aniId = ID_ANI_PLANT_BITE;
-	if (state == PLANT_STATE_READY_FIRE) {
-		aniId = ID_ANI_PLANT_RIGHT;
-		//aniId = ID_ANI_PLANT_LEFT;
+	int aniId = -1;
+	switch (type) {
+	case PIRANHA_TYPE_GREEN:
+		aniId = ID_ANI_PIRANHA_GREEN;
+		break;
+
+	case PIRANHA_TYPE_GREEN_FIRE:
+		if (mario_x < x) {
+			if (mario_y < y) aniId = ID_ANI_PIRANHA_GREEN_TARGET_TOP_LEFT;
+			else aniId = ID_ANI_PIRANHA_GREEN_TARGET_BOTTOM_LEFT;
+		}
+		else {
+			if (mario_y < y) aniId = ID_ANI_PIRANHA_GREEN_TARGET_TOP_RIGHT;
+			else aniId = ID_ANI_PIRANHA_GREEN_TARGET_BOTTOM_RIGHT;
+		}
+		break;
+
+	case PIRANHA_TYPE_RED_FIRE:
+		if (mario_x < x) {
+			if (mario_y < y) aniId = ID_ANI_PIRANHA_RED_TARGET_TOP_LEFT;
+			else aniId = ID_ANI_PIRANHA_RED_TARGET_BOTTOM_LEFT;
+		}
+		else {
+			if (mario_y < y) aniId = ID_ANI_PIRANHA_RED_TARGET_TOP_RIGHT;
+			else aniId = ID_ANI_PIRANHA_RED_TARGET_BOTTOM_RIGHT;
+		}
+		break;
 	}
+	return aniId;
+}
+void CPiranhaPlant::Render()
+{
+	int aniId = GetAniId();
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	//RenderBoundingBox();
 }
 
-void CPlant::SetState(int state)
+void CPiranhaPlant::SetState(int state)
 {
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case PLANT_STATE_DOWN_BITE:
-		y = 170 ;
-		vy = -0.05;
-		wait1 = GetTickCount64();
+	case PIRANHA_STATE_UP:
+		vy = -PIRANHA_UP_DOWN_SPEED;
 		break;
-	case PLANT_STATE_UP_BITE:
-		y = 129;
-		vy = 0.05;
-		wait1 = GetTickCount64();
-		break;
-	case PLANT_STATE_READY_FIRE:
 
+	case PIRANHA_STATE_DOWN:
+		vy = PIRANHA_UP_DOWN_SPEED;
+		break;
+
+	case PIRANHA_STATE_ATTACK: {
+		time_start = GetTickCount64();
+		vy = 0;
+
+		if (type == PIRANHA_TYPE_GREEN)
+			return;
+
+		CGameObject* _bullet = new CBullet(x, y, BULLET_BY_PIRANHA);
+
+		float direction_x, direction_y;
+		direction_x = (mario_x >= x) ? BULLET_DIRECTION_RIGHT : BULLET_DIRECTION_LEFT;
+		direction_y = (mario_y >= y) ? BULLET_DIRECTION_BOTTOM : BULLET_DIRECTION_TOP;
+
+		dynamic_cast<CBullet*>(_bullet)->SetDirection(direction_x, direction_y);
+
+		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(_bullet);
+
+		break;
+	}
+	case PIRANHA_STATE_IDLE:
+		time_start = GetTickCount64();
+		vy = 0;
 		break;
 	}
 }
