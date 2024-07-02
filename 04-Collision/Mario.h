@@ -381,7 +381,6 @@
 #define MARIO_GETINTO_PIPE_UP						2
 class CMario : public CGameObject
 {
-	BOOLEAN isSitting,isHitting,isHolding, readyToHold;
 	float maxVx;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 

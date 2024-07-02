@@ -24,7 +24,25 @@ void CTextures::Add(int id, LPCWSTR filePath)
 
 LPTEXTURE CTextures::Get(unsigned int i)
 {
-	return textures[i];
+	LPTEXTURE t = textures[i];
+	if (t == NULL)
+		DebugOut(L"[ERROR] Texture Id %d not found !\n", i);
+
+	return t;
+}
+
+/*
+	Clear all loaded textures
+*/
+void CTextures::Clear()
+{
+	for (auto x : textures)
+	{
+		LPTEXTURE tex = x.second;
+		if (tex != NULL) delete tex;
+	}
+
+	textures.clear();
 }
 
 
