@@ -84,7 +84,7 @@
     <ClInclude Include="worldmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Koopa.h">
+    <ClInclude Include="KoopaTroopa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="piranhaplant.h">
@@ -155,7 +155,7 @@
     <ClCompile Include="worldmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Koopa.cpp">
+    <ClCompile Include="KoopaTroopa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="piranhaplant.cpp">
