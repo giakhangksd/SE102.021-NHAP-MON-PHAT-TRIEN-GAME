@@ -69,16 +69,10 @@
     <ClInclude Include="Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="underpipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="leaf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="worldmap.h">
@@ -87,7 +81,10 @@
     <ClInclude Include="KoopaTroopa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="piranhaplant.h">
+    <ClInclude Include="PiranhaPlant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,16 +137,10 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="underpipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="leaf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="worldmap.cpp">
@@ -158,7 +149,10 @@
     <ClCompile Include="KoopaTroopa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="piranhaplant.cpp">
+    <ClCompile Include="PiranhaPlant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

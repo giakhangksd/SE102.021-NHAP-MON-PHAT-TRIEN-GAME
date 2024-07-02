@@ -131,6 +131,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AssetIDs.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="debug.h" />
@@ -138,13 +139,11 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="KoopaTroopa.h" />
-    <ClInclude Include="piranhaplant.h" />
+    <ClInclude Include="PiranhaPlant.h" />
     <ClInclude Include="worldmap.h" />
     <ClInclude Include="KeyEventHandler.h" />
-    <ClInclude Include="leaf.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="Mushroom.h" />
-    <ClInclude Include="pipe.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Sprite.h" />
@@ -155,8 +154,9 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
-    <ClCompile Include="piranhaplant.cpp" />
+    <ClCompile Include="PiranhaPlant.cpp" />
     <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
@@ -165,11 +165,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
-    <ClCompile Include="leaf.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="Mushroom.cpp" />
-    <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
