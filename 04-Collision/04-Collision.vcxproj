@@ -146,10 +146,12 @@
     <ClInclude Include="InvisibleObject.h" />
     <ClInclude Include="KoopaTroopa.h" />
     <ClInclude Include="MarioWorldmap.h" />
+    <ClInclude Include="PhaseChecker.h" />
     <ClInclude Include="PiranhaPlant.h" />
     <ClInclude Include="PlatformAnimate.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="PSwitch.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Mario.h" />
@@ -172,10 +174,12 @@
     <ClCompile Include="InvisibleObject.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
     <ClCompile Include="MarioWorldmap.cpp" />
+    <ClCompile Include="PhaseChecker.cpp" />
     <ClCompile Include="PiranhaPlant.cpp" />
     <ClCompile Include="PlatformAnimate.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="PSwitch.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Coin.cpp" />
