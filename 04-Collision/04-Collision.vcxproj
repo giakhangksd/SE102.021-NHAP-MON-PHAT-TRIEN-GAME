@@ -145,6 +145,7 @@
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="InvisibleObject.h" />
     <ClInclude Include="KoopaTroopa.h" />
+    <ClInclude Include="MarioWorldmap.h" />
     <ClInclude Include="PiranhaPlant.h" />
     <ClInclude Include="PlatformAnimate.h" />
     <ClInclude Include="PlayScene.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="InvisibleObject.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
+    <ClCompile Include="MarioWorldmap.cpp" />
     <ClCompile Include="PiranhaPlant.cpp" />
     <ClCompile Include="PlatformAnimate.cpp" />
     <ClCompile Include="PlayScene.cpp" />
