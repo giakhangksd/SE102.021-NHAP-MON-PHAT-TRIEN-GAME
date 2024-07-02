@@ -75,16 +75,10 @@
     <ClInclude Include="underpipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="quesbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mushroom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="leaf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="coineffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="worldmap.h">
@@ -152,16 +146,10 @@
     <ClCompile Include="underpipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="quesbox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Mushroom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="leaf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="coineffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="worldmap.cpp">

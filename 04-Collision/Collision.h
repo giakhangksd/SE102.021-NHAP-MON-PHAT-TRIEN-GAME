@@ -35,7 +35,7 @@ struct CCollisionEvent
 		this->isDeleted = false;
 	}
 
-	int WasCollided(); 
+	int WasCollided() { return t >= 0.0f && t <= 1.0f; }
 
 	static bool compare(const LPCOLLISIONEVENT& a, LPCOLLISIONEVENT& b)
 	{
@@ -61,16 +61,30 @@ public:
 		float& t,
 		float& nx,
 		float& ny);
+	static int AABB(
+		float sl,
+		float st,
+		float sr,
+		float sb,
+		float dl,
+		float dr,
+		float dt,
+		float db);
 
 	LPCOLLISIONEVENT SweptAABB(
 		LPGAMEOBJECT objSrc, 
 		DWORD dt,
 		LPGAMEOBJECT objDest); 
+
 	void Scan(
 		LPGAMEOBJECT objSrc, 
 		DWORD dt, 
 		vector<LPGAMEOBJECT>* objDests, 
 		vector<LPCOLLISIONEVENT>& coEvents);
+	void Scan(
+		LPGAMEOBJECT objSrc,
+		vector<LPGAMEOBJECT>* objDests,
+		LPGAMEOBJECT& objCollided); // Get first object in objDests
 
 	void Filter(
 		LPGAMEOBJECT objSrc,
@@ -82,6 +96,7 @@ public:
 		int filterY);
 
 	void Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	void Process(LPGAMEOBJECT objSrc, vector<LPGAMEOBJECT>* coObjects); // Use for Racoon attack
 
 	static CCollision* GetInstance();
 };
