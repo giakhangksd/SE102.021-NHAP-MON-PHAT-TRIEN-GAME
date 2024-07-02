@@ -12,6 +12,10 @@
 using namespace std;
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
+#define BBOX_ALPHA					0.25f		// Bounding box transparency
+
+#define DEFLECT_DIRECTION_LEFT		-1
+#define DEFLECT_DIRECTION_RIGHT		1	
 
 class CGameObject;
 typedef CGameObject* LPGAMEOBJECT;
@@ -38,6 +42,8 @@ public:
 	void GetPosition(float& x, float& y) { x = this->x; y = this->y; }
 	void GetSpeed(float& vx, float& vy) { vx = this->vx; vy = this->vy; }
 
+	void SetNx(int nx) { this->nx = nx; }
+
 	int GetState() { return this->state; }
 	virtual void Delete() { isDeleted = true; }
 	bool IsDeleted() { return isDeleted; }
@@ -52,7 +58,7 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL) {};
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
-
+	virtual void Deflected(int direction = 0) {}
 	//
 	// Collision ON or OFF ? This can change depending on object's state. For example: die
 	//
@@ -60,6 +66,9 @@ public:
 
 	// When no collision has been detected (triggered by CCollision::Process)
 	virtual void OnNoCollision(DWORD dt) {};
+	
+	// AABB collision
+	virtual void OnCollisionWith(LPGAMEOBJECT o) {};
 
 	// When collision with an object has been detected (triggered by CCollision::Process)
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
