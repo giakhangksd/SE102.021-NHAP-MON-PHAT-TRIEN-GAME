@@ -134,6 +134,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Control.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EnemyWorldmap.h" />
@@ -160,12 +161,18 @@
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
+    <ClInclude Include="Tail.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="WorldmapKeyEventHandler.h" />
+    <ClInclude Include="WorldmapScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Control.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EnemyWorldmap.cpp" />
     <ClCompile Include="Hud.cpp" />
@@ -195,7 +202,11 @@
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="Tail.cpp" />
     <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WorldmapKeyEventHandler.cpp" />
+    <ClCompile Include="WorldmapScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
