@@ -4,7 +4,7 @@ width	320
 height	240
 
 #id	type	file
-# type: 0: intro, 1: play scene 
+# type: 10: intro, 1: play scene 
 [SCENES]
 0	intro.txt
 1	scene01.txt
@@ -17,3 +17,4 @@ height	240
 0	textures\mario.png
 10	textures\enemies.png
 20	textures\misc.png
+30	textures\map.png
