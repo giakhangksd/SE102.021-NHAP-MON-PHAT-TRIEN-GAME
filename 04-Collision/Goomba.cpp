@@ -56,19 +56,19 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 	//if (!e->obj->IsBlocking()) return; 
 	//if (dynamic_cast<CGoomba*>(e->obj) && e->nx!=0) return; 
 
-		if (e->ny != 0)
-		{
-			if (dynamic_cast<CPlatform*>(e->obj)) {
-				CPlatform* platform = dynamic_cast<CPlatform*>(e->obj);
-				switch (platform->GetType()) {
-				case PLATFORM_TYPE_BLOCK:
-					vy = 0;
-					break;
+	if (e->ny != 0)
+	{
+		if (dynamic_cast<CPlatform*>(e->obj)) {
+			CPlatform* platform = dynamic_cast<CPlatform*>(e->obj);
+			switch (platform->GetType()) {
+			case PLATFORM_TYPE_BLOCK:
+				vy = 0;
+				break;
 
-				case PLATFORM_TYPE_NORMAL:
-					if (e->ny < 0)
-						vy = 0;
-				}
+			case PLATFORM_TYPE_NORMAL:
+				if (e->ny < 0)
+					vy = 0;
+			}
 		}
 		else if (e->nx != 0)
 		{
@@ -84,7 +84,7 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 			OnCollisionWithGoomba(e);
 		else if (dynamic_cast<CKoopaTroopa*>(e->obj))
 			OnCollisionWithKoopaTroopa(e);
-
+	}
 }
 int CGoomba::getAniId()
 {

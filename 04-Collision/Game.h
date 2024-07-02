@@ -81,7 +81,7 @@ public:
 	LPTEXTURE LoadTexture(LPCWSTR texturePath);
 
 	// Keyboard related functions 
-	void InitKeyboard(LPKEYEVENTHANDLER handler);
+	void InitKeyboard();
 	int IsKeyDown(int KeyCode);
 	void ProcessKeyboard();
 	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }

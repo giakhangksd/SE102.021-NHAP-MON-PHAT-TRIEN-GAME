@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "Portal.h"
 #include "Game.h"
 #include "Textures.h"

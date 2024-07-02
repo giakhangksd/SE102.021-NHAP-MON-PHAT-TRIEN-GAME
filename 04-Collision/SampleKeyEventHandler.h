@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 
-class CSampleKeyHandler: public CKeyEventHandler
+class CSampleKeyHandler : public CSceneKeyHandler
 {
 	virtual void KeyState(BYTE *states);
 	virtual void OnKeyDown(int KeyCode);

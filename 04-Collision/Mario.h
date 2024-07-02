@@ -406,17 +406,18 @@ class CMario : public CGameObject
 	CGameObject* _tail;
 	CKoopaTroopa* _koopa;
 
+
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithKoopaTroopa(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
+	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
 	void OnCollisionWithBrick(LPCOLLISIONEVENT e);
-	void OnCollosionWithMushroom(LPCOLLISIONEVENT e);
-	void OnCollisionWithKoopaTroopa(LPCOLLISIONEVENT e);
 	void OnCollisionWithPiranhaPlant(LPCOLLISIONEVENT e);
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
-	int GetAniIdFox();
+	int GetAniIdRacoon();
 
 public:
 	CMario(float x, float y,int type = 100) : CGameObject(x, y)
