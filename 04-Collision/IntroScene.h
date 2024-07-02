@@ -174,7 +174,7 @@ protected:
 				Mario->SetState(MARIO_STATE_IDLE); // Mario idle
 				stateOfMario = MARIO_STATE_JUMP; // Sign for Luigi jump on Mario
 			}
-			else if (delta > MARIO_WALKING_TIME && delta < MARIO_JUMPING_TIME
+			else if (delta > MARIO_WALKING_TIME && delta < MARIO_JUMPING_TIME 
 				&& stateOfMario == MARIO_STATE_JUMP && player[0]->GetState() != MARIO_STATE_JUMP)
 				Luigi->SetState(MARIO_STATE_JUMP); // Luigi jump
 			else if (delta > MARIO_JUMPING_TIME) {
@@ -337,7 +337,7 @@ protected:
 			Mario->GetPosition(x, y);
 
 			//DebugOut(L"x: %f, y: %f, vx: %f, vy: %f \n", x, y, vx, vy);
-
+			
 			// When Mario walking right then he will walking left and then walking right
 			if (vx > 0 && x >= Screen_Width * 4 / 5)
 				Mario->SetState(MARIO_STATE_WALKING_LEFT);
@@ -351,7 +351,7 @@ protected:
 		// When Mario out of right screen, create 3 koopa troopa to walking from the left
 		if (flag == KOOPA_TROOPA_WALKING) {
 			Mario->GetPosition(x, y);
-
+			
 			// Makes 3 koopas walking from the left
 			if (x > Screen_Width + 30 && ItemsAndEnemies.size() == 0) {
 				LPGAMEOBJECT obj = new CKoopaTroopa(0, y - 10, KOOPA_TROOPA_TYPE_GREEN, 1);

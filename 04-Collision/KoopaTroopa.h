@@ -6,6 +6,7 @@
 #include "PhaseChecker.h"
 #include "GameObject.h"
 
+
 #define KOOPA_TROOPA_GRAVITY						0.001f
 #define KOOPA_TROOPA_WALKING_SPEED					0.04f
 #define KOOPA_TROOPA_SHELL_SPEED					0.2f
@@ -58,12 +59,12 @@
 #define ID_ANI_GREEN_PARA_KOOPA_TROOPA_FLYING_LEFT	6211
 #define ID_ANI_GREEN_PARA_KOOPA_TROOPA_FLYING_RIGHT 6212
 
-class CKoopaTroopa : public CGameObject
-{
+
+class CKoopaTroopa : public CGameObject {
 protected:
 	float ax;
 	float ay;
-	
+
 	int type;
 	int level;
 
@@ -75,7 +76,7 @@ protected:
 
 	CGameObject* phaseCheck;
 
-	virtual int IsCollidable() { return state != KOOPA_TROOPA_STATE_DIE && !isHeld; };
+	virtual int IsCollidable() { return state != KOOPA_TROOPA_STATE_DIE && !isHeld; }
 	virtual int IsBlocking() { return 0; }
 	virtual void Deflected(int direction);
 
@@ -87,10 +88,9 @@ protected:
 	int GetAniId();
 
 public:
-	CKoopaTroopa(float x, float y, int type,int level);
-	virtual void SetState(int state);
-	//void HoldByMario(float* x, float* y, int* nx);
-	//void UpdatePositionFollowMario();
+	CKoopaTroopa(float x, float y, int type, int level);
+
+	void SetState(int state);
 	void SetNx(int nx) {
 		this->nx = nx;
 	}

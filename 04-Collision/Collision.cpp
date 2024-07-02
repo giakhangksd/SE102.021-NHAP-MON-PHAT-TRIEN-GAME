@@ -7,12 +7,7 @@
 
 #include "debug.h"
 
-int CCollisionEvent::WasCollided() {
-	return
-		t >= 0.0f && t <= 1.0f && obj->IsDirectionColliable(nx, ny)==1;
-}
-
-#define BLOCK_PUSH_FACTOR 0.4f
+#define BLOCK_PUSH_FACTOR 0.2f
 
 CCollision* CCollision::__instance = NULL;
 
@@ -130,6 +125,7 @@ int CCollision::AABB(float sl, float st, float sr, float sb, float dl, float dt,
 		&& st < db
 		&& sb > dt;
 }
+
 /*
 	Extension of original SweptAABB to deal with two moving objects
 */
@@ -189,6 +185,7 @@ void CCollision::Scan(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* objDe
 
 	//std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }
+
 void CCollision::Scan(LPGAMEOBJECT objSrc, vector<LPGAMEOBJECT>* objDests, LPGAMEOBJECT& objCollided) {
 	float sl, st, sr, sb;
 	objSrc->GetBoundingBox(sl, st, sr, sb);
@@ -236,24 +233,31 @@ void CCollision::Filter( LPGAMEOBJECT objSrc,
 			continue;
 		}
 
-		if (c->t < min_tx && c->nx != 0 && filterX == 1) {
+		if (c->t < min_tx && c->nx != 0 && filterX == 1 && c->obj->IsBlocking() == 1) {
 			min_tx = c->t; min_ix = i;
 		}
 
 		if (c->t < min_ty && c->ny != 0 && filterY == 1) {
-			min_ty = c->t; min_iy = i;
+			if (c->obj->IsBlocking() == 2 && c->ny < 0) {
+				min_ty = c->t; min_iy = i;
+			}
+			else if (c->obj->IsBlocking() == 1) {
+				min_ty = c->t; min_iy = i;
+			}
 		}
 	}
 
 	if (min_ix >= 0) colX = coEvents[min_ix];
 	if (min_iy >= 0) colY = coEvents[min_iy];
 }
+
 void CCollision::Process(LPGAMEOBJECT objSrc, vector<LPGAMEOBJECT>* coObjects)
 {
 	LPGAMEOBJECT objCollided = NULL;
 	if (objSrc->IsCollidable()) Scan(objSrc, coObjects, objCollided);
 	if (objCollided) objSrc->OnCollisionWith(objCollided);
 }
+
 /*
 *  Simple/Sample collision framework 
 *  NOTE: Student might need to improve this based on game logic 

@@ -1,10 +1,10 @@
+#include "Brick.h"
+#include "Goomba.h"
 #include "Platform.h"
 #include "PlayScene.h"
 #include "KoopaTroopa.h"
 #include "PiranhaPlant.h"
 #include "debug.h"
-#include "Goomba.h"
-#include "Brick.h"
 
 void CKoopaTroopa::Deflected(int direction)
 {
@@ -17,75 +17,7 @@ void CKoopaTroopa::Deflected(int direction)
 	isUp = true;
 	if (level == KOOPA_TROOPA_LEVEL_PARA) level = KOOPA_TROOPA_LEVEL_NORMAL;
 }
-void CKoopaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
-{
-	if (state == KOOPA_TROOPA_STATE_SHELL && deflected_start == 0) vx = 0;
 
-	if (e->ny != 0) {
-		if (dynamic_cast<CPlatform*>(e->obj)) {
-			CPlatform* platform = dynamic_cast<CPlatform*>(e->obj);
-
-			switch (platform->GetType()) {
-			case PLATFORM_TYPE_BLOCK:
-				vy = 0;
-				break;
-
-			case PLATFORM_TYPE_NORMAL:
-				if (e->ny < 0) vy = 0;
-				break;
-			}
-		}
-		else if (e->obj->IsBlocking()) vy = 0;
-	}
-	else if (e->nx != 0) {
-		if (dynamic_cast<CPlatform*>(e->obj)) {
-			if (dynamic_cast<CPlatform*>(e->obj)->GetType() == PLATFORM_TYPE_BLOCK) {
-				vx = -vx;
-
-				float p_vx, p_vy;
-				phaseCheck->GetSpeed(p_vx, p_vy);
-
-				if (p_vx >= this->vx)
-					phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
-				else
-					phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
-			}
-		}
-		else if (e->obj->IsBlocking()) {
-			vx = -vx;
-
-			float p_vx, p_vy;
-			phaseCheck->GetSpeed(p_vx, p_vy);
-
-			if (p_vx >= this->vx)
-				phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
-			else
-				phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
-		}
-	}
-
-	float px, py;
-	phaseCheck->GetPosition(px, py);
-
-	if (py - this->y > 10 && level != KOOPA_TROOPA_LEVEL_PARA && state != KOOPA_TROOPA_STATE_SHELL && state != KOOPA_TROOPA_STATE_ATTACKING) {
-		vx = -vx;
-
-		if (px <= this->x)
-			phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
-		else phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
-	}
-
-	phaseCheck->SetSpeed(vx, 1);
-
-	if (dynamic_cast<CBrick*>(e->obj))
-		OnCollisionWithBrick(e);
-	if (dynamic_cast<CGoomba*>(e->obj))
-		OnCollisionWithGoomba(e);
-	else if (dynamic_cast<CKoopaTroopa*>(e->obj))
-		OnCollisionWithKoopaTroopa(e);
-	else if (dynamic_cast<CPiranhaPlant*>(e->obj))
-		OnCollisionWithPiranhaPlant(e);
-}
 void CKoopaTroopa::OnCollisionWithBrick(LPCOLLISIONEVENT e)
 {
 	CBrick* brick = dynamic_cast<CBrick*>(e->obj);
@@ -162,13 +94,12 @@ void CKoopaTroopa::OnCollisionWithKoopaTroopa(LPCOLLISIONEVENT e)
 	switch (state) {
 	case KOOPA_TROOPA_STATE_ATTACKING:
 		koopa->SetState(KOOPA_TROOPA_STATE_DIE);
-		if (flag) SetState(KOOPA_TROOPA_STATE_DIE);
+		if(flag) SetState(KOOPA_TROOPA_STATE_DIE);
 
 		if (koopa->x >= x) {
 			if (state == KOOPA_TROOPA_STATE_DIE) Deflected(DEFLECT_DIRECTION_LEFT);
 			koopa->Deflected(DEFLECT_DIRECTION_RIGHT);
-		}
-		else {
+		} else {
 			if (state == KOOPA_TROOPA_STATE_DIE) Deflected(DEFLECT_DIRECTION_RIGHT);
 			koopa->Deflected(DEFLECT_DIRECTION_LEFT);
 		}
@@ -232,7 +163,7 @@ int CKoopaTroopa::GetAniId()
 				break;
 			}
 		}
-		else if (state == KOOPA_TROOPA_STATE_ATTACKING)
+		else if (state == KOOPA_TROOPA_STATE_ATTACKING) 
 			if (isUp) aniId = ID_ANI_RED_KOOPA_TROOPA_ATTACKING_UP;
 			else aniId = ID_ANI_RED_KOOPA_TROOPA_ATTACKING_DOWN;
 		break;
@@ -271,8 +202,7 @@ int CKoopaTroopa::GetAniId()
 	return aniId;
 }
 
-CKoopaTroopa::CKoopaTroopa(float x, float y, int type,int l) :CGameObject(x, y)
-{
+CKoopaTroopa::CKoopaTroopa(float x, float y, int type, int l) :CGameObject(x, y) {
 	phaseCheck = new CPhaseChecker(x - KOOPA_TROOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y,
 		KOOPA_TROOPA_PHASE_CHECK_WIDTH, KOOPA_TROOPA_PHASE_CHECK_HEIGHT);
 	phaseCheck->SetSpeed(0, KOOPA_TROOPA_WALKING_SPEED);
@@ -291,6 +221,118 @@ CKoopaTroopa::CKoopaTroopa(float x, float y, int type,int l) :CGameObject(x, y)
 	deflected_start = 0;
 }
 
+void CKoopaTroopa::SetState(int state)
+{
+	CGameObject::SetState(state);
+	isHeld = false;
+	if (state != KOOPA_TROOPA_STATE_ATTACKING && state != KOOPA_TROOPA_STATE_SHELL) isUp = false;
+	switch (state) {
+	case KOOPA_TROOPA_STATE_WALKING:
+		vx = -KOOPA_TROOPA_WALKING_SPEED;
+		phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y);
+		break;
+
+	case KOOPA_TROOPA_STATE_SHELL:
+		time_start = GetTickCount64();
+		y += (KOOPA_TROOPA_BBOX_HEIGHT - KOOPA_TROOPA_BBOX_HEIGHT_DIE) / 2;
+		vx = vy = 0;
+		break;
+
+	case KOOPA_TROOPA_STATE_ATTACKING:
+		time_start = -1;
+		if (nx >= 0) vx = -KOOPA_TROOPA_SHELL_SPEED;
+		else vx = KOOPA_TROOPA_SHELL_SPEED;
+		break;
+
+	case KOOPA_TROOPA_STATE_FLYING:
+		time_start = GetTickCount64();
+		vy = -KOOPA_TROOPA_FLY_SPEED_Y;
+		break;
+
+	case KOOPA_TROOPA_STATE_DIE:
+		time_start = GetTickCount64();
+		phaseCheck->Delete();
+		break;
+	}
+
+}
+
+void CKoopaTroopa::OnNoCollision(DWORD dt)
+{
+	x += vx * dt;
+	y += vy * dt;
+}
+
+void CKoopaTroopa::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (state == KOOPA_TROOPA_STATE_SHELL && deflected_start == 0) vx = 0;
+
+	if (e->ny != 0) {
+		if (dynamic_cast<CPlatform*>(e->obj)) {
+			CPlatform* platform = dynamic_cast<CPlatform*>(e->obj);
+
+			switch (platform->GetType()) {
+			case PLATFORM_TYPE_BLOCK:
+				vy = 0;
+				break;
+
+			case PLATFORM_TYPE_NORMAL:
+				if (e->ny < 0) vy = 0;
+				break;
+			}
+		}
+		else if (e->obj->IsBlocking()) vy = 0;
+	}
+	else if (e->nx != 0) {
+		if (dynamic_cast<CPlatform*>(e->obj)) {
+			if (dynamic_cast<CPlatform*>(e->obj)->GetType() == PLATFORM_TYPE_BLOCK) {
+				vx = -vx;
+
+				float p_vx, p_vy;
+				phaseCheck->GetSpeed(p_vx, p_vy);
+
+				if (p_vx >= this->vx)
+					phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
+				else
+					phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
+			}
+		}
+		else if (e->obj->IsBlocking()) {
+			vx = -vx;
+
+			float p_vx, p_vy;
+			phaseCheck->GetSpeed(p_vx, p_vy);
+
+			if (p_vx >= this->vx)
+				phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
+			else
+				phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
+		}
+	}
+
+	float px, py;
+	phaseCheck->GetPosition(px, py);
+
+	if (py - this->y > 10 && level != KOOPA_TROOPA_LEVEL_PARA && state != KOOPA_TROOPA_STATE_SHELL && state != KOOPA_TROOPA_STATE_ATTACKING) {
+		vx = -vx;
+
+		if (px <= this->x)
+			phaseCheck->SetPosition(x + KOOPA_TROOPA_BBOX_WIDTH, y);
+		else phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH, y);
+	}
+
+	phaseCheck->SetSpeed(vx, 1);
+
+	if (dynamic_cast<CBrick*>(e->obj))
+		OnCollisionWithBrick(e);
+	if (dynamic_cast<CGoomba*>(e->obj))
+		OnCollisionWithGoomba(e);
+	else if (dynamic_cast<CKoopaTroopa*>(e->obj))
+		OnCollisionWithKoopaTroopa(e);
+	else if (dynamic_cast<CPiranhaPlant*>(e->obj))
+		OnCollisionWithPiranhaPlant(e);
+}
+
 void CKoopaTroopa::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	if (state == KOOPA_TROOPA_STATE_WALKING) {
@@ -306,14 +348,6 @@ void CKoopaTroopa::GetBoundingBox(float& left, float& top, float& right, float& 
 		bottom = top + KOOPA_TROOPA_BBOX_HEIGHT_DIE;
 	}
 }
-
-void CKoopaTroopa::OnNoCollision(DWORD dt)
-{
-	x += vx * dt;
-	y += vy * dt;
-};
-
-
 
 void CKoopaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -343,9 +377,8 @@ void CKoopaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isDeleted = true;
 		phaseCheck->Delete();
 		return;
-	}
-	else if (state == KOOPA_TROOPA_STATE_FLYING &&
-		(GetTickCount64() - time_start) > KOOPA_TROOPA_FLY_TIMEOUT &&
+	} else if (state == KOOPA_TROOPA_STATE_FLYING && 
+		(GetTickCount64() - time_start) > KOOPA_TROOPA_FLY_TIMEOUT && 
 		vy == ay * dt) {
 		time_start = -1;
 		SetState(KOOPA_TROOPA_STATE_FLYING);
@@ -357,7 +390,7 @@ void CKoopaTroopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CKoopaTroopa::Render()
 {
-	//phaseCheck->RenderBoundingBox();
+	phaseCheck->RenderBoundingBox();
 
 	int aniId = GetAniId();
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
@@ -366,58 +399,3 @@ void CKoopaTroopa::Render()
 	float px, py;
 	phaseCheck->GetPosition(px, py);
 }
-
-void CKoopaTroopa::SetState(int state)
-{
-	CGameObject::SetState(state);
-	isHeld = false;
-	if (state != KOOPA_TROOPA_STATE_ATTACKING && state != KOOPA_TROOPA_STATE_SHELL) isUp = false;
-	switch (state)
-	{
-	case KOOPA_TROOPA_STATE_WALKING:
-		vx = -KOOPA_TROOPA_WALKING_SPEED;
-		phaseCheck->SetPosition(x - KOOPA_TROOPA_BBOX_WIDTH - KOOPA_TROOPA_PHASE_CHECK_WIDTH / 2, y);
-		break;
-
-	case KOOPA_TROOPA_STATE_SHELL:
-		time_start = GetTickCount64();
-		y += (KOOPA_TROOPA_BBOX_HEIGHT - KOOPA_TROOPA_BBOX_HEIGHT_DIE) / 2;
-		vx = vy = 0;
-		break;
-
-	case KOOPA_TROOPA_STATE_ATTACKING:
-		time_start = -1;
-		if (nx >= 0) vx = -KOOPA_TROOPA_SHELL_SPEED;
-		else vx = KOOPA_TROOPA_SHELL_SPEED;
-		break;
-
-	case KOOPA_TROOPA_STATE_FLYING:
-		time_start = GetTickCount64();
-		vy = -KOOPA_TROOPA_FLY_SPEED_Y;
-		break;
-
-	case KOOPA_TROOPA_STATE_DIE:
-		time_start = GetTickCount64();
-		phaseCheck->Delete();
-		break;
-	}
-}
-
-//shell movment with mario
-
-//void CKoopa::HoldByMario(float* x, float* y, int* nx)
-//{
-//	m_x = x;
-//	m_y = y;
-//	m_nx = nx;
-//	SetState(KOOPA_STATE_SHELL_HOLDED);
-//}
-//
-//void CKoopa::UpdatePositionFollowMario()
-//{
-//	if (isheld)
-//	{
-//		x = *m_x + *m_nx * (KOOPA_BBOX_WIDTH / 2 + 4);
-//		y = *m_y - 1;
-//	}
-//}

@@ -4,6 +4,16 @@
 #include "Effect.h"
 #include "PlayScene.h"
 
+void CCoin::CoinTransformBrick() {
+	if (GetTickCount64() - remain_start >= COIN_TIMEOUT)
+		if ((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
+			this->Delete();
+
+			CGameObject* brick = new CBrick(x, y);
+			((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(brick);
+		}
+}
+
 void CCoin::Render()
 {
 	int aniId = ID_ANI_COIN;
@@ -13,24 +23,6 @@ void CCoin::Render()
 	animations->Get(aniId)->Render(x, y);
 
 	//RenderBoundingBox();
-}
-
-void CCoin::GetBoundingBox(float& l, float& t, float& r, float& b)
-{
-	l = x - COIN_BBOX_WIDTH / 2;
-	t = y - COIN_BBOX_HEIGHT / 2;
-	r = l + COIN_BBOX_WIDTH;
-	b = t + COIN_BBOX_HEIGHT;
-}
-
-void CCoin::CoinTransformBrick() {
-	if (GetTickCount64() - remain_start >= COIN_TIMEOUT)
-		if ((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene()) {
-			this->Delete();
-
-			CGameObject* brick = new CBrick(x, y);
-			((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetObjects().push_back(brick);
-		}
 }
 
 void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -48,6 +40,14 @@ void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		vy += ay * dt;
 		y += vy * dt;
 	}
+}
+
+void CCoin::GetBoundingBox(float& l, float& t, float& r, float& b)
+{
+	l = x - COIN_BBOX_WIDTH / 2;
+	t = y - COIN_BBOX_HEIGHT / 2;
+	r = l + COIN_BBOX_WIDTH;
+	b = t + COIN_BBOX_HEIGHT;
 }
 
 void CCoin::Deflected(int direction) {

@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_COIN 11000
+#define ID_ANI_COIN						11000
 #define ID_ANI_COIN_DEFLECT				11001
 
 #define COIN_DEFLECT					0.38f
@@ -17,9 +17,6 @@
 #define COIN_TRANSFORMED_FROM_BRICK		1
 
 #define COIN_TIMEOUT					10000
-//#define	COIN_WIDTH 10
-//#define COIN_BBOX_WIDTH 10
-//#define COIN_BBOX_HEIGHT 16
 
 class CCoin : public CGameObject {
 private:
@@ -31,6 +28,7 @@ private:
 	ULONGLONG remain_start;
 
 	void CoinTransformBrick();
+
 public:
 	CCoin(float x, float y, int type = 0) : CGameObject(x, y) {
 		ay = vy = 0.0;

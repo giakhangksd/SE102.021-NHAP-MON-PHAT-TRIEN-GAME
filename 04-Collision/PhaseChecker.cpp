@@ -21,7 +21,7 @@ void CPhaseChecker::Render()
 }
 
 void CPhaseChecker::OnCollisionWith(LPCOLLISIONEVENT e) {
-	if (e->ny != 0)
+	if (e->ny != 0) 
 		vy = 0;
 }
 

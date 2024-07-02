@@ -52,12 +52,12 @@ public:
 		active[type - 1] = 0;
 	}
 
-	int IsPausing() {
-		return active[CONTROL_TYPE_PAUSE - 1] == 1;
+	int IsPausing() { 
+		return active[CONTROL_TYPE_PAUSE - 1] == 1; 
 	}
 
-	int IsActivatingModeOne() {
-		return active[CONTROL_TYPE_MODE_ONE - 1] == 1;
+	int IsActivatingModeOne() { 
+		return active[CONTROL_TYPE_MODE_ONE - 1] == 1; 
 	}
 
 	int IsActivatingModeTwo() {

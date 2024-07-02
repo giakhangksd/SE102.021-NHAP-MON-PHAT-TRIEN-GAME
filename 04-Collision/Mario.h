@@ -379,11 +379,13 @@
 
 #define MARIO_GETINTO_PIPE_DOWN						1
 #define MARIO_GETINTO_PIPE_UP						2
+
 class CMario : public CGameObject
 {
-	float maxVx;
+
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
+	float maxVx;
 
 	int coin;
 	int flag;
@@ -406,7 +408,6 @@ class CMario : public CGameObject
 	CGameObject* _tail;
 	CKoopaTroopa* _koopa;
 
-
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithKoopaTroopa(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
@@ -420,12 +421,12 @@ class CMario : public CGameObject
 	int GetAniIdRacoon();
 
 public:
-	CMario(float x, float y,int type = 100) : CGameObject(x, y)
+	CMario(float x, float y, int type=100) : CGameObject(x, y)
 	{
 		maxVx = 0.0f;
-		ax = 0.0f;
-		ay = MARIO_GRAVITY; 
 
+		ax = 0.0f;
+		ay = MARIO_GRAVITY;
 		this->type = type;
 		_koopa = NULL;
 		_tail = new CTail(x, y);
@@ -434,28 +435,26 @@ public:
 		isSitting = isOnPlatform = false;
 		untouchable = coin = flag = holdable = canGetIntoPipe = 0;
 		fly_start = float_start = time_count = transform_start = 0;
-		
 	}
 
-	void SetGravity(float gravity) {
-		ay = gravity;
+	void SetGravity(float gravity) { 
+		ay = gravity; 
 	}
 
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);
 
-	int IsCollidable()
-	{ 
-		return (state != MARIO_STATE_DIE); 
+	int IsCollidable() {
+		return (state != MARIO_STATE_DIE);
 	}
 
 	int IsHolding() {
 		return _koopa != NULL;
 	}
 
-	int IsBlocking() {
-		return (state != MARIO_STATE_DIE && untouchable == 0);
+	int IsBlocking() { 
+		return (state != MARIO_STATE_DIE && untouchable == 0); 
 	}
 
 	int IsUntouchable() {
@@ -466,28 +465,28 @@ public:
 		return isOnPlatform;
 	}
 
-	bool IsFlying() {
-		return fly_start != 0;
+	bool IsFlying() { 
+		return fly_start != 0; 
 	}
 
-	bool IsFloating() {
-		return float_start != 0;
+	bool IsFloating() { 
+		return float_start != 0; 
 	}
 
-	void SetTransformStart() {
-		transform_start = GetTickCount64();
+	void SetTransformStart() { 
+		transform_start = GetTickCount64(); 
 	}
 
-	bool IsTransforming() {
+	bool IsTransforming() { 
 		return transform_start != 0;
 	}
 
-	void SetCanGetIntoPipe(int var) {
-		canGetIntoPipe = var;
+	void SetCanGetIntoPipe(int var) { 
+		canGetIntoPipe = var; 
 	}
 
-	int IsCanGetIntoPipe() {
-		return canGetIntoPipe;
+	int IsCanGetIntoPipe() { 
+		return canGetIntoPipe; 
 	}
 
 	void SetMaxVx(float vx) {

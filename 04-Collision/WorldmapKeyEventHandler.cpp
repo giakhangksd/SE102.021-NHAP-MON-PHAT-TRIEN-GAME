@@ -1,21 +1,16 @@
+#include "Game.h"
+#include "debug.h"
+#include "Control.h"
+#include "MarioWorldmap.h"
+#include "WorldmapScene.h"
 #include "WorldmapKeyEventHandler.h"
 
-#include "debug.h"
-#include "Game.h"
 
-#include "MarioWorldmap.h"
-#include "Control.h"
-#include "WorldmapScene.h"
-
-//extern CMario* mario;
-//extern void Reload();
 void CWorldmapKeyEventHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 	CMarioWorldmap* mario = (CMarioWorldmap*)((LPWORLDMAPSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	LPGAME game = CGame::GetInstance();
-
-
 	switch (KeyCode)
 	{
 	case DIK_S:
@@ -26,11 +21,13 @@ void CWorldmapKeyEventHandler::OnKeyDown(int KeyCode)
 		else CControl::GetInstance()->ActiveControl(CONTROL_TYPE_PAUSE);
 		break;
 	}
+
 }
 
 void CWorldmapKeyEventHandler::OnKeyUp(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
+
 	CMarioWorldmap* mario = (CMarioWorldmap*)((LPWORLDMAPSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	switch (KeyCode)
 	{
@@ -44,6 +41,7 @@ void CWorldmapKeyEventHandler::KeyState(BYTE* states)
 {
 	CMarioWorldmap* mario = (CMarioWorldmap*)((LPWORLDMAPSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	LPGAME game = CGame::GetInstance();
+
 	if (mario->IsMoving()) return;
 
 	if (game->IsKeyDown(DIK_RIGHT))

@@ -1,6 +1,7 @@
+#include <fstream>
+
 #include "Game.h"
 #include "debug.h"
-
 #include "Timer.h"
 #include "Utils.h"
 #include "Texture.h"
@@ -8,7 +9,6 @@
 #include "Animations.h"
 #include "IntroScene.h"
 #include "WorldmapScene.h"
-#include <fstream>
 
 CGame * CGame::__instance = NULL;
 
@@ -173,8 +173,8 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 {
 	if (tex == NULL) return;
 
-	int spriteWidth = 0;
-	int spriteHeight = 0;
+	int spriteWidth = sprite_width;
+	int spriteHeight = sprite_height;
 
 	D3DX10_SPRITE sprite;
 
@@ -191,8 +191,8 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 		sprite.TexSize.x = 1.0f;
 		sprite.TexSize.y = 1.0f;
 
-		if (spriteWidth == 0) spriteWidth = tex->getWidth();
-		if (spriteHeight == 0) spriteHeight = tex->getHeight();
+		if (spriteWidth==0) spriteWidth = tex->getWidth();
+		if (spriteHeight==0) spriteHeight = tex->getHeight();
 	}
 	else
 	{
@@ -201,7 +201,6 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 
 		if (spriteWidth == 0) spriteWidth = (rect->right - rect->left + 1);
 		if (spriteHeight == 0) spriteHeight = (rect->bottom - rect->top + 1);
-
 
 		sprite.TexSize.x = spriteWidth / (float)tex->getWidth();
 		sprite.TexSize.y = spriteHeight / (float)tex->getHeight();
@@ -491,11 +490,11 @@ void CGame::Load(LPCWSTR gameFile)
 		if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
 		if (line == "[TEXTURES]") { section = GAME_FILE_SECTION_TEXTURES; continue; }
 		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
-		if (line[0] == '[')
-		{
-			section = GAME_FILE_SECTION_UNKNOWN;
+		if (line[0] == '[') 
+		{ 
+			section = GAME_FILE_SECTION_UNKNOWN; 
 			DebugOut(L"[ERROR] Unknown section: %s\n", ToLPCWSTR(line));
-			continue;
+			continue; 
 		}
 
 		//
@@ -517,7 +516,7 @@ void CGame::Load(LPCWSTR gameFile)
 
 void CGame::SwitchScene()
 {
-	if (next_scene < 0 || next_scene == current_scene) return;
+	if (next_scene < 0 || next_scene == current_scene) return; 
 
 	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
 
@@ -551,6 +550,7 @@ void CGame::_ParseSection_TEXTURES(string line)
 
 	CTextures::GetInstance()->Add(texID, path.c_str());
 }
+
 
 CGame::~CGame()
 {

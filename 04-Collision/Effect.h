@@ -11,7 +11,7 @@ protected:
 	vector<LPGAMEOBJECT> effects;
 
 	ULONGLONG render_start;
-
+	
 	int idSpriteOrAni;
 	bool isSprite;
 
@@ -45,7 +45,7 @@ public:
 	void SetPosition(float px, float py);
 
 	virtual int IsBlocking() {
-		return 0;
+		return 0; 
 	}
 
 	virtual void Deflected(int Direction = 0);

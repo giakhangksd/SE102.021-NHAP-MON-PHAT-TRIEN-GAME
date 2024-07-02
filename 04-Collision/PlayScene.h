@@ -17,9 +17,9 @@
 #define POSITION_SECRET_ROOM			2710
 #define POSITION_SECRET_ROOM_Y			220
 
-class CPlayScene : public CScene
+class CPlayScene: public CScene
 {
-protected:
+protected: 
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
 
@@ -38,8 +38,8 @@ protected:
 	void _ParseSection_OBJECTS(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
-
-public:
+	
+public: 
 	CPlayScene(int id, LPCWSTR filePath);
 
 	virtual void Load();

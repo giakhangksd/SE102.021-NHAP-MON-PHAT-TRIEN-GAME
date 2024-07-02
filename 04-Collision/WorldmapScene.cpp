@@ -23,20 +23,20 @@ using namespace std;
 CWorldmapScene::CWorldmapScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
-	player= NULL;
+	player = NULL;
 	key_handler = new CWorldmapKeyEventHandler(this);
 }
 
 
-#define SCENE_SECTION_UNKNOWN		-1
-#define SCENE_SECTION_ASSETS		1
-#define SCENE_SECTION_OBJECTS		2
+#define SCENE_SECTION_UNKNOWN				-1
+#define SCENE_SECTION_ASSETS				1
+#define SCENE_SECTION_OBJECTS				2
 
-#define ASSETS_SECTION_UNKNOWN		-1
-#define ASSETS_SECTION_SPRITES		1
-#define ASSETS_SECTION_ANIMATIONS	2
+#define ASSETS_SECTION_UNKNOWN				-1
+#define ASSETS_SECTION_SPRITES				1
+#define ASSETS_SECTION_ANIMATIONS			2
 
-#define MAX_SCENE_LINE				1024
+#define MAX_SCENE_LINE						1024
 
 void CWorldmapScene::_ParseSection_SPRITES(string line)
 {
@@ -113,11 +113,11 @@ void CWorldmapScene::_ParseSection_OBJECTS(string line)
 	switch (object_type)
 	{
 	case OBJECT_TYPE_MARIO: {
-		if (player != NULL) {
+		if (player != NULL)
+		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-
 		obj = new CMarioWorldmap(x, y);
 		player = (CMarioWorldmap*)obj;
 
@@ -125,9 +125,8 @@ void CWorldmapScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
-
 	case OBJECT_TYPE_WORLDMAP_ENEMY: {
-		float range = (float)atof(tokens[3].c_str());
+		float range = (float) atof(tokens[3].c_str());
 		obj = new CEnemyWorldmap(x, y, range);
 		break;
 	}

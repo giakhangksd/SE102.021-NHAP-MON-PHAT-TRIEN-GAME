@@ -64,8 +64,8 @@ public:
 		nx = direction;
 	}
 
-	bool IsAttacking() {
-		return attack_start != 0;
+	bool IsAttacking() { 
+		return attack_start != 0; 
 	}
 
 	void SetAttackTime(ULONGLONG time) {

@@ -4,11 +4,6 @@
 #include "Animation.h"
 #include "Animations.h"
 
-//#define ID_ANI_BRICK 10000
-//#define BRICK_WIDTH 16
-//#define BRICK_BBOX_WIDTH 16
-//#define BRICK_BBOX_HEIGHT 16
-
 #define BRICK_GRAVITY						0.002f
 #define BRICK_TRANSFORM_DEFLECT				0.2f
 
@@ -64,7 +59,7 @@ protected:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 
 public:
-	CBrick(float x, float y, int type = 1, int contain_object =0 ) : CGameObject(x, y) {
+	CBrick(float x, float y, int type=1, int contain_object=0) : CGameObject(x, y) {
 		this->type = state = -1;
 		SetType(type);
 		time_start = -1;
@@ -72,8 +67,9 @@ public:
 		isBrokenByJump = false;
 		containObject = contain_object;
 	}
+
 	void Render();
-	void GetBoundingBox(float &l, float& t, float& r, float& b);
+	void GetBoundingBox(float& l, float& t, float& r, float& b);
 
 	int GetType() { return type; }
 

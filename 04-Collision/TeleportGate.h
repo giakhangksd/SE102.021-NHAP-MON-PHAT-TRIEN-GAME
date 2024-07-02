@@ -13,21 +13,26 @@
 
 class CTeleportGate : public CGameObject {
 protected:
-	float des_x; 
+	float des_x;
 	float des_y;
 
 	int direction;
 
 	ULONGLONG tele_start;
 
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
-	virtual void Render();
+	virtual int IsBlocking() { 
+		return 0; 
+	}
 
-	virtual int IsCollidable() { return 1; }
-	virtual int IsBlocking() { return 0; }
+	virtual int IsCollidable() { 
+		return 1; 
+	}
 
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void OnCollisionWith(LPGAMEOBJECT obj);
+
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	virtual void Render();
 
 public:
 	CTeleportGate(float x, float y, float destination_x, float destination_y, int direction = 0) : CGameObject(x, y) {

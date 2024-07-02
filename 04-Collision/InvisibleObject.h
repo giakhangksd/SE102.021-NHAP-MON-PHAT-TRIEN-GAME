@@ -1,3 +1,9 @@
+#pragma once
+
+/*****************************
+Using this in case: when I should update Koopa Para Troopa
+****************************/
+
 #include "GameObject.h"
 #include "debug.h"
 
@@ -12,24 +18,23 @@ public:
 		isActived = false;
 	}
 
-	void Render() {
+	void Render() { 
 		//RenderBoundingBox(); 
 	}
 
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 
-	int IsBlocking() {
+	int IsBlocking() { 
 		return 0;
 	}
 
-	void Activating() {
-		isActived = true;
+	void Activating() { 
+		isActived = true; 
 	}
 
 	bool IsActived() {
 		//DebugOut(L"isActived: %d\n", isActived); 
-		return isActived;
+		return isActived; 
 	}
 };
-

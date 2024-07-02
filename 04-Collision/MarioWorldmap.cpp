@@ -1,4 +1,4 @@
-#include "Portal.h"
+ #include "Portal.h"
 #include "Platform.h"
 #include "Collision.h"
 #include "MarioWorldmap.h"
@@ -62,7 +62,7 @@ void CMarioWorldmap::OnCollisionWith(LPGAMEOBJECT o) {
 		dynamic_cast<CPortal*>(o)->SwitchScene();
 }
 
-void CMarioWorldmap::OnCollisionWith(LPCOLLISIONEVENT e) {
+void CMarioWorldmap::OnCollisionWith(LPCOLLISIONEVENT e){
 	if (e->obj->IsBlocking()) {
 		if (dynamic_cast<CPlatformAnimate*>(e->obj)) {
 			CPlatformAnimate* platform = dynamic_cast<CPlatformAnimate*>(e->obj);
@@ -154,7 +154,7 @@ void CMarioWorldmap::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			crossingStart = 0;
 		}
 	}
-
+	
 	if (crossingStart && GetTickCount64() - crossingStart > MARIO_CROSSING_TIME)
 		crossingStart = 0;
 

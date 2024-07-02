@@ -5,6 +5,7 @@
 #define PLATFORM_TYPE_BLOCK				1
 #define PLATFORM_TYPE_NORMAL			2
 #define PLATFORM_TYPE_NO_COLLISION		3
+
 // 
 // The most popular type of object in Mario! 
 // 
@@ -16,17 +17,17 @@ protected:
 	float cellHeight;
 	int spriteIdBegin, spriteIdMiddle, spriteIdEnd;
 
-
 	int type;
 	virtual int IsBlocking() {
 		if (type == PLATFORM_TYPE_BLOCK) return 1;
 		else if (type == PLATFORM_TYPE_NORMAL) return 2;
 		return 0;
 	}
+
 public: 
 	CPlatform(float x, float y,
 		float cell_width, float cell_height, int length,
-		int sprite_id_begin, int sprite_id_middle, int sprite_id_end,int type) :CGameObject(x, y)
+		int sprite_id_begin, int sprite_id_middle, int sprite_id_end, int type) :CGameObject(x, y)
 	{
 		this->length = length;
 		this->cellWidth = cell_width;
@@ -44,10 +45,9 @@ public:
 
 	int GetType() { return type; }
 
-	int GetSpriteIDBegin() {
-		return spriteIdBegin;
+	int GetSpriteIDBegin() { 
+		return spriteIdBegin; 
 	}
-	//int IsDirectionColliable(float nx, float ny);
 };
 
 typedef CPlatform* LPPLATFORM;

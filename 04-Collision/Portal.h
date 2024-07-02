@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 
 #include "AssetIDs.h"
 #include "GameObject.h"
@@ -33,7 +32,7 @@ class CPortal : public CGameObject
 	int giftType;
 
 	float width;
-	float height;
+	float height; 
 
 	float goal_x;
 	float goal_y;
@@ -47,21 +46,21 @@ public:
 	CPortal(float l, float t, float r, float b, int scene_id, int Type = 1);
 
 	virtual void Render();
-	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
+	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
 
 	void RenderBoundingBox(void);
-
-	int GetSceneId() {
-		return scene_id;
+	
+	int GetSceneId() { 
+		return scene_id;  
 	}
 
 	int IsBlocking() {
-		return 0;
+		return 0; 
 	}
 
 	void SwitchScene();
-	int IsSwitchingScene() {
-		return (int)switchScene_start;
+	int IsSwitchingScene() { 
+		return (int) switchScene_start; 
 	}
 
 	int GetSpriteGift() {

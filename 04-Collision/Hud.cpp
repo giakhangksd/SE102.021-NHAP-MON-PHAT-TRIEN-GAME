@@ -112,7 +112,7 @@ void CHud::Render() {
 	// Draw time
 	p_x = hx - NUMBER_WIDTH / 2 + COLUMN_MT_X;
 	p_y = hy + ROW_BELOW_Y + NUMBER_HEIGHT / 2;
-	RenderNumber(p_x, p_y, (int)CTimer::GetInstance()->getCurrentTime() / 1000, LENGTH_TIME, 1);
+	RenderNumber(p_x, p_y, (int) CTimer::GetInstance()->getCurrentTime() / 1000, LENGTH_TIME, 1);
 
 	// Draw Mario's speed state (P speed)
 	p_x = hx - NUMBER_WIDTH / 2 + COLUMN_SPEED_X;

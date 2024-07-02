@@ -687,8 +687,7 @@ int CMario::GetAniIdRacoon()
 			aniId = ID_ANI_MARIO_RACOON_IDLE_FRONT;
 
 		if (aniId == -1) aniId = ID_ANI_MARIO_RACOON_IDLE_RIGHT;
-	}
-	else {
+	} else {
 		if (!isOnPlatform)
 		{
 			if (checkHold) {
@@ -1008,9 +1007,9 @@ void CMario::Render()
 			aniId = GetAniIdSmall();
 		else aniId = GetAniIdRacoon();
 
-		if (untouchable && GetTickCount64() % 2 == 0)
+		if (untouchable && GetTickCount64() % 2 == 0) 
 			animations->Get(aniId)->Render(x, y);
-		else if (!untouchable)
+		else if (!untouchable) 
 			animations->Get(aniId)->Render(x, y);
 
 		//RenderBoundingBox();

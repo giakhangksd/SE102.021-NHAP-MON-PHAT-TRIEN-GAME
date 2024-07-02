@@ -1,5 +1,6 @@
-#include "Animation.h"
 #include "debug.h"
+#include "Control.h"
+#include "Animation.h"
 
 void CAnimation::Add(int spriteId, DWORD time)
 {
@@ -16,6 +17,9 @@ void CAnimation::Add(int spriteId, DWORD time)
 
 void CAnimation::Render(float x, float y)
 {
+	if (CControl::GetInstance()->IsPausing())
+		lastFrameTime = GetTickCount64();
+
 	ULONGLONG now = GetTickCount64();
 	if (currentFrame == -1)
 	{

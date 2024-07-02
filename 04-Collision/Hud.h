@@ -4,6 +4,7 @@
 #define ID_ANI_P_CHANGING_COLOR					8888
 
 #define SPEED_LEVEL								0.016f
+//#define EFFECT_SPEED							0.02f
 
 #define HUD_BBOX_WIDTH							153
 #define HUD_BBOX_HEIGHT							29
@@ -75,11 +76,11 @@ public:
 		score = 0;
 	}
 
-	void SaveLevel(int l) {
-		level = l;
+	void SaveLevel(int l) { 
+		level = l; 
 	}
 
-	int GetLevel() {
+	int GetLevel() { 
 		return level;
 	}
 
@@ -92,10 +93,10 @@ public:
 	void Render();
 
 	virtual int IsBlocking() {
-		return 0;
+		return 0; 
 	}
 
-	void CollectCoin() {
+	void CollectCoin() { 
 		coin++;
 		score += SCORE_COIN;
 	}
@@ -104,20 +105,20 @@ public:
 		life++;
 	}
 
-	void MarioDeath() {
-		life--;
+	void MarioDeath() { 
+		life--; 
 	}
 
-	void CollectScore(int Score) {
+	void CollectScore(int Score) { 
 		score += Score;
 	}
 
-	void CollectGift(int gift) {
-		gifts.push_back(gift);
+	void CollectGift(int gift) { 
+		gifts.push_back(gift); 
 	}
 
 	int CanRevive() {
-		return life > 0;
+		return life > 0; 
 	}
 };
 

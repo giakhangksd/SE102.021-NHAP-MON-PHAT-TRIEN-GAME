@@ -18,6 +18,8 @@ using namespace std;
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
 
+
+
 /*
 	Our simple game framework
 */
@@ -86,6 +88,7 @@ public:
 	void ProcessKeyboard();
 	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler; }
 
+
 	ID3D10Device* GetDirect3DDevice() { return this->pD3DDevice; }
 	IDXGISwapChain* GetSwapChain() { return this->pSwapChain; }
 	ID3D10RenderTargetView* GetRenderTargetView() { return this->pRenderTargetView; }
@@ -111,6 +114,8 @@ public:
 
 	void _ParseSection_TEXTURES(string line);
 
+
 	~CGame();
 };
 typedef CGame* LPGAME;
+

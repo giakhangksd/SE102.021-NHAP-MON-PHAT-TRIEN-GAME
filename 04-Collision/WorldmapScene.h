@@ -1,11 +1,13 @@
+#pragma once
 
 #include "Game.h"
-#include "Textures.h"
 #include "Scene.h"
+#include "Textures.h"
 #include "GameObject.h"
 
 #define ADJUST_Y								1.0f
 #define DEFAULT_CAMERA_WORLDMAP_POSITION		0
+
 
 class CWorldmapScene : public CScene
 {
@@ -37,8 +39,6 @@ public:
 	void PurgeDeletedObjects();
 
 	static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);
-
 };
 
 typedef CWorldmapScene* LPWORLDMAPSCENE;
-
