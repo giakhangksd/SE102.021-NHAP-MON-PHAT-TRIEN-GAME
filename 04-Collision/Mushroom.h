@@ -7,7 +7,7 @@
 #include "Brick.h"
 #include "Goomba.h"
 
-#define MUSHROOM_GRAVITY				0.001f
+#define MUSHROOM_GRAVITY				0.0002f
 #define MUSHROOM_WALKING_SPEED			0.065f
 #define MUSHROOM_CREATE_SPEED			0.02f
 #define MUSHROOM_DEFLECTED_SPEED		0.3f

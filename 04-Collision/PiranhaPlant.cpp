@@ -1,40 +1,33 @@
-#include "PiranhaPlant.h"
 #include "Game.h"
 #include "debug.h"
 #include "Mario.h"
 #include "PlayScene.h"
 #include "KoopaTroopa.h"
+#include "PiranhaPlant.h"
 
-void CPiranhaPlant::GetBoundingBox(float& l, float& t, float& r, float& b)
-{
+void CPiranhaPlant::GetBoundingBox(float& left, float& top, float& right, float& bottom) {
 	if (type == PIRANHA_TYPE_RED_FIRE) {
-		l = x - PIRANHA_RED_BBOX_WIDTH / 2;
-		t = y - PIRANHA_RED_BBOX_HEIGHT / 2;
-		r = l + PIRANHA_RED_BBOX_WIDTH;
-		b = t + PIRANHA_RED_BBOX_HEIGHT;
+		left = x - PIRANHA_RED_BBOX_WIDTH / 2;
+		top = y - PIRANHA_RED_BBOX_HEIGHT / 2;
+		right = left + PIRANHA_RED_BBOX_WIDTH;
+		bottom = top + PIRANHA_RED_BBOX_HEIGHT;
 	}
 	else {
-		l = x - PIRANHA_GREEN_BBOX_WIDTH / 2;
-		t = y - PIRANHA_GREEN_BBOX_HEIGHT / 2;
-		r = l + PIRANHA_GREEN_BBOX_WIDTH;
-		b = t + PIRANHA_GREEN_BBOX_HEIGHT;
+		left = x - PIRANHA_GREEN_BBOX_WIDTH / 2;
+		top = y - PIRANHA_GREEN_BBOX_HEIGHT / 2;
+		right = left + PIRANHA_GREEN_BBOX_WIDTH;
+		bottom = top + PIRANHA_GREEN_BBOX_HEIGHT;
 	}
 }
-void CPiranhaPlant::OnCollisionWith(LPCOLLISIONEVENT e)
-{
-	if (dynamic_cast<CKoopaTroopa*>(e->obj)) {
-		CKoopaTroopa* koopa = dynamic_cast<CKoopaTroopa*>(e->obj);
 
-		if (koopa->GetState() == KOOPA_TROOPA_STATE_SHELL && koopa->GetStateHeld()) {
-			Delete();
-			koopa->SetState(KOOPA_TROOPA_STATE_DIE);
-		}
-	}
-	else if (dynamic_cast<CPhaseChecker*>(e->obj)) Delete();
+void CPiranhaPlant::Render() {
+	int aniId = GetAniId();
+
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
+	//RenderBoundingBox();
 }
 
-void CPiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
+void CPiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	vy += ay * dt;
 	y += vy * dt;
 
@@ -79,10 +72,22 @@ void CPiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CPlayScene* playScene = dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene());
 	playScene->GetPlayer()->GetPosition(mario_x, mario_y);
 
-
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
+
+void CPiranhaPlant::OnCollisionWith(LPCOLLISIONEVENT e) {
+	if (dynamic_cast<CKoopaTroopa*>(e->obj)) {
+		CKoopaTroopa* koopa = dynamic_cast<CKoopaTroopa*>(e->obj);
+
+		if (koopa->GetState() == KOOPA_TROOPA_STATE_SHELL && koopa->GetStateHeld()) {
+			Delete();
+			koopa->SetState(KOOPA_TROOPA_STATE_DIE);
+		}
+	} 
+	else if (dynamic_cast<CPhaseChecker*>(e->obj)) Delete();
+}
+
 int CPiranhaPlant::GetAniId()
 {
 	int aniId = -1;
@@ -115,19 +120,10 @@ int CPiranhaPlant::GetAniId()
 	}
 	return aniId;
 }
-void CPiranhaPlant::Render()
-{
-	int aniId = GetAniId();
 
-	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	//RenderBoundingBox();
-}
-
-void CPiranhaPlant::SetState(int state)
-{
+void CPiranhaPlant::SetState(int state) {
 	CGameObject::SetState(state);
-	switch (state)
-	{
+	switch (state) {
 	case PIRANHA_STATE_UP:
 		vy = -PIRANHA_UP_DOWN_SPEED;
 		break;

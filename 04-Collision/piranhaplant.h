@@ -1,4 +1,5 @@
 #pragma once
+
 #include "GameObject.h"
 #include "Bullet.h"
 
@@ -41,8 +42,7 @@
 
 #define PIRANHA_ATTACK_IDLE_TIME					5000
 
-class CPiranhaPlant : public CGameObject
-{
+class CPiranhaPlant : public CGameObject {
 protected:
 	int ay;
 	int type;
@@ -54,13 +54,14 @@ protected:
 	CGameObject* _bullet;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
-	virtual int IsCollidable() { return 1; };
+	virtual int IsCollidable() { return 1; }
 	virtual int IsBlocking() { return 0; }
-	virtual void OnNoCollision(DWORD dt){};
 
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+
+	virtual void OnNoCollision(DWORD dt) {}
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 	int GetAniId();
@@ -73,7 +74,7 @@ public:
 		mario_x = mario_y = vy = vx = 0.0;
 		SetState(PIRANHA_STATE_UP);
 	}
-	virtual void SetState(int state);
 
+	virtual void SetState(int state);
 };
 

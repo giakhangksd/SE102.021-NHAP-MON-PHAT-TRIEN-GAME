@@ -17,7 +17,7 @@ void CPhaseChecker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void CPhaseChecker::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CPhaseChecker::OnCollisionWith(LPCOLLISIONEVENT e) {

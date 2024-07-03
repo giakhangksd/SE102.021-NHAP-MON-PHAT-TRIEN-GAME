@@ -1017,7 +1017,7 @@ void CMario::Render()
 
 	if (_tail != NULL) _tail->Render();
 
-	//DebugOutTitle(L"Coins: %d", coin);
+	//DebugOutTitle(L"Coin: %d", coin);
 }
 
 void CMario::SetState(int state) {
