@@ -11,7 +11,7 @@
 #include "debug.h"
 
 
-void CBrick::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void CBrick::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) //state mushroom,leaf,mushroom up,switch,breakable
 {
 	if (time_start == -1)
 		return;
@@ -113,7 +113,7 @@ void CBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
 	b = t + BRICK_BBOX_HEIGHT;
 }
 
-void CBrick::SetType(int type)
+void CBrick::SetType(int type)//set state contain or empty
 {
 	if (containObject != BRICK_CONTAIN_NONE && type == BRICK_TYPE_BREAK) {
 		SetType(BRICK_TYPE_EMPTY);
@@ -167,7 +167,7 @@ void CBrick::SetState(int State) {
 	state = State;
 }
 
-bool CBrick::IsAttacking() {
+bool CBrick::IsAttacking() {  
 	return this != NULL && time_start != -1;
 }
 

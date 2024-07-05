@@ -26,7 +26,6 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			vy = 0;
 		}
 
-		// Use this case if tail of Mario over the attack range
 		else if (abs(x + vx * dt - old_x) > TAIL_ATTACK_RANGE * TAIL_BBOX_WIDTH) {
 			if (vx >= 0) vx = (TAIL_ATTACK_RANGE * TAIL_BBOX_WIDTH + old_x - x) / dt;
 			else vx = (old_x - TAIL_ATTACK_RANGE * TAIL_BBOX_WIDTH - x) / dt;

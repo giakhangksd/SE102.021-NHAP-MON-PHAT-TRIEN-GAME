@@ -1,9 +1,5 @@
 #pragma once
 
-/*****************************
-Using this in case: when I should update Koopa Para Troopa
-****************************/
-
 #include "GameObject.h"
 #include "debug.h"
 
@@ -19,7 +15,7 @@ public:
 	}
 
 	void Render() { 
-		//RenderBoundingBox(); 
+		RenderBoundingBox(); 
 	}
 
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

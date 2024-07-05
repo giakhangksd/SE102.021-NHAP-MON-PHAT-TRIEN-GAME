@@ -22,17 +22,6 @@ void CKoopaTroopa::OnCollisionWithBrick(LPCOLLISIONEVENT e)
 {
 	CBrick* brick = dynamic_cast<CBrick*>(e->obj);
 
-	if (brick->IsAttacking() && brick->IsBrokenByJump() && e->ny != 0) {
-		this->SetState(KOOPA_TROOPA_STATE_SHELL);
-
-		float bx, by;
-		brick->GetPosition(bx, by);
-
-		if (bx < x)
-			this->Deflected(DEFLECT_DIRECTION_RIGHT);
-		else
-			this->Deflected(DEFLECT_DIRECTION_LEFT);
-	}
 	if (state == KOOPA_TROOPA_STATE_ATTACKING && e->nx != 0)
 	{
 		if (brick->GetType() == BRICK_TYPE_GOLD)

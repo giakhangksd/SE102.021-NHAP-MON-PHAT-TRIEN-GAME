@@ -44,7 +44,7 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 #include "AssetIDs.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"NES - My Super Mario Bros 3"
+#define MAIN_WINDOW_TITLE L"22520610 - game Super Mario Bros 3 - SE102.021"
 #define WINDOW_ICON_PATH L"mario.ico"
 
 #define BACKGROUND_COLOR D3DXCOLOR(175.0f/255, 249.0f/255, 240.0f/255, 0.0f)

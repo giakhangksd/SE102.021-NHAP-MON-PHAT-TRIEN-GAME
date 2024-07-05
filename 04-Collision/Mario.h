@@ -407,6 +407,7 @@ class CMario : public CGameObject
 
 	CGameObject* _tail;
 	CKoopaTroopa* _koopa;
+	
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithKoopaTroopa(LPCOLLISIONEVENT e);

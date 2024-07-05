@@ -103,7 +103,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		CHud::GetInstance()->MarioDeath();
 		((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPortal()->SwitchScene();
 	}
-
 	if (isOnPlatform) fly_start = float_start = 0;
 
 	isOnPlatform = false;
@@ -336,7 +335,6 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
 		CHud::GetInstance()->CollectScore(SCORE_SUPER_MUSHROOM_LEAF);
 		CEffect::GetInstance()->pushEffectIntoQueue(x, y, ID_SPRITE_POINTS_1000, true, true);
 
-		//if (level != MARIO_LEVEL_RACOON) SetTransformStart();
 
 		switch (level) {
 		case MARIO_LEVEL_SMALL:
